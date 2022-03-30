@@ -1,5 +1,4 @@
-mcre-info
-================
+# mcre-info
 
 ## 開発時メモ
 
@@ -24,3 +23,22 @@ npm i --save-dev @types/node
 const vuetify = require('@vuetify/vite-plugin')
 ```
 
+eslint, prettier を追加。
+設定値は package.json, .vscode/extentions.json に適宜設定。
+
+```
+npm i -D eslint eslint-plugin-vue @vue/eslint-config-typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+npm i -D prettier eslint-plugin-prettier @vue/eslint-config-prettier
+```
+
+.vscode/settings.json に追加
+
+```
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+```
