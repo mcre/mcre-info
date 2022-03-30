@@ -42,3 +42,9 @@ npm i -D prettier eslint-plugin-prettier @vue/eslint-config-prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
 ```
+
+vue-router を追加。main.ts, router.ts を適宜変更。
+
+```
+npm install vue-router
+```
