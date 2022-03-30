@@ -1,11 +1,26 @@
-# Vue 3 + Typescript + Vite
+mcre-info
+================
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 開発時メモ
 
-## Recommended IDE Setup
+初期設定
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+```
+% npm init @vitejs/app mcre-info -- --template vue-ts
+% cd mcre-info
+% vue add vuetify
+? Choose a preset: Vite Preview (Vuetify 3 + Vite)
+```
 
-## Type Support For `.vue` Imports in TS
+エラー回避
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+```
+npm i --save-dev @types/node
+```
+
+```
+# vite.config.ts 3行目を変更
+# import vuetify from '@vuetify/vite-plugin' # 変更前
+const vuetify = require('@vuetify/vite-plugin')
+```
+
