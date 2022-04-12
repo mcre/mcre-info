@@ -8,7 +8,6 @@ export async function loadFonts() {
   const webFontLoader = await import(
     /* webpackChunkName: "webfontloader" */ 'webfontloader'
   )
-
   webFontLoader.load({
     google: {
       families: ['Zen+Maru+Gothic:wght@300;400;500;700;900'],

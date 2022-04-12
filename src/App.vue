@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar collapse>
+    <v-app-bar color="primary" collapse>
       <span @click="$router.push({ name: 'home' })" class="font-weight-bold">
         mcre.info
       </span>
