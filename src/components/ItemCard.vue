@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import TagChip from '@/components/TagChip.vue'
   import LinkBtn from '@/components/LinkBtn.vue'
-  import { defineProps } from 'vue'
 
   const props = defineProps<{
     title: string

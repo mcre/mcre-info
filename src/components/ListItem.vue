@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { defineProps } from 'vue'
   import LinkIcon from '@/components/LinkIcon.vue'
   import LinkImg from '@/components/LinkImg.vue'
 
