@@ -7,6 +7,7 @@
     img?: string
     href: string
     description: string
+    youtube?: string
     tags?: { [key: string]: string[] }
   }>()
 </script>
@@ -21,6 +22,17 @@
     <v-card-text>
       {{ props.description }}
     </v-card-text>
+    <v-container v-if="props.youtube" class="responsive-style">
+      <iframe
+        width="560"
+        height="315"
+        :src="`https://www.youtube.com/embed/${props.youtube}`"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
+    </v-container>
     <v-card-actions v-if="props.tags">
       <v-item-group>
         <tag-chip
@@ -33,3 +45,19 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<style lang="scss" scoped>
+  .responsive-style {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 50%;
+  }
+  .responsive-style iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
