@@ -73,8 +73,7 @@
         />
         <list-item
           title="Webアプリ開発"
-          subtitle="最近のメインはPython, TypeScript。"
-          subtitle2="Vue, GraphQL, AWS DynamoDBなどをつかってひととおり開発できます。"
+          subtitle="最近はVue, GraphQL, AWS DynamoDBなどをつかうことが多いです。"
         />
         <list-item
           title="データベース"
@@ -83,7 +82,7 @@
         <list-item
           title="データ分析・機械学習"
           subtitle="SQL, Excel, Python/Pandasでのデータ集計・変形、TensorFlow/Kerasでの機械学習等。"
-          subtitle2="特に営業施策効果分析・予測・レポーティングは豊富な経験あり。"
+          subtitle2="特に営業施策の効果分析・予測・レポーティングは豊富な経験あり。"
         />
       </v-list>
       <v-divider class="my-4" />
