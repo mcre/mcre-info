@@ -1,11 +1,37 @@
+<script setup lang="ts">
+  import ProfileCard from '@/views/Home/ProfileCard.vue'
+  import TwitterCard from '@/views/Home/TwitterCard.vue'
+  import YoutubeCard from '@/views/Home/YoutubeCard.vue'
+  import WebsiteCard from '@/views/Home/WebsiteCard.vue'
+  import GithubCard from '@/views/Home/GithubCard.vue'
+  import NoteCard from '@/views/Home/NoteCard.vue'
+</script>
+
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" sm="10" md="10" lg="6" xl="6">
-        <v-card class="my-2" v-for="n of 20" :key="n">
-          <v-card-title>テスト</v-card-title>
-          <v-card-text>テスト</v-card-text>
-        </v-card>
+      <v-avatar size="128" image="/img/face01.jpg" />
+    </v-row>
+    <v-row justify="center">
+      <v-col class="my-4" cols="12" sm="10" md="8" lg="6" xl="4">
+        <v-row>
+          <v-col><profile-card /></v-col>
+        </v-row>
+        <v-row>
+          <v-col><youtube-card /></v-col>
+        </v-row>
+        <v-row>
+          <v-col><website-card /></v-col>
+        </v-row>
+        <v-row>
+          <v-col><github-card /></v-col>
+        </v-row>
+        <v-row>
+          <v-col><note-card /></v-col>
+        </v-row>
+        <v-row>
+          <v-col><twitter-card /></v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>

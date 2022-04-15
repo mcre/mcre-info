@@ -1,5 +1,8 @@
 # mcre-info
 
+mcre の自己紹介サイト。
+https://mcre.info
+
 ## 開発時メモ
 
 初期設定
