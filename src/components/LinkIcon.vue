@@ -16,7 +16,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <v-icon v-bind="props">
+        <v-icon size="x-large" v-bind="props">
           {{ mainProps.icon }}
         </v-icon>
       </v-btn>

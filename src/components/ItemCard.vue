@@ -5,17 +5,19 @@
   const props = defineProps<{
     title: string
     img?: string
+    icon?: string
     href: string
     description: string
     youtube?: string
+    coverImg?: string
     tags?: { [key: string]: string[] }
   }>()
 </script>
 
 <template>
   <v-card class="mb-2">
-    <v-card-title class="pl-1">
-      <link-btn :href="props.href" :img="props.img">
+    <v-card-title class="pl-1 custom-card-title">
+      <link-btn :href="props.href" :img="props.img" :icon="props.icon">
         {{ props.title }}
       </link-btn>
     </v-card-title>
@@ -33,6 +35,7 @@
         allowfullscreen
       />
     </v-container>
+    <v-img class="mx-4" v-if="props.coverImg" :src="props.coverImg" />
     <v-card-actions v-if="props.tags">
       <v-item-group>
         <tag-chip
@@ -47,6 +50,9 @@
 </template>
 
 <style lang="scss" scoped>
+  .custom-card-title {
+    display: block;
+  }
   .responsive-style {
     position: relative;
     width: 100%;
