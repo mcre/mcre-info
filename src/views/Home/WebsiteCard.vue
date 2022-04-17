@@ -7,7 +7,7 @@
     <v-card-title><v-icon left>mdi-web</v-icon>Webapp 開発</v-card-title>
     <v-card-text>
       <item-card
-        title="CoCoDakara"
+        title="CoCoDakara Body Design"
         img="/img/cocodakara.png"
         href="https://bodydesign.cocodakara.net/"
         description="麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システム開発・運用を担当しています。"
