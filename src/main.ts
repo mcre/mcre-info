@@ -1,9 +1,24 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import vuetify from './plugins/vuetify'
-import router from './router'
-import { loadFonts } from './plugins/webfontloader'
 
+const app = createApp(App)
+
+import { loadFonts } from './plugins/webfontloader'
 loadFonts()
 
-createApp(App).use(vuetify).use(router).mount('#app')
+import vuetify from './plugins/vuetify'
+app.use(vuetify)
+
+import router from './router'
+app.use(router)
+
+import VueGtag from 'vue-gtag-next'
+if (process.env.NODE_ENV === 'production') {
+  app.use(VueGtag, {
+    property: {
+      id: 'G-EVL1PP92QT',
+    },
+  })
+}
+
+app.mount('#app')
