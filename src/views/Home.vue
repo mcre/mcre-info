@@ -12,6 +12,9 @@
     <v-row justify="center">
       <v-avatar size="128" image="/img/face01.jpg" />
     </v-row>
+    <v-row class="mt-10" justify="center">
+      <p>一生プログラミングします。</p>
+    </v-row>
     <v-row justify="center">
       <v-col class="my-4" cols="12" sm="10" md="8" lg="6" xl="4">
         <v-row>
