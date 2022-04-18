@@ -38,7 +38,7 @@
         />
         <list-item
           title="ai6(株)"
-          subtitle="スタートアップにて開発全般担当"
+          subtitle="スタートアップにて開発全般担当。PoC用ウェブアプリ、PoC用デバイスファームウェア用アプリ、サーバ、データレイク開発、データ分析等。"
           subtitle2="<small>現職</small>"
         />
         <list-item
