@@ -25,15 +25,17 @@
       {{ props.description }}
     </v-card-text>
     <v-container v-if="props.youtube" class="responsive-style">
-      <iframe
-        width="560"
-        height="315"
-        :src="`https://www.youtube.com/embed/${props.youtube}`"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      />
+      <v-lazy>
+        <iframe
+          width="560"
+          height="315"
+          :src="`https://www.youtube.com/embed/${props.youtube}`"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </v-lazy>
     </v-container>
     <v-img class="mx-4" v-if="props.coverImg" :src="props.coverImg" />
     <v-card-actions v-if="props.tags">

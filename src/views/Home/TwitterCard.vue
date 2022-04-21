@@ -1,16 +1,8 @@
 <script setup lang="ts">
   import LinkBtn from '@/components/LinkBtn.vue'
   import LinkIcon from '@/components/LinkIcon.vue'
+  import TwitterEmbedded from '@/components/TwitterEmbedded.vue'
   import { mdiTwitter } from '@mdi/js'
-  import { onMounted } from 'vue'
-  onMounted(async () => {
-    await setTimeout(() => {
-      const twScript = document.createElement('script')
-      twScript.setAttribute('src', 'https://platform.twitter.com/widgets.js')
-      twScript.setAttribute('async', 'true')
-      document.head.appendChild(twScript)
-    }, 100)
-  })
 </script>
 
 <template>
@@ -24,15 +16,9 @@
       Twitter
     </v-card-title>
     <v-card-text>
-      <a
-        class="twitter-timeline"
-        data-tweet-limit="3"
-        data-chrome="noheader,nofooter,transparent"
-        data-lang="ja"
-        href="https://twitter.com/m_cre?ref_src=twsrc%5Etfw"
-      >
-        読込中
-      </a>
+      <v-lazy>
+        <twitter-embedded />
+      </v-lazy>
     </v-card-text>
     <v-card-actions>
       <v-spacer />
