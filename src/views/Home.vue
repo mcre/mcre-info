@@ -21,19 +21,29 @@
           <v-col><profile-card /></v-col>
         </v-row>
         <v-row>
-          <v-col><youtube-card /></v-col>
+          <v-col>
+            <v-lazy><youtube-card /></v-lazy>
+          </v-col>
         </v-row>
         <v-row>
-          <v-col><website-card /></v-col>
+          <v-col>
+            <v-lazy><website-card /></v-lazy>
+          </v-col>
         </v-row>
         <v-row>
-          <v-col><github-card /></v-col>
+          <v-col>
+            <v-lazy><github-card /></v-lazy>
+          </v-col>
         </v-row>
         <v-row>
-          <v-col><note-card /></v-col>
+          <v-col>
+            <v-lazy><note-card /></v-lazy>
+          </v-col>
         </v-row>
         <v-row>
-          <v-col><twitter-card /></v-col>
+          <v-col>
+            <v-lazy><twitter-card /></v-lazy>
+          </v-col>
         </v-row>
       </v-col>
     </v-row>
