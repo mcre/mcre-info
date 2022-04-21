@@ -2,11 +2,19 @@
   import LinkIcon from '@/components/LinkIcon.vue'
   import LinkImg from '@/components/LinkImg.vue'
   import ListItem from '@/components/ListItem.vue'
+  import {
+    mdiAccountTie,
+    mdiTwitter,
+    mdiDog,
+    mdiNewspaper,
+    mdiGithub,
+    mdiLinkedin,
+  } from '@mdi/js'
 </script>
 
 <template>
   <v-card>
-    <v-card-title><v-icon left>mdi-account-tie</v-icon>Profile</v-card-title>
+    <v-card-title><v-icon left :icon="mdiAccountTie" />Profile</v-card-title>
     <v-card-text class="pt-0">
       <v-list :density="null" lines="three">
         <v-list-subheader>名前</v-list-subheader>
@@ -15,7 +23,7 @@
         <list-item
           title="TwitterのDM"
           link-href="https://twitter.com/m_cre"
-          link-icon="mdi-twitter"
+          :link-icon="mdiTwitter"
           link-tooltip="Twitter DM"
         />
         <v-list-subheader>出身校</v-list-subheader>
@@ -51,14 +59,14 @@
           title="人狼知能大会 <wbr />プロトコル部門"
           subtitle="第2回大会 5位・第3回大会 5位・GAT2017プレ大会 1位"
           link-href="http://aiwolf.org/"
-          link-icon="mdi-dog"
+          :link-icon="mdiDog"
           link-tooltip="人狼知能ウェブサイト"
         />
         <list-item
           title="人狼知能大会 <wbr /> 自然言語部門 <wbr />第3回大会"
           subtitle="総合優秀賞+人狼ゲーム賞"
           link-href="https://www.inside-games.jp/article/2017/09/05/109557.html"
-          link-icon="mdi-newspaper"
+          :link-icon="mdiNewspaper"
           link-tooltip="大会紹介ニュース記事"
         />
         <list-item
@@ -90,12 +98,12 @@
         <v-col align="center">
           <link-icon
             href="https://twitter.com/m_cre"
-            icon="mdi-twitter"
+            :icon="mdiTwitter"
             tooltip="Twitter"
           />
           <link-icon
             href="https://github.com/mcre"
-            icon="mdi-github"
+            :icon="mdiGithub"
             tooltip="GitHub"
           />
           <link-img
@@ -105,7 +113,7 @@
           />
           <link-icon
             href="https://www.linkedin.com/in/shinya-fujita-03b5ba12/"
-            icon="mdi-linkedin"
+            :icon="mdiLinkedin"
             tooltip="LinkedIn"
           />
           <link-img

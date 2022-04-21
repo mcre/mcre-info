@@ -2,6 +2,7 @@
   import LinkBtn from '@/components/LinkBtn.vue'
   import ItemCard from '@/components/ItemCard.vue'
   import LinkIcon from '@/components/LinkIcon.vue'
+  import { mdiGithub, mdiCardsOutline, mdiDog } from '@mdi/js'
 </script>
 
 <template>
@@ -9,7 +10,7 @@
     <v-card-title>
       <link-icon
         href="https://github.com/mcre"
-        icon="mdi-github"
+        :icon="mdiGithub"
         tooltip="GitHub"
       />GitHub
     </v-card-title>
@@ -25,7 +26,7 @@
       />
       <item-card
         title="address-printing-on-jp-postcards"
-        icon="mdi-cards-outline"
+        :icon="mdiCardsOutline"
         href="https://github.com/mcre/address-printing-on-jp-postcards"
         description="毎年の年賀状宛名印刷のために作りました。柔軟なフォーマットで差込印刷できます。"
         :tags="{
@@ -35,7 +36,7 @@
       />
       <item-card
         title="aiwolf-4th-nlp"
-        icon="mdi-dog"
+        :icon="mdiDog"
         href="https://github.com/mcre/aiwolf-4th-nlp"
         description="人狼知能大会 自然言語部門 第4回大会に参加したときのソースコードを公開しています。"
         coverImg="/img/aiwolf-4th-nlp.png"

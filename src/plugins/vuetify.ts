@@ -1,7 +1,7 @@
-import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
 import { createVuetify } from 'vuetify'
+import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 import { ja } from 'vuetify/locale'
 
 export default createVuetify({
@@ -13,6 +13,11 @@ export default createVuetify({
   locale: {
     defaultLocale: 'ja',
     messages: { ja },
+  },
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: { mdi },
   },
   theme: {
     defaultTheme: 'light',

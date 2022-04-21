@@ -1,10 +1,14 @@
 <script setup lang="ts">
   import ItemCard from '@/components/ItemCard.vue'
+  import { mdiYoutube } from '@mdi/js'
 </script>
 
 <template>
   <v-card>
-    <v-card-title><v-icon left>mdi-youtube</v-icon>Youtube Cannel</v-card-title>
+    <v-card-title>
+      <v-icon left :icon="mdiYoutube" />
+      Youtube Cannel
+    </v-card-title>
     <v-card-text>
       <item-card
         title="「聴く」名作文庫"

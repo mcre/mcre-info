@@ -2,6 +2,7 @@
   import LinkBtn from '@/components/LinkBtn.vue'
   import ItemCard from '@/components/ItemCard.vue'
   import LinkImg from '@/components/LinkImg.vue'
+  import { mdiMicrophone, mdiCalendarCheck } from '@mdi/js'
 </script>
 
 <template>
@@ -16,7 +17,7 @@
     <v-card-text>
       <item-card
         title="iPhoneから音声入力でNotionにメモ"
-        icon="mdi-microphone"
+        :icon="mdiMicrophone"
         href="https://note.com/m_cre/n/n677310ce3a93"
         description="iPhoneから、「Hey Siri、アイディア」「たこ焼き食べたい」で、Notionにメモを追加できるようになる方法を説明しています。"
         :tags="{
@@ -25,7 +26,7 @@
       />
       <item-card
         title="Notionかんたんタスク管理"
-        icon="mdi-calendar-check"
+        :icon="mdiCalendarCheck"
         href="https://note.com/m_cre/n/n85b9a1720458"
         description="最近大人気の Notion ですが、何でも出来すぎて逆にとっつきづらいと感じている方も多いと思います。そんな方のためにデータベースもテンプレートも使わない、今日から始められる個人向け「かんたんタスク管理」の例をご紹介します。これだけでも十分にNotionの恩恵を感じられると思います。"
         :tags="{

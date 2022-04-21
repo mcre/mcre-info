@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import LinkBtn from '@/components/LinkBtn.vue'
   import LinkIcon from '@/components/LinkIcon.vue'
+  import { mdiTwitter } from '@mdi/js'
   import { onMounted } from 'vue'
   onMounted(async () => {
     await setTimeout(() => {
@@ -17,7 +18,7 @@
     <v-card-title>
       <link-icon
         href="https://twitter.com/m_cre"
-        icon="mdi-twitter"
+        :icon="mdiTwitter"
         tooltip="Twitter"
       />
       Twitter
