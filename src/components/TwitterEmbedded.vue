@@ -13,7 +13,7 @@
 <template>
   <a
     class="twitter-timeline"
-    data-tweet-limit="3"
+    data-tweet-limit="5"
     data-chrome="noheader,nofooter,transparent"
     data-lang="ja"
     href="https://twitter.com/m_cre?ref_src=twsrc%5Etfw"
