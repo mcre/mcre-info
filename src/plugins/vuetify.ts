@@ -1,10 +1,69 @@
 import 'vuetify/styles'
 
 import { createVuetify } from 'vuetify'
+import {
+  VApp,
+  VAppBar,
+  VAvatar,
+  VBtnGroup,
+  VCard,
+  VCardActions,
+  VCardText,
+  VCardTitle,
+  VChip,
+  VCol,
+  VContainer,
+  VDivider,
+  VIcon,
+  VImg,
+  VItemGroup,
+  VLazy,
+  VList,
+  VListItem,
+  VListItemAvatar,
+  VListItemHeader,
+  VListItemSubtitle,
+  VListItemTitle,
+  VListSubheader,
+  VMain,
+  VRow,
+  VSpacer,
+  VTooltip,
+} from 'vuetify/components'
+
 import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 import { ja } from 'vuetify/locale'
 
 export default createVuetify({
+  components: {
+    VApp,
+    VAppBar,
+    VAvatar,
+    VBtnGroup,
+    VCard,
+    VCardActions,
+    VCardText,
+    VCardTitle,
+    VChip,
+    VCol,
+    VContainer,
+    VDivider,
+    VIcon,
+    VImg,
+    VItemGroup,
+    VLazy,
+    VList,
+    VListItem,
+    VListItemAvatar,
+    VListItemHeader,
+    VListItemSubtitle,
+    VListItemTitle,
+    VListSubheader,
+    VMain,
+    VRow,
+    VSpacer,
+    VTooltip,
+  },
   defaults: {
     VCard: {
       elevation: 3,
