@@ -42,7 +42,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-lazy><twitter-card /></v-lazy>
+            <twitter-card />
           </v-col>
         </v-row>
       </v-col>
