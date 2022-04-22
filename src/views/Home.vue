@@ -22,22 +22,22 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-lazy><youtube-card /></v-lazy>
+            <youtube-card />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-lazy><website-card /></v-lazy>
+            <website-card />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-lazy><github-card /></v-lazy>
+            <github-card />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-lazy><note-card /></v-lazy>
+            <note-card />
           </v-col>
         </v-row>
         <v-row>
