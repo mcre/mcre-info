@@ -15,9 +15,7 @@
     "vue-gtag-next": "^1.14.0",
     "vue-router": "^4.0.14",
     "vuetify": "^3.0.0-beta.0",
-    "webfontloader": "^1.0.0"
-  },
-  "devDependencies": {
+    "webfontloader": "^1.0.0",
     "@types/node": "^17.0.23",
     "@types/webfontloader": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
