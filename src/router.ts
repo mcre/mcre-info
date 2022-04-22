@@ -3,7 +3,10 @@ import { trackRouter } from 'vue-gtag-next'
 
 const Home = () => import(/* webpackChunkName: "Home" */ '@/views/Home.vue')
 
-const routes = [{ path: '/', name: 'home', component: Home }]
+const routes = [
+  { path: '/', name: 'home', component: Home },
+  { path: '/:pathMatch(.*)*', redirect: '/' },
+]
 
 const router = createRouter({
   history: createWebHistory(),
