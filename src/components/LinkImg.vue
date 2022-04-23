@@ -1,9 +1,14 @@
 <script setup lang="ts">
-  const mainProps = defineProps<{
+  interface MainProps {
     href: string
     img: string
     tooltip: string
-  }>()
+    size?: number
+  }
+
+  const mainProps = withDefaults(defineProps<MainProps>(), {
+    size: 48,
+  })
 </script>
 
 <template>
@@ -16,7 +21,11 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <v-avatar size="48" :image="mainProps.img" v-bind="props" />
+        <v-avatar
+          :size="mainProps.size"
+          :image="mainProps.img"
+          v-bind="props"
+        />
       </v-btn>
     </template>
     <span>{{ mainProps.tooltip }}</span>

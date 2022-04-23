@@ -110,6 +110,13 @@
             href="https://note.com/m_cre/"
             img="/img/note.svg"
             tooltip="note"
+            :size="40"
+          />
+          <link-img
+            href="https://lapras.com/public/NCTOWDE"
+            img="img/laplas.svg"
+            tooltip="LAPLAS"
+            :size="28"
           />
           <link-icon
             href="https://www.linkedin.com/in/shinya-fujita-03b5ba12/"
