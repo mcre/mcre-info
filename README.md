@@ -283,3 +283,8 @@ CloudFront のディストリビューションを選択する
     - 300
   - ルーティングポリシー
     - シンプルルーティング
+
+## License
+
+- MIT
+  - see LICENSE
