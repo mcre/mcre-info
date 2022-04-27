@@ -41,7 +41,7 @@
         <v-list-subheader>職歴</v-list-subheader>
         <list-item
           title="ソフトバンク(株)"
-          subtitle="営業施策分析、契約者数予測、Azure/AWSでのデータ分析システム企画・開発・運用など"
+          subtitle="営業施策分析、契約者数予測、Azure/AWSでのデータ分析システム企画・開発・運用、スポーツデータの機械学習分析など"
           subtitle2="<small>※ウィルコム入社後 吸収合併</small>"
         />
         <list-item
@@ -63,14 +63,14 @@
           link-tooltip="人狼知能ウェブサイト"
         />
         <list-item
-          title="人狼知能大会 <wbr /> 自然言語部門 <wbr />第3回大会"
+          title="人狼知能大会 <wbr />第3回大会 <wbr /> 自然言語部門"
           subtitle="総合優秀賞+人狼ゲーム賞"
           link-href="https://www.inside-games.jp/article/2017/09/05/109557.html"
           :link-icon="mdiNewspaper"
           link-tooltip="大会紹介ニュース記事"
         />
         <list-item
-          title="人狼知能大会 <wbr />自然言語部門 <wbr />第4回大会"
+          title="人狼知能大会 <wbr />第4回大会 <wbr /> 自然言語部門"
           subtitle="準優勝"
         />
         <v-list-subheader>技術等</v-list-subheader>
