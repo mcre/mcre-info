@@ -35,6 +35,13 @@
         }"
       />
       <item-card
+        title="listening-paperback"
+        img="/img/lp.jpg"
+        href="https://github.com/mcre/listening-paperback"
+        description="Youtubeチャンネル 「聴く」名作文庫 の動画を生成するためのプログラムを公開しています。"
+        :tags="{ Python: ['MoviePy'], AWS: ['Polly'], TeX: ['jlreq'] }"
+      />
+      <item-card
         title="aiwolf-4th-nlp"
         :icon="mdiDog"
         href="https://github.com/mcre/aiwolf-4th-nlp"
