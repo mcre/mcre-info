@@ -15,37 +15,33 @@
 
 <template>
   <v-list-item>
-    <v-list-item-header>
-      <v-list-item-title v-html="props.title" />
-      <v-list-item-subtitle
-        v-if="props.subtitle"
-        class="wordwrap"
-        v-html="props.subtitle"
-      />
-      <v-list-item-subtitle
-        v-if="props.subtitle2"
-        class="wordwrap"
-        v-html="props.subtitle2"
-      />
-    </v-list-item-header>
+    <v-list-item-title v-html="props.title" />
+    <v-list-item-subtitle
+      v-if="props.subtitle"
+      class="wordwrap"
+      v-html="props.subtitle"
+    />
+    <v-list-item-subtitle
+      v-if="props.subtitle2"
+      class="wordwrap"
+      v-html="props.subtitle2"
+    />
     <template
       v-if="props.linkHref && (props.linkIcon || props.linkImg)"
       v-slot:append
     >
-      <v-list-item-avatar end>
-        <link-icon
-          v-if="props.linkIcon"
-          :href="props.linkHref"
-          :icon="props.linkIcon"
-          :tooltip="props.linkTooltip"
-        />
-        <link-img
-          v-if="props.linkImg"
-          :href="props.linkHref"
-          :img="props.linkImg"
-          :tooltip="props.linkTooltip"
-        />
-      </v-list-item-avatar>
+      <link-icon
+        v-if="props.linkIcon"
+        :href="props.linkHref"
+        :icon="props.linkIcon"
+        :tooltip="props.linkTooltip"
+      />
+      <link-img
+        v-if="props.linkImg"
+        :href="props.linkHref"
+        :img="props.linkImg"
+        :tooltip="props.linkTooltip"
+      />
     </template>
   </v-list-item>
 </template>
