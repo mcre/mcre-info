@@ -90,7 +90,7 @@
         />
         <list-item
           title="データ分析・機械学習"
-          subtitle="SQL, Excel, Python/Pandasでのデータ集計・変形、TensorFlow/Kerasでの機械学習等。"
+          subtitle="SQL, Excel, SAS, Python/Pandasでのデータ集計・変形、TensorFlow/Kerasでの機械学習等。"
           subtitle2="特に営業施策の効果分析・予測・レポーティングは豊富な経験あり。"
         />
         <list-item
