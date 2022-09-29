@@ -96,7 +96,7 @@
         <list-item
           title="英語"
           subtitle="メールでの英文のやり取りは3年以上日常的に行っています。"
-          subtitle2="会議で自在に発言できるほどではないので、英会話教室Gabaで Level5 の学習中。"
+          subtitle2="会議で自在に発言できるほどではないので、英会話教室Gabaで Level6 の学習中。"
           link-href="https://www.gaba.co.jp/aboutgaba/text_level.html"
           :link-icon="mdiBookAlphabet"
           link-tooltip="Gabaのレベル設定"
