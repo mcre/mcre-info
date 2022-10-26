@@ -2,7 +2,7 @@
   import LinkBtn from '@/components/LinkBtn.vue'
   import ItemCard from '@/components/ItemCard.vue'
   import LinkIcon from '@/components/LinkIcon.vue'
-  import { mdiGithub, mdiCardsOutline, mdiDog } from '@mdi/js'
+  import { mdiGithub, mdiDog } from '@mdi/js'
 </script>
 
 <template>
@@ -22,16 +22,6 @@
         description="このサイトのソースコードを公開しています。"
         :tags="{
           Vue3: ['Vuetify3'],
-        }"
-      />
-      <item-card
-        title="address-printing-on-jp-postcards"
-        :icon="mdiCardsOutline"
-        href="https://github.com/mcre/address-printing-on-jp-postcards"
-        description="毎年の年賀状宛名印刷のために作りました。柔軟なフォーマットで差込印刷できます。"
-        :tags="{
-          Python: [],
-          TeX: [],
         }"
       />
       <item-card

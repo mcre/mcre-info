@@ -5,6 +5,7 @@
   import WebsiteCard from '@/views/Home/WebsiteCard.vue'
   import GithubCard from '@/views/Home/GithubCard.vue'
   import NoteCard from '@/views/Home/NoteCard.vue'
+  import ZennCard from '@/views/Home/ZennCard.vue'
 </script>
 
 <template>
@@ -38,6 +39,11 @@
         <v-row>
           <v-col>
             <note-card />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <zenn-card />
           </v-col>
         </v-row>
         <v-row>

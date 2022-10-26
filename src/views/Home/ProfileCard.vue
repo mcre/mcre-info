@@ -122,6 +122,12 @@
             :size="40"
           />
           <link-img
+            href="https://zenn.dev/m_cre"
+            img="/img/zenn.svg"
+            tooltip="Zenn"
+            :size="28"
+          />
+          <link-img
             href="https://lapras.com/public/NCTOWDE"
             img="img/laplas.svg"
             tooltip="LAPLAS"
