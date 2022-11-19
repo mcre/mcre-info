@@ -24,7 +24,16 @@
     <v-avatar v-if="props.icon" class="mr-1" size="32">
       <v-icon>{{ props.icon }}</v-icon>
     </v-avatar>
-    <span class="font-weight-bold text-decoration-underline">
+    <span
+      class="font-weight-bold text-decoration-underline text-truncate d-none d-sm-flex"
+      style="max-width: 400px"
+    >
+      <slot />
+    </span>
+    <span
+      class="font-weight-bold text-decoration-underline text-truncate d-flex d-sm-none"
+      style="max-width: 200px"
+    >
       <slot />
     </span>
   </v-btn>
