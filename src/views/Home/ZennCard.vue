@@ -25,7 +25,7 @@
       <link-img
         href="https://zenn.dev/m_cre"
         img="/img/zenn.svg"
-        tooltip="note"
+        tooltip="Zenn"
         :size="36"
       />Zenn
     </v-card-title>
