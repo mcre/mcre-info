@@ -13,7 +13,6 @@ export interface RssArticle {
 export const useRss = async (path: string) => {
   const feed = await parse(`${config.mcreinfoProxyHost}/${path}`)
   const articles: RssArticle[] = feed.items.map((item) => {
-    console.log(item)
     return {
       link: item.link,
       title: item.title,
