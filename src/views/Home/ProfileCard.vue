@@ -116,6 +116,12 @@
             tooltip="GitHub"
           />
           <link-img
+            href="https://wakatime.com/@mcre"
+            img="/img/wakatime.png"
+            tooltip="WakaTime"
+            :size="32"
+          />
+          <link-img
             href="https://note.com/m_cre/"
             img="/img/note.svg"
             tooltip="note"
