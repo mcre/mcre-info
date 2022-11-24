@@ -1,8 +1,23 @@
 <script setup lang="ts">
+  import { reactive, onMounted } from 'vue'
   import LinkBtn from '@/components/LinkBtn.vue'
   import ItemCard from '@/components/ItemCard.vue'
   import LinkImg from '@/components/LinkImg.vue'
-  import { mdiMicrophone, mdiCalendarCheck } from '@mdi/js'
+  import { mdiNoteTextOutline } from '@mdi/js'
+
+  import { useRss, RssArticle } from '@/composables/useRss'
+
+  const state: {
+    articles: RssArticle[]
+  } = reactive({
+    articles: [],
+  })
+
+  onMounted(() => {
+    useRss('note-rss').then((articles) => {
+      state.articles = articles
+    })
+  })
 </script>
 
 <template>
@@ -16,22 +31,13 @@
     </v-card-title>
     <v-card-text>
       <item-card
-        title="iPhoneから音声入力でNotionにメモ"
-        :icon="mdiMicrophone"
-        href="https://note.com/m_cre/n/n677310ce3a93"
-        description="iPhoneから、「Hey Siri、アイディア」「たこ焼き食べたい」で、Notionにメモを追加できるようになる方法を説明しています。"
-        :tags="{
-          Notion: [],
-        }"
-      />
-      <item-card
-        title="Notionかんたんタスク管理"
-        :icon="mdiCalendarCheck"
-        href="https://note.com/m_cre/n/n85b9a1720458"
-        description="最近大人気の Notion ですが、何でも出来すぎて逆にとっつきづらいと感じている方も多いと思います。そんな方のためにデータベースもテンプレートも使わない、今日から始められる個人向け「かんたんタスク管理」の例をご紹介します。これだけでも十分にNotionの恩恵を感じられると思います。"
-        :tags="{
-          Notion: [],
-        }"
+        v-for="article in state.articles"
+        :title="!article.enclosure ? article.title : undefined"
+        :icon="mdiNoteTextOutline"
+        :href="article.link"
+        :description="article.description"
+        :head-img="article.enclosure"
+        read-more
       />
     </v-card-text>
     <v-card-actions>

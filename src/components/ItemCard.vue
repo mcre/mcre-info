@@ -3,27 +3,35 @@
   import LinkBtn from '@/components/LinkBtn.vue'
 
   const props = defineProps<{
-    title: string
+    title?: string
     img?: string
     icon?: string
     href: string
     description: string
     youtube?: string
-    coverImg?: string
+    headImg?: string
+    footImg?: string
+    readMore?: boolean
     tags?: { [key: string]: string[] }
   }>()
 </script>
 
 <template>
   <v-card class="mb-2">
-    <v-card-title class="pl-1 custom-card-title">
+    <v-card-title class="pl-1 custom-card-title" v-if="props.title">
       <link-btn :href="props.href" :img="props.img" :icon="props.icon">
         {{ props.title }}
       </link-btn>
     </v-card-title>
-    <v-card-text>
-      {{ props.description }}
-    </v-card-text>
+    <a
+      :href="props.href"
+      target="_blank"
+      rel="noopener noreferrer"
+      v-if="props.headImg"
+    >
+      <v-img class="mx-4 ma-4" v-if="props.headImg" :src="props.headImg" />
+    </a>
+    <v-card-text v-html="props.description" />
     <v-container v-if="props.youtube" class="responsive-style">
       <v-lazy>
         <iframe
@@ -37,13 +45,18 @@
         />
       </v-lazy>
     </v-container>
-    <v-img class="mx-4" v-if="props.coverImg" :src="props.coverImg" />
+    <v-img class="mx-4" v-if="props.footImg" :src="props.footImg" />
+    <v-card-actions v-if="props.readMore">
+      <v-spacer />
+      <link-btn :href="props.href">続きを読む</link-btn>
+      <v-spacer />
+    </v-card-actions>
     <v-card-actions v-if="props.tags">
       <v-item-group>
         <tag-chip
           v-for="(children, parent) in props.tags"
           :key="parent"
-          :parent="parent"
+          :parent="`${parent}`"
           :children="children"
         />
       </v-item-group>

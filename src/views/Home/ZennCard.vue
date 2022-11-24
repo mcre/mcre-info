@@ -1,8 +1,22 @@
 <script setup lang="ts">
+  import { reactive, onMounted } from 'vue'
   import LinkBtn from '@/components/LinkBtn.vue'
   import ItemCard from '@/components/ItemCard.vue'
   import LinkImg from '@/components/LinkImg.vue'
-  import { mdiPostageStamp } from '@mdi/js'
+
+  import { useRss, RssArticle } from '@/composables/useRss'
+
+  const state: {
+    articles: RssArticle[]
+  } = reactive({
+    articles: [],
+  })
+
+  onMounted(() => {
+    useRss('zenn-rss').then((articles) => {
+      state.articles = articles
+    })
+  })
 </script>
 
 <template>
@@ -17,14 +31,11 @@
     </v-card-title>
     <v-card-text>
       <item-card
-        title="年賀状の宛名印刷難民の救済"
-        :icon="mdiPostageStamp"
-        href="https://zenn.dev/m_cre/articles/address-printing-on-jp-postcards"
-        description="毎年年末に悩まされる年賀状、近年の傾向のとおり私も基本的には止めてしまったのですが、親戚だけには出すことにしています。Windowsであれば手頃な宛名印刷ソフトがいくつかあったと思うのですが、Macに乗り換えてからは定番のものがみつからず、困っていたものです。それであれば、自分でつくろうと考えました。Macだけでなく、DockerさえインストールできればWindowsでもLinuxでもラズパイでもうごくはずです。たぶん。"
-        :tags="{
-          Python: [],
-          TeX: [],
-        }"
+        v-for="article in state.articles"
+        :href="article.link"
+        :description="article.description"
+        :head-img="article.enclosure"
+        read-more
       />
     </v-card-text>
     <v-card-actions>

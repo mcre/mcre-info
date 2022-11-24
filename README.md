@@ -284,6 +284,51 @@ CloudFront のディストリビューションを選択する
   - ルーティングポリシー
     - シンプルルーティング
 
+# API-Gateway
+
+Zenn と note の RSS を使用したいが、直接読むと CORS の関係で使用できないので、API-Gateway を簡易的に経由するようにする。
+
+- HTTP API 構築
+
+  - 統合を作成して設定
+    - 統合(1)
+      - HTTP
+      - メソッド
+        - GET
+      - エンドポイント
+        - https://zenn.dev/m_cre/feed
+    - 統合(2)
+      - HTTP
+      - メソッド
+        - GET
+      - エンドポイント
+        - https://note.com/m_cre/rss
+    - API 名
+      - mcreinfo-proxy
+  - ルートを設定
+    - ルート(1)
+      - メソッド
+        - GET
+      - リソースパス
+        - /zenn-rss
+      - 統合ターゲット
+        - GET https://zenn.dev/m_cre/feed
+    - ルート(2)
+      - メソッド
+        - GET
+      - リソースパス
+        - /note-rss
+      - 統合ターゲット
+        - GET https://note.com/m_cre/rss
+  - ステージを設定
+    - そのまま次へ
+
+- CORS
+  - Access-Control-Allow-Origin
+    - `*`
+
+https://5em5yx202a.execute-api.ap-northeast-1.amazonaws.com
+
 ## License
 
 - MIT

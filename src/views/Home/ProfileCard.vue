@@ -141,7 +141,7 @@
           <link-img
             href="https://www.wantedly.com/id/fujita_shinya"
             img="/img/wantedly.svg"
-            tooltip="wantedly"
+            tooltip="Wantedly"
           />
         </v-col>
       </v-row>
