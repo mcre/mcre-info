@@ -16,15 +16,10 @@
     <v-row class="mt-10" justify="center">
       <p>一生プログラミングします。</p>
     </v-row>
-    <v-row justify="center">
-      <v-col class="my-4" cols="12" sm="10" md="8" lg="6" xl="4">
+    <v-row class="my-8" justify="center">
+      <v-col cols="12" sm="10" md="6" lg="6" xl="4">
         <v-row>
           <v-col><profile-card /></v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <youtube-card />
-          </v-col>
         </v-row>
         <v-row>
           <v-col>
@@ -38,12 +33,19 @@
         </v-row>
         <v-row>
           <v-col>
-            <note-card />
+            <youtube-card />
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="12" sm="10" md="6" lg="6" xl="4">
+        <v-row>
+          <v-col>
+            <zenn-card />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <zenn-card />
+            <note-card />
           </v-col>
         </v-row>
         <v-row>

@@ -17,7 +17,7 @@
 </script>
 
 <template>
-  <v-card class="mb-2">
+  <v-card class="mb-2" variant="outlined" elevation="0">
     <v-card-title class="pl-1 custom-card-title" v-if="props.title">
       <link-btn :href="props.href" :img="props.img" :icon="props.icon">
         {{ props.title }}
