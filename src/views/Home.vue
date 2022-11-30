@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import SnsRow from '@/components/SnsRow.vue'
+  import SnsRow from '@/views/Home/SnsRow.vue'
   import ProfileCard from '@/views/Home/ProfileCard.vue'
   import TwitterCard from '@/views/Home/TwitterCard.vue'
   import YoutubeCard from '@/views/Home/YoutubeCard.vue'
@@ -7,6 +7,7 @@
   import GithubCard from '@/views/Home/GithubCard.vue'
   import NoteCard from '@/views/Home/NoteCard.vue'
   import ZennCard from '@/views/Home/ZennCard.vue'
+  import WakaTimeCard from '@/views/Home/WakaTimeCard.vue'
 </script>
 
 <template>
@@ -48,6 +49,11 @@
         <v-row>
           <v-col>
             <note-card />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <waka-time-card />
           </v-col>
         </v-row>
         <v-row>
