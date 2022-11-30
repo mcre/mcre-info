@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import SnsRow from '@/components/SnsRow.vue'
   import ProfileCard from '@/views/Home/ProfileCard.vue'
   import TwitterCard from '@/views/Home/TwitterCard.vue'
   import YoutubeCard from '@/views/Home/YoutubeCard.vue'
@@ -16,7 +17,8 @@
     <v-row class="mt-10" justify="center">
       <p>一生プログラミングします。</p>
     </v-row>
-    <v-row class="my-8" justify="center">
+    <sns-row class="my-6" />
+    <v-row justify="center">
       <v-col cols="12" sm="10" md="6" lg="6" xl="4">
         <v-row>
           <v-col><profile-card /></v-col>

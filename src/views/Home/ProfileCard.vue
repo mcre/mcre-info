@@ -1,14 +1,10 @@
 <script setup lang="ts">
-  import LinkIcon from '@/components/LinkIcon.vue'
-  import LinkImg from '@/components/LinkImg.vue'
   import ListItem from '@/components/ListItem.vue'
   import {
     mdiAccountTie,
     mdiTwitter,
     mdiDog,
     mdiNewspaper,
-    mdiGithub,
-    mdiLinkedin,
     mdiBookAlphabet,
   } from '@mdi/js'
 </script>
@@ -102,55 +98,6 @@
           link-tooltip="Gabaのレベル設定"
         />
       </v-list>
-      <v-divider class="my-4" />
-      <v-row>
-        <v-col align="center">
-          <link-icon
-            href="https://twitter.com/m_cre"
-            :icon="mdiTwitter"
-            tooltip="Twitter"
-          />
-          <link-icon
-            href="https://github.com/mcre"
-            :icon="mdiGithub"
-            tooltip="GitHub"
-          />
-          <link-img
-            href="https://wakatime.com/@mcre"
-            img="/img/wakatime.png"
-            tooltip="WakaTime"
-            :size="32"
-          />
-          <link-img
-            href="https://note.com/m_cre/"
-            img="/img/note.svg"
-            tooltip="note"
-            :size="40"
-          />
-          <link-img
-            href="https://zenn.dev/m_cre"
-            img="/img/zenn.svg"
-            tooltip="Zenn"
-            :size="28"
-          />
-          <link-img
-            href="https://lapras.com/public/NCTOWDE"
-            img="img/laplas.svg"
-            tooltip="LAPLAS"
-            :size="28"
-          />
-          <link-icon
-            href="https://www.linkedin.com/in/shinya-fujita-03b5ba12/"
-            :icon="mdiLinkedin"
-            tooltip="LinkedIn"
-          />
-          <link-img
-            href="https://www.wantedly.com/id/fujita_shinya"
-            img="/img/wantedly.svg"
-            tooltip="Wantedly"
-          />
-        </v-col>
-      </v-row>
     </v-card-text>
   </v-card>
 </template>
