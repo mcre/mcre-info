@@ -32,8 +32,7 @@
     <v-card-text>
       <item-card
         v-for="article in state.articles"
-        :title="!article.enclosure ? article.title : undefined"
-        :icon="mdiNoteTextOutline"
+        :title="article.title"
         :href="article.link"
         :description="article.description"
         :head-img="article.enclosure"
