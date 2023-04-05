@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import LinkBtn from '@/components/LinkBtn.vue'
+  import LinkTitleBtn from '@/components/LinkTitleBtn.vue'
   import ItemCard from '@/components/ItemCard.vue'
   import LinkIcon from '@/components/LinkIcon.vue'
   import { mdiGithub, mdiDog } from '@mdi/js'
@@ -8,7 +9,7 @@
 <template>
   <v-card>
     <v-card-title>
-      <link-icon
+      <link-title-icon
         href="https://github.com/mcre"
         :icon="mdiGithub"
         tooltip="GitHub"

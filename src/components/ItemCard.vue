@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import TagChip from '@/components/TagChip.vue'
+  import LinkTitleBtn from '@/components/LinkTitleBtn.vue'
   import LinkBtn from '@/components/LinkBtn.vue'
 
   const props = defineProps<{
@@ -19,9 +20,9 @@
 <template>
   <v-card class="mb-2" variant="outlined" elevation="0">
     <v-card-title class="pl-1 custom-card-title" v-if="props.title">
-      <link-btn :href="props.href" :img="props.img" :icon="props.icon">
+      <link-title-btn :href="props.href" :img="props.img" :icon="props.icon">
         {{ props.title }}
-      </link-btn>
+      </link-title-btn>
     </v-card-title>
     <a
       :href="props.href"
