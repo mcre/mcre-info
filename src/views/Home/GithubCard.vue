@@ -26,6 +26,15 @@
         }"
       />
       <item-card
+        title="dqw-tools"
+        img="/img/dqw-tools.png"
+        href="https://github.com/mcre/dqw-tools"
+        description="DQW(ドラゴンクエストウォーク)のこころ道クエスト検索ツールのソースコードを公開しています。"
+        :tags="{
+          Vue3: ['Vuetify3'],
+        }"
+      />
+      <item-card
         title="listening-paperback"
         img="/img/lp.jpg"
         href="https://github.com/mcre/listening-paperback"
