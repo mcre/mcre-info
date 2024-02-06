@@ -4,6 +4,8 @@
     mdiAccountTie,
     mdiTwitter,
     mdiDog,
+    mdiBrain,
+    mdiDumbbell,
     mdiNewspaper,
     mdiBookAlphabet,
   } from '@mdi/js'
@@ -18,10 +20,10 @@
         <list-item title="mcre" subtitle="(FUJITA Shinya)" />
         <v-list-subheader>連絡先</v-list-subheader>
         <list-item
-          title="TwitterのDM"
-          link-href="https://twitter.com/m_cre"
-          :link-icon="mdiTwitter"
-          link-tooltip="Twitter DM"
+          title="XのDM"
+          link-href="https://x.com/m_cre"
+          link-img="/img/x.png"
+          link-tooltip="X DM"
         />
         <v-list-subheader>出身校</v-list-subheader>
         <list-item
@@ -44,7 +46,18 @@
         <list-item
           title="ai6(株)"
           subtitle="スタートアップにて開発全般担当。PoC用ウェブアプリ、PoC用デバイスファームウェア用アプリ、サーバ、データレイク開発、データ分析等。"
-          subtitle2="<small>現職</small>"
+          subtitle2=" <small>General Manager, Engineering, 現職</small>"
+          link-href="https://ai6.jp/"
+          :link-icon="mdiBrain"
+          link-tooltip="ai6 株式会社"
+        />
+        <list-item
+          title="CoCoDakara(株)"
+          subtitle="麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システム開発・運用担当。"
+          subtitle2="<small>取締役, 現職</small>"
+          link-href="https://bodydesign.cocodakara.net/"
+          :link-icon="mdiDumbbell"
+          link-tooltip="CoCoDakara BodyDesign"
         />
         <list-item
           title="ITフリーランス"

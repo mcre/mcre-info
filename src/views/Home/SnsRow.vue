@@ -7,10 +7,11 @@
 <template>
   <v-row>
     <v-col align="center">
-      <link-icon
-        href="https://twitter.com/m_cre"
-        :icon="mdiTwitter"
-        tooltip="Twitter"
+      <link-img
+        href="https://x.com/m_cre"
+        img="/img/x.png"
+        tooltip="X"
+        :size="32"
       />
       <link-icon
         href="https://github.com/mcre"
