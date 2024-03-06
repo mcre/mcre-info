@@ -5,12 +5,16 @@ on:
     branches: [master]
     paths-ignore:
       - 'backend/**'
+      - 'tools/**'
+      - '.github/**'
+      - '.vscode/**'
+      - '.gitignore'
+      - 'README.md'
 
 jobs:
   ci:
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: production
       AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
@@ -22,7 +26,9 @@ jobs:
           cache: npm
       - name: npm ci, build
         run: |
+          export NODE_ENV=development
           npm ci
+          export NODE_ENV=production
           npm run build --if-present
 
       - name: s3 sync

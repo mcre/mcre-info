@@ -1,0 +1,24 @@
+{
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#ffffff",
+    "titleBar.activeForeground": "#ff3c00",
+    "activityBar.background": "#ffffff",
+    "activityBar.foreground": "#ff3c00"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "cSpell.words": [
+    "Cachebuster",
+    "edgelambda",
+    "esbenp",
+    "jmwj",
+    "mcreinfo",
+    "Prerender",
+    "Waka",
+    "wakatime"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
