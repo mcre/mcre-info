@@ -35,6 +35,15 @@
         }"
       />
       <item-card
+        title="mcre-tools"
+        img="/img/favicon32.png"
+        href="https://github.com/mcre/mcre-tools"
+        description="「熟語パズル」などのツールのソースコード。"
+        :tags="{
+          AWS: ['API-Gateway', 'DynamoDB', 'CDK'],
+        }"
+      />
+      <item-card
         title="listening-paperback"
         img="/img/lp.jpg"
         href="https://github.com/mcre/listening-paperback"

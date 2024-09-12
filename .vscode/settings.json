@@ -1,20 +1,18 @@
 {
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#ffffff",
-    "titleBar.activeForeground": "#ff3c00",
-    "activityBar.background": "#ffffff",
-    "activityBar.foreground": "#ff3c00"
-  },
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
+    "aiwolf",
     "Cachebuster",
     "edgelambda",
     "esbenp",
+    "jlreq",
     "jmwj",
+    "jukugo",
+    "Juman",
     "mcreinfo",
     "Prerender",
     "Waka",

@@ -29,21 +29,11 @@
       <item-card
         title="熟語パズル"
         img="/img/jukugo.png"
-        href="http://www.mchs-u.net/mc/jukugo/"
-        description="いわゆる「和同開珎パズル」を自動で解いてくれるソルバーです。たぶんそのうちリメイクします。"
+        href="https://tools.mcre.info/jukugo"
+        description="いわゆる「和同開珎パズル」を自動で解いてくれるソルバーです。"
         :tags="{
-          PHP: [],
-          MySQL: [],
-        }"
-      />
-      <item-card
-        title="脱出歴"
-        img="/img/dhist.png"
-        href="http://www.mchs-u.net/mc/app/dhist/"
-        description="「リアル脱出ゲーム」などの参加型ゲームイベントの参加歴作成・共有サービス（ほぼ放置中・・・）"
-        :tags="{
-          'Ruby on Rails': [],
-          MySQL: [],
+          Vue3: ['Vuetify3'],
+          AWS: ['API-Gateway', 'DynamoDB', 'CDK'],
         }"
       />
     </v-card-text>
