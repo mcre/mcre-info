@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title><v-icon left icon="mdi-account-tile" />Profile</v-card-title>
+    <v-card-title><v-icon left icon="mdi-account-tie" />Profile</v-card-title>
     <v-card-text class="pt-0">
       <v-list :density="null" lines="three">
         <v-list-subheader>名前</v-list-subheader>

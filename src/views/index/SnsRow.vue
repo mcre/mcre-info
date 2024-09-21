@@ -1,6 +1,6 @@
 <template>
-  <v-row>
-    <v-col align="center">
+  <v-row justify="center">
+    <v-col cols="auto">
       <link-img
         href="https://x.com/m_cre"
         img="/img/x.png"

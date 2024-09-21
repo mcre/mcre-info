@@ -7,22 +7,22 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    GithubCard: typeof import('./components/GithubCard.vue')['default']
+    GithubCard: typeof import('./views/index/GithubCard.vue')['default']
     ItemCard: typeof import('./components/ItemCard.vue')['default']
     LinkBtn: typeof import('./components/LinkBtn.vue')['default']
     LinkIcon: typeof import('./components/LinkIcon.vue')['default']
     LinkImg: typeof import('./components/LinkImg.vue')['default']
     LinkTitleBtn: typeof import('./components/LinkTitleBtn.vue')['default']
     ListItem: typeof import('./components/ListItem.vue')['default']
-    NoteCard: typeof import('./components/NoteCard.vue')['default']
-    ProfileCard: typeof import('./components/ProfileCard.vue')['default']
+    NoteCard: typeof import('./views/index/NoteCard.vue')['default']
+    ProfileCard: typeof import('./views/index/ProfileCard.vue')['default']
     SnsRow: typeof import('./components/SnsRow.vue')['default']
     TagChip: typeof import('./components/TagChip.vue')['default']
-    TwitterCard: typeof import('./components/TwitterCard.vue')['default']
+    TwitterCard: typeof import('./views/index/TwitterCard.vue')['default']
     TwitterEmbedded: typeof import('./components/TwitterEmbedded.vue')['default']
-    WakaTimeCard: typeof import('./components/WakaTimeCard.vue')['default']
-    WebsiteCard: typeof import('./components/WebsiteCard.vue')['default']
-    YoutubeCard: typeof import('./components/YoutubeCard.vue')['default']
-    ZennCard: typeof import('./components/ZennCard.vue')['default']
+    WakaTimeCard: typeof import('./views/index/WakaTimeCard.vue')['default']
+    WebsiteCard: typeof import('./views/index/WebsiteCard.vue')['default']
+    YoutubeCard: typeof import('./views/index/YoutubeCard.vue')['default']
+    ZennCard: typeof import('./views/index/ZennCard.vue')['default']
   }
 }
