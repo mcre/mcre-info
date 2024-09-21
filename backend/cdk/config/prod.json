@@ -1,0 +1,25 @@
+{
+  "prefix": "mcre-info",
+  "account_id": "118834186871",
+  "cdk_identifier": "hnb659fds",
+  "tags": [{ "key": "project", "value": "mcre-info" }],
+  "iam": {
+    "open_id_connect_provider": {
+      "github_arn": "arn:aws:iam::118834186871:oidc-provider/token.actions.githubusercontent.com"
+    }
+  },
+  "s3": {
+    "dist": {
+      "deletion_protection": false
+    }
+  },
+  "cloudfront": {
+    "domain": {
+      "dist": {
+        "name": "tmp",
+        "zone_name": "mcre.info",
+        "hosted_zone_id": "Z330CBZA3E00YU"
+      }
+    }
+  }
+}

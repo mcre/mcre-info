@@ -7,6 +7,8 @@
   "cSpell.words": [
     "aiwolf",
     "Cachebuster",
+    "CBZA",
+    "certificatemanager",
     "edgelambda",
     "esbenp",
     "jlreq",
@@ -14,7 +16,9 @@
     "jukugo",
     "Juman",
     "mcreinfo",
+    "oidc",
     "Prerender",
+    "venv",
     "Waka",
     "wakatime"
   ],
