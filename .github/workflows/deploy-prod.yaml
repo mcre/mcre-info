@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       PREFIX: ${{ steps.output-step.outputs.PREFIX }}
+      DOMAIN_NAME_RSS_PROXY: ${{ steps.output-step.outputs.DOMAIN_NAME_RSS_PROXY }}
       DOMAIN_NAME_DISTRIBUTION: ${{ steps.output-step.outputs.DOMAIN_NAME_DISTRIBUTION }}
       CLOUDFRONT_DISTRIBUTION: ${{ steps.output-step.outputs.CLOUDFRONT_DISTRIBUTION }}
       BUCKET_DISTRIBUTION: ${{ steps.output-step.outputs.BUCKET_DISTRIBUTION }}
@@ -55,12 +56,15 @@ jobs:
         id: output-step
         working-directory: backend/cdk
         run: |
-          STACK_NAME_US=$(jq -r 'keys[0]' cdk-outputs.json)
-          PREFIX=$(jq -r --arg STACK_NAME_US "$STACK_NAME_US" '.[$STACK_NAME_US].Prefix' cdk-outputs.json)
+          STACK_NAME_JP=$(jq -r 'keys[0]' cdk-outputs.json)
+          STACK_NAME_US=$(jq -r 'keys[1]' cdk-outputs.json)
+          PREFIX=$(jq -r --arg STACK_NAME_JP "$STACK_NAME_JP" '.[$STACK_NAME_JP].Prefix' cdk-outputs.json)
+          DOMAIN_NAME_RSS_PROXY=$(jq -r --arg STACK_NAME_JP "$STACK_NAME_JP" '.[$STACK_NAME_JP].DomainNameRssProxy' cdk-outputs.json)
           CLOUDFRONT_DISTRIBUTION=$(jq -r --arg STACK_NAME_US "$STACK_NAME_US" '.[$STACK_NAME_US].CloudfrontDistribution' cdk-outputs.json)
           BUCKET_DISTRIBUTION=$(jq -r --arg STACK_NAME_US "$STACK_NAME_US" '.[$STACK_NAME_US].BucketDistribution' cdk-outputs.json)
           DOMAIN_NAME_DISTRIBUTION=$(jq -r --arg STACK_NAME_US "$STACK_NAME_US" '.[$STACK_NAME_US].DomainNameDistribution' cdk-outputs.json)
           echo "PREFIX=${PREFIX}" >> $GITHUB_OUTPUT
+          echo "DOMAIN_NAME_RSS_PROXY=${DOMAIN_NAME_RSS_PROXY}" >> $GITHUB_OUTPUT
           echo "CLOUDFRONT_DISTRIBUTION=${CLOUDFRONT_DISTRIBUTION}" >> $GITHUB_OUTPUT
           echo "BUCKET_DISTRIBUTION=${BUCKET_DISTRIBUTION}" >> $GITHUB_OUTPUT
           echo "DOMAIN_NAME_DISTRIBUTION=${DOMAIN_NAME_DISTRIBUTION}" >> $GITHUB_OUTPUT
@@ -80,6 +84,7 @@ jobs:
       - name: Write CDK outputs to .env.production
         run: |
           echo "VITE_DISTRIBUTION_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_DISTRIBUTION }}" >> .env.production
+          echo "VITE_RSS_PROXY_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_RSS_PROXY }}" >> .env.production
 
       - name: npm ci, build
         run: |

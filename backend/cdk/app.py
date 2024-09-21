@@ -14,6 +14,7 @@ from resources import (
     create_s3_bucket,
     create_cloudfront,
     create_iam_role_github_actions,
+    create_api_gateway_rss_proxy,
 )
 from config import get_env_config
 
@@ -21,6 +22,20 @@ from config import get_env_config
 # 開始処理
 config = get_env_config()
 app = App()
+
+
+# ===== JPリージョン =====
+stack = Stack(
+    app,
+    f"{config['prefix']}-stack",
+    env=Environment(region="ap-northeast-1"),
+)
+
+# api-gateway
+acm_result_rss_proxy = create_acm_certificate(
+    stack, "rss_proxy", config["api-gateway"]["domain"]["rss-proxy"]
+)
+create_api_gateway_rss_proxy(stack, acm_result_rss_proxy)
 
 
 # ===== USリージョン =====
@@ -80,7 +95,8 @@ policies = [
 iam_role_github_actions = create_iam_role_github_actions(stack_us, policies)
 
 # 後続処理で参照するパラメータを出力する処理
-CfnOutput(stack_us, "Prefix", value=config["prefix"])
+CfnOutput(stack, "Prefix", value=config["prefix"])
+CfnOutput(stack, "DomainNameRssProxy", value=acm_result_rss_proxy["domain_name"])
 CfnOutput(stack_us, "IamRoleGithubActions", value=iam_role_github_actions.role_arn)
 CfnOutput(stack_us, "DomainNameDistribution", value=acm_result_dist["domain_name"])
 CfnOutput(stack_us, "BucketDistribution", value=bucket_distribution.bucket_name)

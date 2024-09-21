@@ -1,11 +1,11 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
     "aiwolf",
+    "apigatewayv",
+    "apigw",
     "Cachebuster",
     "CBZA",
     "certificatemanager",
@@ -21,6 +21,5 @@
     "venv",
     "Waka",
     "wakatime"
-  ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  ]
 }

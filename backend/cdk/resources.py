@@ -15,6 +15,8 @@ from aws_cdk import (
     aws_s3 as s3,
     aws_cloudfront as cloudfront,
     aws_cloudfront_origins as cloudfront_origins,
+    aws_apigatewayv2 as apigw,
+    aws_apigatewayv2_integrations as apigw_integrations,
 )
 from config import get_env_config
 
@@ -188,7 +190,6 @@ def create_cloudfront(
         ],
     )
 
-
     domain_parts = acm_result["domain_name"].split(".")
     route53.ARecord(
         scope,
@@ -197,6 +198,85 @@ def create_cloudfront(
         zone=acm_result["hosted_zone"],
         target=route53.RecordTarget.from_alias(
             route53_targets.CloudFrontTarget(resource)
+        ),
+    )
+
+    add_tags(resource)
+    return resource
+
+
+def create_api_gateway_rss_proxy(
+    scope: Stack,
+    acm_result: Dict[str, Union[acm.Certificate, route53.HostedZone, str]],
+) -> apigw.HttpApi:
+    cors_domain_config = config["cloudfront"]["domain"]["dist"]
+    if "name" in cors_domain_config:
+        cors_origin = (
+            f"https://{cors_domain_config['name']}.{cors_domain_config['zone_name']}"
+        )
+    else:
+        cors_origin = f"https://{cors_domain_config['zone_name']}"
+
+    resource = apigw.HttpApi(
+        scope,
+        "api-gateway-rss-proxy",
+        api_name=f"{config['prefix']}-api-gateway-rss-proxy",
+        cors_preflight={
+            "allow_origins": [
+                cors_origin,
+                "http://localhost:3000",
+                "http://localhost:5173",
+            ],
+            "allow_methods": [apigw.CorsHttpMethod.GET],
+        },
+    )
+
+    resource.add_routes(
+        path="/zenn-rss",
+        methods=[apigw.HttpMethod.GET],
+        integration=apigw_integrations.HttpUrlIntegration(
+            "api-gateway-rss-proxy-integration-zenn",
+            url="https://zenn.dev/m_cre/feed",
+            method=apigw.HttpMethod.GET,
+        ),
+    )
+
+    resource.add_routes(
+        path="/note-rss",
+        methods=[apigw.HttpMethod.GET],
+        integration=apigw_integrations.HttpUrlIntegration(
+            "api-gateway-rss-proxy-integration-note",
+            url="https://note.com/m_cre/rss",
+            method=apigw.HttpMethod.GET,
+        ),
+    )
+
+    custom_domain = apigw.DomainName(
+        scope,
+        f"api-gateway-domain-rss-proxy",
+        domain_name=acm_result["domain_name"],
+        certificate=acm_result["certificate"],
+    )
+
+    domain_mapping = apigw.DomainMappingOptions(domain_name=custom_domain)
+
+    resource.add_stage(
+        f"api-gateway-rss-proxy-stage",
+        stage_name="prod",
+        auto_deploy=True,
+        domain_mapping=domain_mapping,
+    )
+
+    route53.ARecord(
+        scope,
+        f"api-gateway-a-record-rss-proxy",
+        record_name=acm_result["domain_name"].split(".")[0],
+        zone=acm_result["hosted_zone"],
+        target=route53.RecordTarget.from_alias(
+            route53_targets.ApiGatewayv2DomainProperties(
+                regional_domain_name=custom_domain.regional_domain_name,
+                regional_hosted_zone_id=custom_domain.regional_hosted_zone_id,
+            )
         ),
     )
 
