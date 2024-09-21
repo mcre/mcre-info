@@ -1,19 +1,6 @@
-<script setup lang="ts">
-  import ListItem from '@/components/ListItem.vue'
-  import {
-    mdiAccountTie,
-    mdiTwitter,
-    mdiDog,
-    mdiBrain,
-    mdiDumbbell,
-    mdiNewspaper,
-    mdiBookAlphabet,
-  } from '@mdi/js'
-</script>
-
 <template>
   <v-card>
-    <v-card-title><v-icon left :icon="mdiAccountTie" />Profile</v-card-title>
+    <v-card-title><v-icon left icon="mdi-account-tile" />Profile</v-card-title>
     <v-card-text class="pt-0">
       <v-list :density="null" lines="three">
         <v-list-subheader>名前</v-list-subheader>
@@ -48,7 +35,7 @@
           subtitle="スタートアップにて開発全般担当。PoC用ウェブアプリ、PoC用デバイスファームウェア用アプリ、サーバ、データレイク開発、データ分析等。"
           subtitle2=" <small>General Manager, Engineering, 現職</small>"
           link-href="https://ai6.jp/"
-          :link-icon="mdiBrain"
+          link-icon="mdi-brain"
           link-tooltip="ai6 株式会社"
         />
         <list-item
@@ -56,7 +43,7 @@
           subtitle="麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システム開発・運用担当。"
           subtitle2="<small>取締役, 現職</small>"
           link-href="https://bodydesign.cocodakara.net/"
-          :link-icon="mdiDumbbell"
+          link-icon="mdi-dumbbell"
           link-tooltip="CoCoDakara BodyDesign"
         />
         <list-item
@@ -69,14 +56,14 @@
           title="人狼知能大会 <wbr />プロトコル部門"
           subtitle="第2回大会 5位・第3回大会 5位・GAT2017プレ大会 1位"
           link-href="http://aiwolf.org/"
-          :link-icon="mdiDog"
+          link-icon="mdi-dog"
           link-tooltip="人狼知能ウェブサイト"
         />
         <list-item
           title="人狼知能大会 <wbr />第3回大会 <wbr /> 自然言語部門"
           subtitle="総合優秀賞+人狼ゲーム賞"
           link-href="https://www.inside-games.jp/article/2017/09/05/109557.html"
-          :link-icon="mdiNewspaper"
+          link-icon="mdi-newspaper"
           link-tooltip="大会紹介ニュース記事"
         />
         <list-item
@@ -107,10 +94,14 @@
           subtitle="メールでの英文のやり取りは5年以上日常的に行っています。"
           subtitle2="会議で自在に発言できるほどではないのですが、英会話教室Gabaに3年通い、当初Level 2 だったのが Level 6 まで到達しました。"
           link-href="https://www.gaba.co.jp/aboutgaba/text_level.html"
-          :link-icon="mdiBookAlphabet"
+          link-icon="mdi-book-alphabet"
           link-tooltip="Gabaのレベル設定"
         />
       </v-list>
     </v-card-text>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import ListItem from "@/components/ListItem.vue";
+</script>

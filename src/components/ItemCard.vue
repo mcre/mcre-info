@@ -1,22 +1,3 @@
-<script setup lang="ts">
-  import TagChip from '@/components/TagChip.vue'
-  import LinkTitleBtn from '@/components/LinkTitleBtn.vue'
-  import LinkBtn from '@/components/LinkBtn.vue'
-
-  const props = defineProps<{
-    title?: string
-    img?: string
-    icon?: string
-    href: string
-    description: string
-    youtube?: string
-    headImg?: string
-    footImg?: string
-    readMore?: boolean
-    tags?: { [key: string]: string[] }
-  }>()
-</script>
-
 <template>
   <v-card class="mb-2" variant="outlined" elevation="0">
     <v-card-title class="pl-1 custom-card-title" v-if="props.title">
@@ -66,20 +47,39 @@
 </template>
 
 <style lang="scss" scoped>
-  .custom-card-title {
-    display: block;
-  }
-  .responsive-style {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 50%;
-  }
-  .responsive-style iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+.custom-card-title {
+  display: block;
+}
+.responsive-style {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 50%;
+}
+.responsive-style iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 </style>
+
+<script setup lang="ts">
+import TagChip from "@/components/TagChip.vue";
+import LinkTitleBtn from "@/components/LinkTitleBtn.vue";
+import LinkBtn from "@/components/LinkBtn.vue";
+
+const props = defineProps<{
+  title?: string;
+  img?: string;
+  icon?: string;
+  href: string;
+  description: string;
+  youtube?: string;
+  headImg?: string;
+  footImg?: string;
+  readMore?: boolean;
+  tags?: { [key: string]: string[] };
+}>();
+</script>

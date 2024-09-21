@@ -1,16 +1,3 @@
-<script setup lang="ts">
-  interface MainProps {
-    href: string
-    img: string
-    tooltip: string
-    size?: number
-  }
-
-  const mainProps = withDefaults(defineProps<MainProps>(), {
-    size: 48,
-  })
-</script>
-
 <template>
   <v-tooltip anchor="top">
     <template #activator="{ props }">
@@ -31,3 +18,16 @@
     <span>{{ mainProps.tooltip }}</span>
   </v-tooltip>
 </template>
+
+<script setup lang="ts">
+interface MainProps {
+  href: string;
+  img: string;
+  tooltip: string;
+  size?: number;
+}
+
+const mainProps = withDefaults(defineProps<MainProps>(), {
+  size: 48,
+});
+</script>

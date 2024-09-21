@@ -1,12 +1,7 @@
-<script setup lang="ts">
-  import ItemCard from '@/components/ItemCard.vue'
-  import { mdiYoutube } from '@mdi/js'
-</script>
-
 <template>
   <v-card>
     <v-card-title>
-      <v-icon left :icon="mdiYoutube" />
+      <v-icon left icon="mdi-youtube" />
       Youtube Cannel
     </v-card-title>
     <v-card-text>
@@ -21,3 +16,7 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import ItemCard from "@/components/ItemCard.vue";
+</script>

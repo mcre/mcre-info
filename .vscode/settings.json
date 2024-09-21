@@ -2,24 +2,5 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "cSpell.words": [
-    "aiwolf",
-    "apigatewayv",
-    "apigw",
-    "Cachebuster",
-    "CBZA",
-    "certificatemanager",
-    "edgelambda",
-    "esbenp",
-    "jlreq",
-    "jmwj",
-    "jukugo",
-    "Juman",
-    "mcreinfo",
-    "oidc",
-    "Prerender",
-    "venv",
-    "Waka",
-    "wakatime"
-  ]
+  "cSpell.words": ["aiwolf", "apigatewayv", "apigw", "Cachebuster", "CBZA", "certificatemanager", "edgelambda", "esbenp", "jlreq", "jmwj", "jukugo", "Juman", "Maru", "materialdesignicons", "mcreinfo", "nocheck", "oidc", "Prerender", "unplugin", "venv", "Waka", "wakatime", "wght"]
 }

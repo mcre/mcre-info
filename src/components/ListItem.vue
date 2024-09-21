@@ -1,18 +1,3 @@
-<script setup lang="ts">
-  import LinkIcon from '@/components/LinkIcon.vue'
-  import LinkImg from '@/components/LinkImg.vue'
-
-  const props = defineProps<{
-    title: string
-    subtitle?: string
-    subtitle2?: string
-    linkHref?: string
-    linkIcon?: string
-    linkImg?: string
-    linkTooltip?: string
-  }>()
-</script>
-
 <template>
   <v-list-item>
     <v-list-item-title v-html="props.title" />
@@ -34,20 +19,35 @@
         v-if="props.linkIcon"
         :href="props.linkHref"
         :icon="props.linkIcon"
-        :tooltip="props.linkTooltip"
+        :tooltip="props.linkTooltip!"
       />
       <link-img
         v-if="props.linkImg"
         :href="props.linkHref"
         :img="props.linkImg"
-        :tooltip="props.linkTooltip"
+        :tooltip="props.linkTooltip!"
       />
     </template>
   </v-list-item>
 </template>
 
 <style lang="scss" scoped>
-  .wordwrap {
-    -webkit-box-orient: initial;
-  }
+.wordwrap {
+  -webkit-box-orient: initial;
+}
 </style>
+
+<script setup lang="ts">
+import LinkIcon from "@/components/LinkIcon.vue";
+import LinkImg from "@/components/LinkImg.vue";
+
+const props = defineProps<{
+  title: string;
+  subtitle?: string;
+  subtitle2?: string;
+  linkHref?: string;
+  linkIcon?: string;
+  linkImg?: string;
+  linkTooltip?: string;
+}>();
+</script>

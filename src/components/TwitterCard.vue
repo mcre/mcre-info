@@ -1,10 +1,3 @@
-<script setup lang="ts">
-  import LinkBtn from '@/components/LinkBtn.vue'
-  import LinkImg from '@/components/LinkImg.vue'
-  import TwitterEmbedded from '@/components/TwitterEmbedded.vue'
-  import { mdiTwitter } from '@mdi/js'
-</script>
-
 <template>
   <v-card>
     <v-card-title>
@@ -27,3 +20,9 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import LinkBtn from "@/components/LinkBtn.vue";
+import LinkImg from "@/components/LinkImg.vue";
+import TwitterEmbedded from "@/components/TwitterEmbedded.vue";
+</script>

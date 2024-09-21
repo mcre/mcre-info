@@ -1,12 +1,7 @@
 <template>
   <v-app>
     <v-app-bar color="primary" collapse>
-      <span
-        @click="$router.push({ name: 'home' })"
-        class="font-weight-bold mx-4"
-      >
-        mcre.info
-      </span>
+      <span class="font-weight-bold mx-4">mcre.info</span>
     </v-app-bar>
     <v-main>
       <router-view />
@@ -15,7 +10,7 @@
 </template>
 
 <style lang="scss">
-  #app {
-    font-family: 'Zen Maru Gothic', sans-serif;
-  }
+#app {
+  font-family: "Zen Maru Gothic", sans-serif;
+}
 </style>

@@ -1,11 +1,6 @@
-<script setup lang="ts">
-  import ItemCard from '@/components/ItemCard.vue'
-  import { mdiWeb } from '@mdi/js'
-</script>
-
 <template>
   <v-card>
-    <v-card-title><v-icon left :icon="mdiWeb" />Webapp 開発</v-card-title>
+    <v-card-title><v-icon left icon="mdi-web" />Webapp 開発</v-card-title>
     <v-card-text>
       <item-card
         title="DQW Tools"
@@ -39,3 +34,7 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import ItemCard from "@/components/ItemCard.vue";
+</script>

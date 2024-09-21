@@ -1,24 +1,20 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+/**
+ * main.ts
+ *
+ * Bootstraps Vuetify and other plugins then mounts the App`
+ */
 
-const app = createApp(App)
+// Plugins
+import { registerPlugins } from "@/plugins";
 
-import { loadFonts } from './plugins/webfontloader'
-loadFonts()
+// Components
+import App from "./App.vue";
 
-import vuetify from './plugins/vuetify'
-app.use(vuetify)
+// Composables
+import { createApp } from "vue";
 
-import router from './router'
-app.use(router)
+const app = createApp(App);
 
-import VueGtag from 'vue-gtag-next'
-if (process.env.NODE_ENV === 'production') {
-  app.use(VueGtag, {
-    property: {
-      id: 'G-EVL1PP92QT',
-    },
-  })
-}
+registerPlugins(app);
 
-app.mount('#app')
+app.mount("#app");

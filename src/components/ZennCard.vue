@@ -1,24 +1,3 @@
-<script setup lang="ts">
-  import { reactive, onMounted } from 'vue'
-  import LinkBtn from '@/components/LinkBtn.vue'
-  import ItemCard from '@/components/ItemCard.vue'
-  import LinkImg from '@/components/LinkImg.vue'
-
-  import { useRss, RssArticle } from '@/composables/useRss'
-
-  const state: {
-    articles: RssArticle[]
-  } = reactive({
-    articles: [],
-  })
-
-  onMounted(() => {
-    useRss('zenn-rss').then((articles) => {
-      state.articles = articles
-    })
-  })
-</script>
-
 <template>
   <v-card>
     <v-card-title>
@@ -45,3 +24,24 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import { reactive, onMounted } from "vue";
+import LinkBtn from "@/components/LinkBtn.vue";
+import ItemCard from "@/components/ItemCard.vue";
+import LinkImg from "@/components/LinkImg.vue";
+
+import { useRss, RssArticle } from "@/composables/useRss";
+
+const state: {
+  articles: RssArticle[];
+} = reactive({
+  articles: [],
+});
+
+onMounted(() => {
+  useRss("zenn-rss").then((articles) => {
+    state.articles = articles;
+  });
+});
+</script>

@@ -1,16 +1,11 @@
-/**
- * plugins/webfontloader.js
- *
- * webfontloader documentation: https://github.com/typekit/webfontloader
- */
+import WebFont from "webfontloader";
 
-export async function loadFonts() {
-  const webFontLoader = await import(
-    /* webpackChunkName: "webfontloader" */ 'webfontloader'
-  )
-  webFontLoader.load({
-    google: {
-      families: ['Zen+Maru+Gothic:wght@300;400;500;700;900'],
-    },
-  })
-}
+export default {
+  install() {
+    WebFont.load({
+      google: {
+        families: ["Zen+Maru+Gothic:wght@300;400;500;700;900"],
+      },
+    });
+  },
+};

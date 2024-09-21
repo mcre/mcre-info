@@ -1,17 +1,3 @@
-<script setup lang="ts">
-  import LinkBtn from '@/components/LinkBtn.vue'
-  interface Props {
-    href: string
-    size?: string
-    img?: string
-    icon?: string
-  }
-
-  const props = withDefaults(defineProps<Props>(), {
-    size: 'large',
-  })
-</script>
-
 <template>
   <v-layout>
     <v-flex>
@@ -27,8 +13,22 @@
   </v-layout>
 </template>
 
+<script setup lang="ts">
+import LinkBtn from "@/components/LinkBtn.vue";
+interface Props {
+  href: string;
+  size?: string;
+  img?: string;
+  icon?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  size: "large",
+});
+</script>
+
 <style lang="scss" scoped>
-  .btn-custom {
-    text-transform: none;
-  }
+.btn-custom {
+  text-transform: none;
+}
 </style>

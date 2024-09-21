@@ -1,17 +1,9 @@
-<script setup lang="ts">
-  import LinkBtn from '@/components/LinkBtn.vue'
-  import LinkTitleBtn from '@/components/LinkTitleBtn.vue'
-  import ItemCard from '@/components/ItemCard.vue'
-  import LinkIcon from '@/components/LinkIcon.vue'
-  import { mdiGithub, mdiDog } from '@mdi/js'
-</script>
-
 <template>
   <v-card>
     <v-card-title>
       <link-title-icon
         href="https://github.com/mcre"
-        :icon="mdiGithub"
+        icon="mdi-github"
         tooltip="GitHub"
       />GitHub
     </v-card-title>
@@ -52,7 +44,7 @@
       />
       <item-card
         title="aiwolf-4th-nlp"
-        :icon="mdiDog"
+        icon="mdi-dog"
         href="https://github.com/mcre/aiwolf-4th-nlp"
         description="人狼知能大会 自然言語部門 第4回大会に参加したときのソースコードを公開しています。"
         footImg="/img/aiwolf-4th-nlp.png"
@@ -69,3 +61,8 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import LinkBtn from "@/components/LinkBtn.vue";
+import ItemCard from "@/components/ItemCard.vue";
+</script>

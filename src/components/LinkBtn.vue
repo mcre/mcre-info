@@ -1,16 +1,3 @@
-<script setup lang="ts">
-  interface Props {
-    href: string
-    size?: string
-    img?: string
-    icon?: string
-  }
-
-  const props = withDefaults(defineProps<Props>(), {
-    size: 'large',
-  })
-</script>
-
 <template>
   <v-btn
     :href="props.href"
@@ -31,7 +18,20 @@
 </template>
 
 <style lang="scss" scoped>
-  .btn-custom {
-    text-transform: none;
-  }
+.btn-custom {
+  text-transform: none;
+}
 </style>
+
+<script setup lang="ts">
+interface Props {
+  href: string;
+  size?: string;
+  img?: string;
+  icon?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  size: "large",
+});
+</script>

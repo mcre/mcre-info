@@ -1,9 +1,3 @@
-<script setup lang="ts">
-  import LinkIcon from '@/components/LinkIcon.vue'
-  import LinkImg from '@/components/LinkImg.vue'
-  import { mdiTwitter, mdiGithub, mdiLinkedin } from '@mdi/js'
-</script>
-
 <template>
   <v-row>
     <v-col align="center">
@@ -15,7 +9,7 @@
       />
       <link-icon
         href="https://github.com/mcre"
-        :icon="mdiGithub"
+        icon="mdi-github"
         tooltip="GitHub"
       />
       <link-img
@@ -44,7 +38,7 @@
       />
       <link-icon
         href="https://www.linkedin.com/in/shinya-fujita-03b5ba12/"
-        :icon="mdiLinkedin"
+        icon="mdi-linkedin"
         tooltip="LinkedIn"
       />
       <link-img
@@ -55,3 +49,8 @@
     </v-col>
   </v-row>
 </template>
+
+<script setup lang="ts">
+import LinkIcon from "@/components/LinkIcon.vue";
+import LinkImg from "@/components/LinkImg.vue";
+</script>

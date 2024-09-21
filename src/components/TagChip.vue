@@ -1,10 +1,3 @@
-<script setup lang="ts">
-  const props = defineProps<{
-    parent: string
-    children?: string[]
-  }>()
-</script>
-
 <template>
   <v-chip
     class="ml-1 mt-1 font-weight-bold"
@@ -23,3 +16,10 @@
     </v-chip>
   </v-chip>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{
+  parent: string;
+  children?: string[];
+}>();
+</script>

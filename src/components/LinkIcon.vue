@@ -1,11 +1,3 @@
-<script setup lang="ts">
-  const mainProps = defineProps<{
-    href: string
-    icon: string
-    tooltip: string
-  }>()
-</script>
-
 <template>
   <v-tooltip anchor="top">
     <template #activator="{ props }">
@@ -24,3 +16,11 @@
     <span>{{ mainProps.tooltip }}</span>
   </v-tooltip>
 </template>
+
+<script setup lang="ts">
+const mainProps = defineProps<{
+  href: string;
+  icon: string;
+  tooltip: string;
+}>();
+</script>

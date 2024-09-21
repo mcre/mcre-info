@@ -1,8 +1,3 @@
-<script setup lang="ts">
-  import LinkBtn from '@/components/LinkBtn.vue'
-  import LinkImg from '@/components/LinkImg.vue'
-</script>
-
 <template>
   <v-card>
     <v-card-title>
@@ -23,3 +18,7 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import LinkImg from "@/components/LinkImg.vue";
+</script>
