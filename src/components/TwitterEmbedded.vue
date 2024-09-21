@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
 onMounted(async () => {
   await setTimeout(() => {
     const twScript = document.createElement("script");

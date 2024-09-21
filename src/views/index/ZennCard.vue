@@ -10,7 +10,7 @@
     </v-card-title>
     <v-card-text>
       <item-card
-        v-for="article in state.articles"
+        v-for="article in articles"
         :href="article.link"
         :description="article.description"
         :head-img="article.enclosure"
@@ -26,22 +26,17 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from "vue";
 import LinkBtn from "@/components/LinkBtn.vue";
 import ItemCard from "@/components/ItemCard.vue";
 import LinkImg from "@/components/LinkImg.vue";
 
 import { useRss, RssArticle } from "@/composables/useRss";
 
-const state: {
-  articles: RssArticle[];
-} = reactive({
-  articles: [],
-});
+const articles = ref<RssArticle[]>([]);
 
 onMounted(() => {
-  useRss("zenn-rss").then((articles) => {
-    state.articles = articles;
+  useRss("zenn-rss").then((data) => {
+    articles.value = data;
   });
 });
 </script>
