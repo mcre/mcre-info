@@ -188,10 +188,12 @@ def create_cloudfront(
         ],
     )
 
+
+    domain_parts = acm_result["domain_name"].split(".")
     route53.ARecord(
         scope,
         f"cloudfront-a-record-{name}",
-        record_name=acm_result["domain_name"].split(".")[0],
+        record_name=domain_parts if len(domain_parts) >= 3 else None,
         zone=acm_result["hosted_zone"],
         target=route53.RecordTarget.from_alias(
             route53_targets.CloudFrontTarget(resource)
