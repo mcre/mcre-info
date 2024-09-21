@@ -16,8 +16,6 @@ declare module 'vue' {
     ListItem: typeof import('./components/ListItem.vue')['default']
     NoteCard: typeof import('./components/NoteCard.vue')['default']
     ProfileCard: typeof import('./components/ProfileCard.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
     SnsRow: typeof import('./components/SnsRow.vue')['default']
     TagChip: typeof import('./components/TagChip.vue')['default']
     TwitterCard: typeof import('./components/TwitterCard.vue')['default']

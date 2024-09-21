@@ -41,6 +41,7 @@
     "onServerPrefetch": true,
     "onUnmounted": true,
     "onUpdated": true,
+    "onWatcherCleanup": true,
     "provide": true,
     "reactive": true,
     "readonly": true,
@@ -58,16 +59,13 @@
     "useAttrs": true,
     "useCssModule": true,
     "useCssVars": true,
-    "useRoute": true,
-    "useRouter": true,
+    "useId": true,
+    "useModel": true,
     "useSlots": true,
+    "useTemplateRef": true,
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true,
-    "onWatcherCleanup": true,
-    "useId": true,
-    "useModel": true,
-    "useTemplateRef": true
+    "watchSyncEffect": true
   }
 }
