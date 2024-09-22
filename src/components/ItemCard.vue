@@ -1,15 +1,17 @@
 <template>
   <v-card
-    class="ma-2"
+    class="my-2 mx-n2 mx-n2 mx-md-2"
     variant="outlined"
     elevation="0"
-    :title="title"
     :href="href"
     target="_blank"
     rel="noopener noreferrer"
   >
     <template v-slot:prepend v-if="title && (img || icon)">
       <avatar :img="img" :icon="icon" />
+    </template>
+    <template v-slot:title>
+      <span class="wordwrap">{{ title }}</span>
     </template>
     <a :href="href" target="_blank" rel="noopener noreferrer" v-if="headImg">
       <v-img class="mx-4 ma-4" v-if="headImg" :src="headImg" />

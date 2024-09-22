@@ -9,12 +9,6 @@
   </v-list-item>
 </template>
 
-<style lang="scss" scoped>
-.wordwrap {
-  -webkit-box-orient: initial;
-}
-</style>
-
 <script setup lang="ts">
 defineProps({
   title: {
