@@ -1,6 +1,8 @@
 <template>
-  <v-card>
-    <v-card-title><v-icon left icon="mdi-web" />Webapp 開発</v-card-title>
+  <v-card title="Webapp 開発">
+    <template v-slot:prepend>
+      <avatar icon="mdi-web" />
+    </template>
     <v-card-text>
       <item-card
         title="DQW Tools"
@@ -34,7 +36,3 @@
     </v-card-text>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import ItemCard from "@/components/ItemCard.vue";
-</script>

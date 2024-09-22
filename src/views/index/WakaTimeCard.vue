@@ -1,13 +1,12 @@
 <template>
-  <v-card>
-    <v-card-title>
-      <link-img
+  <v-card title="WakaTime">
+    <template v-slot:prepend>
+      <avatar
         href="https://wakatime.com/@mcre"
         img="/img/wakatime.png"
-        tooltip="WakaTime"
-        :size="32"
-      />WakaTime
-    </v-card-title>
+        tooltip="WakaTime - mcre"
+      />
+    </template>
     <v-card-text>
       直近30日間のコーディング言語
       <figure>
@@ -18,7 +17,3 @@
     </v-card-text>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import LinkImg from "@/components/LinkImg.vue";
-</script>

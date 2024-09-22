@@ -1,25 +1,26 @@
 <template>
-  <v-card class="mb-2" variant="outlined" elevation="0">
-    <v-card-title class="pl-1 custom-card-title" v-if="props.title">
-      <link-title-btn :href="props.href" :img="props.img" :icon="props.icon">
-        {{ props.title }}
-      </link-title-btn>
-    </v-card-title>
-    <a
-      :href="props.href"
-      target="_blank"
-      rel="noopener noreferrer"
-      v-if="props.headImg"
-    >
-      <v-img class="mx-4 ma-4" v-if="props.headImg" :src="props.headImg" />
+  <v-card
+    class="ma-2"
+    variant="outlined"
+    elevation="0"
+    :title="title"
+    :href="href"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <template v-slot:prepend v-if="title && (img || icon)">
+      <avatar :img="img" :icon="icon" />
+    </template>
+    <a :href="href" target="_blank" rel="noopener noreferrer" v-if="headImg">
+      <v-img class="mx-4 ma-4" v-if="headImg" :src="headImg" />
     </a>
-    <v-card-text v-html="props.description" />
-    <v-container v-if="props.youtube" class="responsive-style">
+    <v-card-text v-html="description" />
+    <v-container v-if="youtube" class="responsive-style">
       <v-lazy>
         <iframe
           width="560"
           height="315"
-          :src="`https://www.youtube.com/embed/${props.youtube}`"
+          :src="`https://www.youtube.com/embed/${youtube}`"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -27,16 +28,11 @@
         />
       </v-lazy>
     </v-container>
-    <v-img class="mx-4" v-if="props.footImg" :src="props.footImg" />
-    <v-card-actions v-if="props.readMore">
-      <v-spacer />
-      <link-btn :href="props.href">続きを読む</link-btn>
-      <v-spacer />
-    </v-card-actions>
-    <v-card-actions v-if="props.tags">
+    <v-img class="mx-4" v-if="footImg" :src="footImg" />
+    <v-card-actions v-if="Object.keys(tags).length > 0">
       <v-item-group>
         <tag-chip
-          v-for="(children, parent) in props.tags"
+          v-for="(children, parent) in tags"
           :key="parent"
           :parent="`${parent}`"
           :children="children"
@@ -46,10 +42,48 @@
   </v-card>
 </template>
 
+<script setup lang="ts">
+defineProps({
+  title: {
+    type: String,
+    default: "",
+  },
+  img: {
+    type: String,
+    default: "",
+  },
+  icon: {
+    type: String,
+    default: "",
+  },
+  href: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  youtube: {
+    type: String,
+    default: "",
+  },
+  headImg: {
+    type: String,
+    default: "",
+  },
+  footImg: {
+    type: String,
+    default: "",
+  },
+  tags: {
+    type: Object as () => { [key: string]: string[] },
+    default: () => ({}),
+  },
+});
+</script>
+
 <style lang="scss" scoped>
-.custom-card-title {
-  display: block;
-}
 .responsive-style {
   position: relative;
   width: 100%;
@@ -64,22 +98,3 @@
   height: 100%;
 }
 </style>
-
-<script setup lang="ts">
-import TagChip from "@/components/TagChip.vue";
-import LinkTitleBtn from "@/components/LinkTitleBtn.vue";
-import LinkBtn from "@/components/LinkBtn.vue";
-
-const props = defineProps<{
-  title?: string;
-  img?: string;
-  icon?: string;
-  href: string;
-  description: string;
-  youtube?: string;
-  headImg?: string;
-  footImg?: string;
-  readMore?: boolean;
-  tags?: { [key: string]: string[] };
-}>();
-</script>

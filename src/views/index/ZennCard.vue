@@ -1,36 +1,30 @@
 <template>
-  <v-card>
-    <v-card-title>
-      <link-img
+  <v-card title="Zenn">
+    <template v-slot:prepend>
+      <avatar
         href="https://zenn.dev/m_cre"
         img="/img/zenn.svg"
-        tooltip="Zenn"
-        :size="36"
-      />Zenn
-    </v-card-title>
+        tooltip="Zenn - m_cre"
+      />
+    </template>
     <v-card-text>
       <item-card
         v-for="article in articles"
         :href="article.link"
         :description="article.description"
         :head-img="article.enclosure"
-        read-more
       />
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <link-btn href="https://zenn.dev/m_cre">もっと見る</link-btn>
+      <more-btn href="https://zenn.dev/m_cre" />
       <v-spacer />
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup lang="ts">
-import LinkBtn from "@/components/LinkBtn.vue";
-import ItemCard from "@/components/ItemCard.vue";
-import LinkImg from "@/components/LinkImg.vue";
-
-import { useRss, RssArticle } from "@/composables/useRss";
+import { RssArticle } from "@/composables/useRss";
 
 const articles = ref<RssArticle[]>([]);
 

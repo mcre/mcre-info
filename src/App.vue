@@ -55,7 +55,7 @@
             </v-row>
             <v-row>
               <v-col>
-                <twitter-card />
+                <x-card />
               </v-col>
             </v-row>
           </v-col>
@@ -64,18 +64,6 @@
     </v-main>
   </v-app>
 </template>
-
-<script setup lang="ts">
-import SnsRow from "@/views/index/SnsRow.vue";
-import ProfileCard from "@/views/index/ProfileCard.vue";
-import TwitterCard from "@/views/index/TwitterCard.vue";
-import YoutubeCard from "@/views/index/YoutubeCard.vue";
-import WebsiteCard from "@/views/index/WebsiteCard.vue";
-import GithubCard from "@/views/index/GithubCard.vue";
-import NoteCard from "@/views/index/NoteCard.vue";
-import ZennCard from "@/views/index/ZennCard.vue";
-import WakaTimeCard from "@/views/index/WakaTimeCard.vue";
-</script>
 
 <style lang="scss">
 #app {

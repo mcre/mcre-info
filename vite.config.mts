@@ -19,9 +19,11 @@ export default defineConfig({
         enabled: true,
       },
       vueTemplate: true,
+      dirs: ["src/composables"],
     }),
     Components({
       dts: "src/components.d.ts",
+      dirs: ["src/components", "src/views"],
     }),
     Vue({
       template: { transformAssetUrls },

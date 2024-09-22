@@ -1,9 +1,8 @@
 <template>
-  <v-card>
-    <v-card-title>
-      <v-icon left icon="mdi-youtube" />
-      Youtube Cannel
-    </v-card-title>
+  <v-card title="Youtube Cannel">
+    <template v-slot:prepend>
+      <avatar icon="mdi-youtube" />
+    </template>
     <v-card-text>
       <item-card
         title="「聴く」名作文庫"
@@ -16,7 +15,3 @@
     </v-card-text>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import ItemCard from "@/components/ItemCard.vue";
-</script>

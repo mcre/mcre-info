@@ -1,12 +1,12 @@
 <template>
-  <v-card>
-    <v-card-title>
-      <link-title-icon
+  <v-card title="GitHub">
+    <template v-slot:prepend>
+      <avatar
         href="https://github.com/mcre"
+        tooltip="Github - mcre"
         icon="mdi-github"
-        tooltip="GitHub"
-      />GitHub
-    </v-card-title>
+      />
+    </template>
     <v-card-text>
       <item-card
         title="mcre-info"
@@ -47,7 +47,7 @@
         icon="mdi-dog"
         href="https://github.com/mcre/aiwolf-4th-nlp"
         description="人狼知能大会 自然言語部門 第4回大会に参加したときのソースコードを公開しています。"
-        footImg="/img/aiwolf-4th-nlp.png"
+        foot-img="/img/aiwolf-4th-nlp.png"
         :tags="{
           Java: [],
           NLP: ['Juman', 'KNP'],
@@ -56,13 +56,8 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <link-btn href="https://github.com/mcre">もっと見る</link-btn>
+      <more-btn href="https://github.com/mcre" />
       <v-spacer />
     </v-card-actions>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import LinkBtn from "@/components/LinkBtn.vue";
-import ItemCard from "@/components/ItemCard.vue";
-</script>
