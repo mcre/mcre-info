@@ -1,14 +1,17 @@
 <template>
   <v-row justify="center">
-    <v-col cols="auto">
+    <v-col
+      cols="3"
+      sm="1"
+      v-for="(item, index) in avatars"
+      :key="index"
+      class="d-flex justify-center"
+    >
       <avatar
-        v-for="(item, index) in avatars"
-        :key="index"
         :href="item.href"
         :img="item.img"
         :icon="item.icon"
         :tooltip="item.tooltip"
-        class="mx-1"
       />
     </v-col>
   </v-row>
