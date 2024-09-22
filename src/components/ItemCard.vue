@@ -14,7 +14,7 @@
       <span class="wordwrap">{{ title }}</span>
     </template>
     <a :href="href" target="_blank" rel="noopener noreferrer" v-if="headImg">
-      <v-img class="mx-4 ma-4" v-if="headImg" :src="headImg" />
+      <v-img class="mx-4 ma-4" v-if="headImg" :src="headImg" :alt="imgAlt" />
     </a>
     <v-card-text v-html="description" />
     <v-container v-if="youtube" class="responsive-style">
@@ -30,7 +30,7 @@
         />
       </v-lazy>
     </v-container>
-    <v-img class="mx-4" v-if="footImg" :src="footImg" />
+    <v-img class="mx-4" v-if="footImg" :src="footImg" :alt="imgAlt" />
     <v-card-actions v-if="Object.keys(tags).length > 0">
       <v-item-group>
         <tag-chip
@@ -77,6 +77,10 @@ defineProps({
   footImg: {
     type: String,
     default: "",
+  },
+  imgAlt: {
+    type: String,
+    default: "image",
   },
   tags: {
     type: Object as () => { [key: string]: string[] },

@@ -13,6 +13,7 @@
         :href="article.link"
         :description="article.description"
         :head-img="article.enclosure"
+        :img-alt="article.title"
       />
     </v-card-text>
     <v-card-actions>

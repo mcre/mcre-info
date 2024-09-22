@@ -14,6 +14,7 @@
         :href="article.link"
         :description="article.description"
         :head-img="article.enclosure"
+        img-alt="イメージ画像"
       />
     </v-card-text>
     <v-card-actions>
