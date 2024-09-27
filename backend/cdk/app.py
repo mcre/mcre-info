@@ -142,6 +142,16 @@ iam_role_github_actions = create_iam_role_github_actions(stack_us, policies)
 CfnOutput(stack, "Prefix", value=config["prefix"])
 CfnOutput(stack, "DomainNameRssProxy", value=acm_result_rss_proxy["domain_name"])
 CfnOutput(stack, "DomainNameApi", value=acm_result_api["domain_name"])
+CfnOutput(
+    stack,
+    "LambdaFunctions",
+    value=",".join(
+        [
+            lambda_function.function_name
+            for lambda_function in github_actions_lambda_deploy_targets
+        ]
+    ),
+)
 CfnOutput(stack_us, "IamRoleGithubActions", value=iam_role_github_actions.role_arn)
 CfnOutput(stack_us, "DomainNameDistribution", value=acm_result_dist["domain_name"])
 CfnOutput(stack_us, "BucketDistribution", value=bucket_distribution.bucket_name)
