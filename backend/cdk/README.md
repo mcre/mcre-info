@@ -21,16 +21,6 @@ Github Actions自体でもCDKのDeployを行っているが、そのためのIAM
 
 - Variables
   - `AWS_IAM_ROLE_ARN` CDKのiam-role-github-actions
-- Secrets
-  - `PRERENDER_TOKEN` prerender.ioのトークン
-
-## ローカルの環境変数
-
-`./config/_secrets.sh` として下記のような内容を保存することで、ローカルから実行できる。
-
-```
-export PRERENDER_TOKEN="***"
-```
 
 ## 仮想環境
 
@@ -59,14 +49,12 @@ source .venv/bin/activate
 CDK から CloudFormation Template をつくる。
 
 ```
-source ./config/_secrets.sh
 cdk --profile m_cre-super-user synth
 ```
 
 synth が通ったあとはデプロイする
 
 ```
-source ./config/_secrets.sh
 cdk --profile m_cre-super-user deploy --all
 ```
 

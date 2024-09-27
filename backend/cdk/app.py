@@ -13,12 +13,10 @@ from resources import (
     create_acm_certificate,
     create_lambda_layer,
     create_lambda_function,
-    create_lambda_edge_function_version,
     create_s3_bucket,
     create_cloudfront,
     create_iam_role_github_actions,
     create_api_gateway,
-    create_api_gateway_rss_proxy,
 )
 from config import get_env_config
 
@@ -51,11 +49,6 @@ lambda_api = create_lambda_function(
 )
 
 # api-gateway
-acm_result_rss_proxy = create_acm_certificate(
-    stack, "rss_proxy", config["api-gateway"]["domain"]["rss-proxy"]
-)
-create_api_gateway_rss_proxy(stack, acm_result_rss_proxy)
-
 dist_domain_config = config["cloudfront"]["domain"]["dist"]
 if "name" in dist_domain_config:
     dist_domain_name = f"{dist_domain_config['name']}.{dist_domain_config['zone_name']}"
@@ -92,24 +85,12 @@ acm_result_dist = create_acm_certificate(
     stack_us, "dist", config["cloudfront"]["domain"]["dist"]
 )
 
-# Lambda
-lambda_edge_version_redirect_to_prerender = create_lambda_edge_function_version(
-    stack_us, "redirect-to-prerender"
-)
-lambda_edge_version_set_prerender_header = create_lambda_edge_function_version(
-    stack_us,
-    "set-prerender-header",
-    {"PRERENDER_TOKEN": os.environ["PRERENDER_TOKEN"]},
-)
-
 # CloudFront
 cloudfront_distribution = create_cloudfront(
     stack_us,
     "dist",
     bucket_distribution,
     acm_result_dist,
-    lambda_edge_version_redirect_to_prerender,
-    lambda_edge_version_set_prerender_header,
 )
 
 # ===== 終了処理 =====
@@ -140,7 +121,6 @@ iam_role_github_actions = create_iam_role_github_actions(stack_us, policies)
 
 # 後続処理で参照するパラメータを出力する処理
 CfnOutput(stack, "Prefix", value=config["prefix"])
-CfnOutput(stack, "DomainNameRssProxy", value=acm_result_rss_proxy["domain_name"])
 CfnOutput(stack, "DomainNameApi", value=acm_result_api["domain_name"])
 CfnOutput(
     stack,

@@ -18,8 +18,6 @@ from aws_cdk import (
     aws_cloudfront as cloudfront,
     aws_cloudfront_origins as cloudfront_origins,
     aws_apigateway as apigateway,
-    aws_apigatewayv2 as apigw,
-    aws_apigatewayv2_integrations as apigw_integrations,
 )
 from config import get_env_config
 
@@ -58,68 +56,6 @@ def create_acm_certificate(
         "hosted_zone": existing_hosted_zone,
         "domain_name": domain_name,
     }
-
-
-def create_lambda_edge_function_version(
-    scope: Stack,
-    name: str,
-    replaces: dict = {},
-    runtime: lambda_.Runtime = lambda_.Runtime.NODEJS_20_X,
-) -> lambda_.Version:
-    iam_role_name = f"{config['prefix']}-lambda-{name}"
-    iam_role = iam.Role(
-        scope,
-        f"iam-role-lambda-{name}",
-        role_name=iam_role_name,
-        assumed_by=iam.CompositePrincipal(
-            iam.ServicePrincipal("lambda.amazonaws.com"),
-            iam.ServicePrincipal("edgelambda.amazonaws.com"),
-        ),
-        inline_policies={
-            f"{iam_role_name}-policy": iam.PolicyDocument(
-                statements=[
-                    iam.PolicyStatement(
-                        actions=[
-                            "logs:CreateLogGroup",
-                            "logs:CreateLogStream",
-                            "logs:PutLogEvents",
-                        ],
-                        resources=["arn:aws:logs:*:*:*"],
-                    )
-                ]
-            )
-        },
-    )
-    add_tags(iam_role)
-
-    class AtTemplate(string.Template):
-        delimiter = "@"
-
-    work_dir = f"work/{name}"
-    os.makedirs(work_dir, exist_ok=True)
-    code_path = f"{work_dir}/index.js"
-    with open(f"resource-files/lambda-edge/{name}/index.js", "r") as template_file:
-        template_content = template_file.read()
-    template = AtTemplate(template_content)
-    code_content = template.substitute(replaces)
-    with open(code_path, "w") as lambda_file:
-        lambda_file.write(code_content)
-
-    resource = lambda_.Function(
-        scope,
-        f"lambda-function-edge-{name}",
-        function_name=f"{config['prefix']}-{name}",
-        runtime=runtime,
-        handler="index.handler",
-        code=lambda_.Code.from_asset(work_dir),
-        role=iam_role,
-        current_version_options=lambda_.VersionOptions(
-            removal_policy=RemovalPolicy.RETAIN
-        ),
-    )
-    version = resource.current_version
-    add_tags(resource)
-    return version
 
 
 def create_lambda_layer(scope: Stack, name: str, zip_name: str):
@@ -254,23 +190,7 @@ def create_cloudfront(
     name: str,
     bucket: s3.Bucket,
     acm_result: Dict[str, Union[acm.Certificate, route53.HostedZone, str]],
-    lambda_edge_version_redirect_to_prerender: lambda_.Version,
-    lambda_edge_version_set_prerender_header: lambda_.Version,
 ) -> cloudfront.Distribution:
-    cache_policy = cloudfront.CachePolicy(
-        scope,
-        f"cloudfront-cache-policy-{name}",
-        cache_policy_name=f"{config['prefix']}-{name}-prerender-cache-policy",
-        header_behavior=cloudfront.CacheHeaderBehavior.allow_list(
-            "X-Prerender-Cachebuster",
-            "X-Prerender-Token",
-            "X-Prerender-Host",
-            "X-Query-String",
-        ),
-        min_ttl=Duration.seconds(31536000),
-        max_ttl=Duration.seconds(31536000),
-        default_ttl=Duration.seconds(31536000),
-    )
     resource = cloudfront.Distribution(
         scope,
         f"cloudfront-distribution-{name}",
@@ -279,17 +199,6 @@ def create_cloudfront(
         default_behavior=cloudfront.BehaviorOptions(
             origin=cloudfront_origins.S3BucketOrigin.with_origin_access_control(bucket),
             viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-            cache_policy=cache_policy,
-            edge_lambdas=[
-                cloudfront.EdgeLambda(
-                    function_version=lambda_edge_version_set_prerender_header,
-                    event_type=cloudfront.LambdaEdgeEventType.VIEWER_REQUEST,
-                ),
-                cloudfront.EdgeLambda(
-                    function_version=lambda_edge_version_redirect_to_prerender,
-                    event_type=cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
-                ),
-            ],
         ),
         default_root_object="index.html",
         error_responses=[
@@ -316,85 +225,6 @@ def create_cloudfront(
         zone=acm_result["hosted_zone"],
         target=route53.RecordTarget.from_alias(
             route53_targets.CloudFrontTarget(resource)
-        ),
-    )
-
-    add_tags(resource)
-    return resource
-
-
-def create_api_gateway_rss_proxy(
-    scope: Stack,
-    acm_result: Dict[str, Union[acm.Certificate, route53.HostedZone, str]],
-) -> apigw.HttpApi:
-    cors_domain_config = config["cloudfront"]["domain"]["dist"]
-    if "name" in cors_domain_config:
-        cors_origin = (
-            f"https://{cors_domain_config['name']}.{cors_domain_config['zone_name']}"
-        )
-    else:
-        cors_origin = f"https://{cors_domain_config['zone_name']}"
-
-    resource = apigw.HttpApi(
-        scope,
-        "api-gateway-rss-proxy",
-        api_name=f"{config['prefix']}-api-gateway-rss-proxy",
-        cors_preflight={
-            "allow_origins": [
-                cors_origin,
-                "http://localhost:3000",
-                "http://localhost:5173",
-            ],
-            "allow_methods": [apigw.CorsHttpMethod.GET],
-        },
-    )
-
-    resource.add_routes(
-        path="/zenn-rss",
-        methods=[apigw.HttpMethod.GET],
-        integration=apigw_integrations.HttpUrlIntegration(
-            "api-gateway-rss-proxy-integration-zenn",
-            url="https://zenn.dev/m_cre/feed",
-            method=apigw.HttpMethod.GET,
-        ),
-    )
-
-    resource.add_routes(
-        path="/note-rss",
-        methods=[apigw.HttpMethod.GET],
-        integration=apigw_integrations.HttpUrlIntegration(
-            "api-gateway-rss-proxy-integration-note",
-            url="https://note.com/m_cre/rss",
-            method=apigw.HttpMethod.GET,
-        ),
-    )
-
-    custom_domain = apigw.DomainName(
-        scope,
-        f"api-gateway-domain-rss-proxy",
-        domain_name=acm_result["domain_name"],
-        certificate=acm_result["certificate"],
-    )
-
-    domain_mapping = apigw.DomainMappingOptions(domain_name=custom_domain)
-
-    resource.add_stage(
-        f"api-gateway-rss-proxy-stage",
-        stage_name="prod",
-        auto_deploy=True,
-        domain_mapping=domain_mapping,
-    )
-
-    route53.ARecord(
-        scope,
-        f"api-gateway-a-record-rss-proxy",
-        record_name=acm_result["domain_name"].split(".")[0],
-        zone=acm_result["hosted_zone"],
-        target=route53.RecordTarget.from_alias(
-            route53_targets.ApiGatewayv2DomainProperties(
-                regional_domain_name=custom_domain.regional_domain_name,
-                regional_hosted_zone_id=custom_domain.regional_hosted_zone_id,
-            )
         ),
     )
 
