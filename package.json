@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@aspida/fetch": "^1.14.0",
+    "@fontsource/zen-maru-gothic": "^5.1.0",
     "@mdi/font": "7.4.47",
     "aspida": "^1.14.0",
     "core-js": "^3.37.1",

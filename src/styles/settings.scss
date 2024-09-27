@@ -8,3 +8,7 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+
+.v-card-title {
+  font-weight: 700 !important;
+}

@@ -2,5 +2,36 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "cSpell.words": ["aiwolf", "apigatewayv", "apigw", "Cachebuster", "CBZA", "certificatemanager", "edgelambda", "esbenp", "jlreq", "jmwj", "jukugo", "Juman", "Maru", "materialdesignicons", "mcreinfo", "mebibytes", "mktime", "nocheck", "oidc", "powertools", "Prerender", "runtimes", "unplugin", "urlset", "venv", "Waka", "wakatime", "wght", "wordwrap"]
+  "cSpell.words": [
+    "aiwolf",
+    "apigatewayv",
+    "apigw",
+    "Cachebuster",
+    "CBZA",
+    "certificatemanager",
+    "edgelambda",
+    "esbenp",
+    "fontsource",
+    "jlreq",
+    "jmwj",
+    "jukugo",
+    "Juman",
+    "Maru",
+    "materialdesignicons",
+    "mcreinfo",
+    "mebibytes",
+    "mktime",
+    "nocheck",
+    "oidc",
+    "powertools",
+    "Prerender",
+    "runtimes",
+    "unplugin",
+    "urlset",
+    "venv",
+    "Waka",
+    "wakatime",
+    "wght",
+    "wordwrap"
+  ]
 }
