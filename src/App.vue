@@ -6,7 +6,7 @@
     <v-main>
       <v-container>
         <v-row justify="center">
-          <v-avatar size="128" image="/img/face01.jpg" />
+          <v-avatar size="128" image="@/assets/images/face01.webp" />
         </v-row>
         <v-row class="mt-10" justify="center">
           <p>一生プログラミングします。</p>

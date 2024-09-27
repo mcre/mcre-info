@@ -3,7 +3,7 @@
     <template v-slot:prepend>
       <avatar
         href="https://zenn.dev/m_cre"
-        img="/img/zenn.svg"
+        :img="zennImg"
         tooltip="Zenn - m_cre"
       />
     </template>
@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import { useSSRContext } from "vue";
 import { RssArticle } from "@/apis/@types/index";
+import zennImg from "@/assets/images/zenn.webp";
 
 const articles = ref<RssArticle[]>([]);
 const ssrContext = useSSRContext();

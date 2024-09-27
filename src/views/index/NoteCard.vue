@@ -4,7 +4,7 @@
       <avatar
         href="https://note.com/m_cre/"
         tooltip="note - mcre"
-        img="/img/note.svg"
+        :img="noteImg"
       />
     </template>
     <v-card-text>
@@ -29,6 +29,7 @@
 <script setup lang="ts">
 import { useSSRContext } from "vue";
 import { RssArticle } from "@/apis/@types/index";
+import noteImg from "@/assets/images/note.webp";
 
 const articles = ref<RssArticle[]>([]);
 const ssrContext = useSSRContext();

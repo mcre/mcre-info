@@ -17,21 +17,40 @@
   </v-row>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import xImg from "@/assets/images/x.webp";
+import wakatimeImg from "@/assets/images/wakatime.webp";
+import noteImg from "@/assets/images/note.webp";
+import zennImg from "@/assets/images/zenn.webp";
+import laprasImg from "@/assets/images/lapras.webp";
+import wantedlyImg from "@/assets/images/wantedly.webp";
+
 const avatars = [
-  { href: "https://x.com/m_cre", img: "/img/x.png", tooltip: "X" },
+  {
+    href: "https://x.com/m_cre",
+    img: xImg,
+    tooltip: "X",
+  },
   { href: "https://github.com/mcre", icon: "mdi-github", tooltip: "GitHub" },
   {
     href: "https://wakatime.com/@mcre",
-    img: "/img/wakatime.png",
+    img: wakatimeImg,
     tooltip: "WakaTime",
   },
-  { href: "https://note.com/m_cre/", img: "/img/note.svg", tooltip: "note" },
-  { href: "https://zenn.dev/m_cre", img: "/img/zenn.svg", tooltip: "Zenn" },
+  {
+    href: "https://note.com/m_cre/",
+    img: noteImg,
+    tooltip: "note",
+  },
+  {
+    href: "https://zenn.dev/m_cre",
+    img: zennImg,
+    tooltip: "Zenn",
+  },
   {
     href: "https://lapras.com/public/NCTOWDE",
-    img: "img/laplas.svg",
-    tooltip: "LAPLAS",
+    img: laprasImg,
+    tooltip: "LAPRAS",
   },
   {
     href: "https://www.linkedin.com/in/shinya-fujita-03b5ba12/",
@@ -40,7 +59,7 @@ const avatars = [
   },
   {
     href: "https://www.wantedly.com/id/fujita_shinya",
-    img: "/img/wantedly.svg",
+    img: wantedlyImg,
     tooltip: "Wantedly",
   },
 ];
