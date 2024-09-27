@@ -10,6 +10,7 @@
     <v-card-text>
       <item-card
         v-for="article in articles"
+        :key="article.link"
         :title="article.title"
         :href="article.link"
         :description="article.description"
@@ -26,12 +27,19 @@
 </template>
 
 <script setup lang="ts">
-import { RssArticle } from "@/composables/useRss";
-const articles = ref<RssArticle[]>([]);
+import { useSSRContext } from "vue";
+import { RssArticle } from "@/apis/@types/index";
 
-onMounted(() => {
-  useRss("note-rss").then((data) => {
-    articles.value = data;
+const articles = ref<RssArticle[]>([]);
+const ssrContext = useSSRContext();
+
+if (ssrContext && ssrContext.initialState && ssrContext.initialState.articles) {
+  articles.value = ssrContext.initialState.articles;
+} else {
+  onMounted(() => {
+    useRss("note").then((data) => {
+      articles.value = data;
+    });
   });
-});
+}
 </script>

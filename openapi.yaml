@@ -1,0 +1,52 @@
+openapi: 3.1.0
+info:
+  title: mcre-info API
+  version: 0.0.1
+paths:
+  /v1/rss/note:
+    get:
+      summary: noteのRSSをJson形式で取得
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RssArticleArray"
+
+  /v1/rss/zenn:
+    get:
+      summary: zennのRSSをJson形式で取得
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RssArticleArray"
+
+components:
+  schemas:
+    RssArticle:
+      type: object
+      required:
+        - link
+        - title
+        - description
+        - published
+      properties:
+        link:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        published:
+          type: integer
+        enclosure:
+          type: string
+
+    RssArticleArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/RssArticle"

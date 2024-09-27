@@ -7,14 +7,17 @@ from aws_cdk import (
     Tags,
     Duration,
     RemovalPolicy,
+    Size,
     aws_lambda as lambda_,
     aws_iam as iam,
+    aws_logs as logs,
     aws_certificatemanager as acm,
     aws_route53 as route53,
     aws_route53_targets as route53_targets,
     aws_s3 as s3,
     aws_cloudfront as cloudfront,
     aws_cloudfront_origins as cloudfront_origins,
+    aws_apigateway as apigateway,
     aws_apigatewayv2 as apigw,
     aws_apigatewayv2_integrations as apigw_integrations,
 )
@@ -117,6 +120,121 @@ def create_lambda_edge_function_version(
     version = resource.current_version
     add_tags(resource)
     return version
+
+
+def create_lambda_layer(scope: Stack, name: str, zip_name: str):
+    resource = lambda_.LayerVersion(
+        scope,
+        f"lambda-layer-{name}",
+        layer_version_name=f"{config['prefix']}-{name}",
+        code=lambda_.Code.from_asset(f"layers/{zip_name}.zip"),
+        compatible_runtimes=[lambda_.Runtime.PYTHON_3_12],
+    )
+    return resource
+
+
+def create_lambda_function(
+    scope: Stack,
+    name: str,
+    policies: list = [],
+    environment: dict = {},
+    layers: list = [],
+) -> lambda_.Function:
+    policies.append(
+        iam.PolicyStatement(
+            actions=[
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+            ],
+            resources=["arn:aws:logs:*:*:*"],
+        )
+    )
+
+    iam_role_name = f"{config['prefix']}-lambda-{name}"
+    iam_role = iam.Role(
+        scope,
+        f"iam-role-lambda-{name}",
+        role_name=iam_role_name,
+        assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
+        inline_policies={
+            f"{iam_role_name}-policy": iam.PolicyDocument(statements=policies)
+        },
+    )
+    add_tags(iam_role)
+
+    resource = lambda_.Function(
+        scope,
+        f"lambda-function-{name}",
+        function_name=f"{config['prefix']}-{name}",
+        code=lambda_.InlineCode("def main(event, context):\n    pass"),
+        handler="main.main",
+        runtime=lambda_.Runtime.PYTHON_3_12,
+        memory_size=config["lambda"][name]["memory"],
+        timeout=Duration.seconds(config["lambda"][name]["timeout_in_seconds"]),
+        role=iam_role,
+        log_retention=logs.RetentionDays.INFINITE,
+        ephemeral_storage_size=Size.mebibytes(512),
+        environment=environment,
+        layers=layers,
+    )
+
+    add_tags(resource)
+    return resource
+
+
+def create_api_gateway(
+    scope: Stack,
+    name: str,
+    target_lambda: lambda_.Function,
+    acm_result: Dict[str, Union[acm.Certificate, route53.HostedZone, str]],
+    cors_allow_origins: list = [],
+) -> apigateway.RestApi:
+    resource = apigateway.RestApi(
+        scope,
+        f"api-gateway-{name}",
+        rest_api_name=f"{config['prefix']}-{name}",
+        endpoint_types=[apigateway.EndpointType.REGIONAL],
+    )
+    add_tags(resource)
+
+    lambda_integration = apigateway.LambdaIntegration(target_lambda)
+    proxy_resource = resource.root.add_resource("{proxy+}")
+    proxy_resource.add_method("ANY", lambda_integration)
+
+    if len(cors_allow_origins) > 0:
+        proxy_resource.add_cors_preflight(allow_origins=cors_allow_origins)
+
+    custom_domain = apigateway.DomainName(
+        scope,
+        f"api-gateway-domain-{name}",
+        domain_name=acm_result["domain_name"],
+        certificate=acm_result["certificate"],
+        endpoint_type=apigateway.EndpointType.REGIONAL,
+        security_policy=apigateway.SecurityPolicy.TLS_1_2,
+    )
+    add_tags(custom_domain)
+
+    domain_config = config["api-gateway"]["domain"][name]
+    apigateway.BasePathMapping(
+        scope,
+        f"base-path-mapping-{name}",
+        domain_name=custom_domain,
+        rest_api=resource,
+        stage=resource.deployment_stage,
+        base_path=domain_config["base_path"] if "base_path" in domain_config else None,
+    )
+
+    route53.ARecord(
+        scope,
+        f"api-gateway-a-record-{name}",
+        record_name=acm_result["domain_name"].split(".")[0],
+        zone=acm_result["hosted_zone"],
+        target=route53.RecordTarget.from_alias(
+            route53_targets.ApiGatewayDomain(custom_domain)
+        ),
+    )
+    return resource
 
 
 def create_s3_bucket(scope: Stack, name: str) -> s3.Bucket:

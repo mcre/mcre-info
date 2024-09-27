@@ -64,9 +64,3 @@
     </v-main>
   </v-app>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: "Zen Maru Gothic", sans-serif;
-}
-</style>

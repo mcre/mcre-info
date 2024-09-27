@@ -6,11 +6,13 @@ on:
     paths:
       - .github/workflows/**
       - backend/cdk/**
+      - backend/lambda/**
       - bin/**
       - public/**
       - src/**
       - index.html
       - LICENSE
+      - openapi.yaml
       - package-lock.json
       - package.json
       - README.md
@@ -25,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       PREFIX: ${{ steps.output-step.outputs.PREFIX }}
+      DOMAIN_NAME_API: ${{ steps.output-step.outputs.DOMAIN_NAME_API }}
       DOMAIN_NAME_RSS_PROXY: ${{ steps.output-step.outputs.DOMAIN_NAME_RSS_PROXY }}
       DOMAIN_NAME_DISTRIBUTION: ${{ steps.output-step.outputs.DOMAIN_NAME_DISTRIBUTION }}
       CLOUDFRONT_DISTRIBUTION: ${{ steps.output-step.outputs.CLOUDFRONT_DISTRIBUTION }}
@@ -59,20 +62,54 @@ jobs:
           STACK_NAME_JP=$(jq -r 'keys[0]' cdk-outputs.json)
           STACK_NAME_US=$(jq -r 'keys[1]' cdk-outputs.json)
           PREFIX=$(jq -r --arg STACK_NAME_JP "$STACK_NAME_JP" '.[$STACK_NAME_JP].Prefix' cdk-outputs.json)
+          DOMAIN_NAME_API=$(jq -r --arg STACK_NAME_JP "$STACK_NAME_JP" '.[$STACK_NAME_JP].DomainNameApi' cdk-outputs.json)
           DOMAIN_NAME_RSS_PROXY=$(jq -r --arg STACK_NAME_JP "$STACK_NAME_JP" '.[$STACK_NAME_JP].DomainNameRssProxy' cdk-outputs.json)
           CLOUDFRONT_DISTRIBUTION=$(jq -r --arg STACK_NAME_US "$STACK_NAME_US" '.[$STACK_NAME_US].CloudfrontDistribution' cdk-outputs.json)
           BUCKET_DISTRIBUTION=$(jq -r --arg STACK_NAME_US "$STACK_NAME_US" '.[$STACK_NAME_US].BucketDistribution' cdk-outputs.json)
           DOMAIN_NAME_DISTRIBUTION=$(jq -r --arg STACK_NAME_US "$STACK_NAME_US" '.[$STACK_NAME_US].DomainNameDistribution' cdk-outputs.json)
           echo "PREFIX=${PREFIX}" >> $GITHUB_OUTPUT
+          echo "DOMAIN_NAME_API=${DOMAIN_NAME_API}" >> $GITHUB_OUTPUT
           echo "DOMAIN_NAME_RSS_PROXY=${DOMAIN_NAME_RSS_PROXY}" >> $GITHUB_OUTPUT
           echo "CLOUDFRONT_DISTRIBUTION=${CLOUDFRONT_DISTRIBUTION}" >> $GITHUB_OUTPUT
           echo "BUCKET_DISTRIBUTION=${BUCKET_DISTRIBUTION}" >> $GITHUB_OUTPUT
           echo "DOMAIN_NAME_DISTRIBUTION=${DOMAIN_NAME_DISTRIBUTION}" >> $GITHUB_OUTPUT
 
+  deploy-lambda:
+    runs-on: ubuntu-latest
+    needs: deploy-cdk
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install Python modules
+        run: pip3 install awscli
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.AWS_IAM_ROLE_ARN }}
+          aws-region: ap-northeast-1
+
+      - name: Deploy Lambda functions
+        run: |
+          IFS=',' read -r -a arr <<< "${{ needs.deploy-cdk.outputs.LAMBDA_FUNCTIONS }}"
+          for fn in "${arr[@]}"; do
+            short_name="${fn/${{  needs.deploy-cdk.outputs.PREFIX }}-/}"
+            cd ./backend/lambda/${short_name}
+            cp ../util.py ./
+            zip -r package.zip *
+            cd ../../../
+            aws lambda update-function-code --function-name ${fn} --zip-file fileb://./backend/lambda/${short_name}/package.zip
+          done
+
   deploy-node:
     runs-on: ubuntu-latest
     needs:
       - deploy-cdk
+      - deploy-lambda
     steps:
       - uses: actions/checkout@v3
 
@@ -85,6 +122,7 @@ jobs:
         run: |
           echo "VITE_DISTRIBUTION_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_DISTRIBUTION }}" >> .env.production
           echo "VITE_RSS_PROXY_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_RSS_PROXY }}" >> .env.production
+          echo "VITE_API_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_API }}" >> .env.production
 
       - name: npm ci, build
         run: |
@@ -112,6 +150,6 @@ jobs:
         with:
           distribution-id: ${{  needs.deploy-cdk.outputs.CLOUDFRONT_DISTRIBUTION }}
           aws-region: ap-northeast-1
-          invalidate-paths: '/*'
-          default-root-object: 'index.html'
+          invalidate-paths: "/*"
+          default-root-object: "index.html"
           include-origin-prefix: false

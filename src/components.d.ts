@@ -8,13 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Avatar: typeof import('./components/Avatar.vue')['default']
-    copy: typeof import('./components/Avatar copy.vue')['default']
     GithubCard: typeof import('./views/index/GithubCard.vue')['default']
     ItemCard: typeof import('./components/ItemCard.vue')['default']
-    LinkBtn: typeof import('./components/LinkBtn.vue')['default']
-    LinkIcon: typeof import('./components/LinkIcon.vue')['default']
-    LinkImg: typeof import('./components/LinkImg.vue')['default']
-    LinkTitleBtn: typeof import('./components/LinkTitleBtn.vue')['default']
     ListItem: typeof import('./components/ListItem.vue')['default']
     MoreBtn: typeof import('./components/MoreBtn.vue')['default']
     NoteCard: typeof import('./views/index/NoteCard.vue')['default']

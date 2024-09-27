@@ -1,21 +1,14 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
-
-// Plugins
 import { registerPlugins } from "@/plugins";
-
-// Components
+import { ViteSSG } from "vite-ssg/single-page";
 import App from "./App.vue";
-
-// Composables
-import { createApp } from "vue";
-
 import "@/styles/global.scss";
-const app = createApp(App);
+import { useRss } from "@/composables/useRss";
 
-registerPlugins(app);
+export const createApp = ViteSSG(App, async (ctx) => {
+  registerPlugins(ctx.app);
 
-app.mount("#app");
+  if (import.meta.env.SSR) {
+    const articles = await useRss("note");
+    ctx.initialState.articles = articles;
+  }
+});

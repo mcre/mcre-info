@@ -4,6 +4,8 @@ node_modules
 /public/sitemap.xml
 /public/robots.txt
 
+.vite-ssg-temp
+
 # local env files
 .env.local
 .env.*.local
@@ -22,3 +24,7 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+# Python files
+__pycache__/
+*.py[cod]
+*$py.class
