@@ -195,7 +195,7 @@ def create_cloudfront(
     custom_cache_policy = cloudfront.CachePolicy(
         scope,
         f"{name}-CustomCachePolicy",
-        cache_policy_name=f"{name}-CustomCachePolicy",
+        cache_policy_name=f"{config['prefix']}-{name}",
         comment="Custom cache policy for efficient caching in browsers",
         default_ttl=Duration.days(30),
         max_ttl=Duration.days(365),
