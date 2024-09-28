@@ -1,7 +1,7 @@
 <template>
   <v-card title="Webapp 開発">
     <template v-slot:prepend>
-      <avatar icon="mdi-web" />
+      <avatar icon="$mdiWeb" />
     </template>
     <v-card-text>
       <item-card

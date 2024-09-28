@@ -1,11 +1,39 @@
-// Styles
-import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
 
-// Composables
 import { createVuetify } from "vuetify";
+import { mdi } from "vuetify/iconsets/mdi-svg";
+import {
+  mdiYoutube,
+  mdiWeb,
+  mdiGithub,
+  mdiLinkedin,
+  mdiBookAlphabet,
+  mdiNewspaper,
+  mdiDog,
+  mdiDumbbell,
+  mdiAccountTie,
+  mdiBrain,
+} from "@mdi/js";
 
 export default createVuetify({
+  icons: {
+    defaultSet: "mdi",
+    aliases: {
+      mdiYoutube,
+      mdiWeb,
+      mdiGithub,
+      mdiLinkedin,
+      mdiBookAlphabet,
+      mdiNewspaper,
+      mdiDog,
+      mdiDumbbell,
+      mdiAccountTie,
+      mdiBrain,
+    },
+    sets: {
+      mdi,
+    },
+  },
   theme: {
     defaultTheme: "light",
     themes: {

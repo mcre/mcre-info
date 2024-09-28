@@ -1,7 +1,7 @@
 <template>
   <v-card title="Youtube Cannel">
     <template v-slot:prepend>
-      <avatar icon="mdi-youtube" />
+      <avatar icon="$mdiYoutube" />
     </template>
     <v-card-text>
       <item-card

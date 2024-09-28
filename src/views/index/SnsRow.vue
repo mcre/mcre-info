@@ -31,7 +31,7 @@ const avatars = [
     img: xImg,
     tooltip: "X",
   },
-  { href: "https://github.com/mcre", icon: "mdi-github", tooltip: "GitHub" },
+  { href: "https://github.com/mcre", icon: "$mdiGithub", tooltip: "GitHub" },
   {
     href: "https://wakatime.com/@mcre",
     img: wakatimeImg,
@@ -54,7 +54,7 @@ const avatars = [
   },
   {
     href: "https://www.linkedin.com/in/shinya-fujita-03b5ba12/",
-    icon: "mdi-linkedin",
+    icon: "$mdiLinkedin",
     tooltip: "LinkedIn",
   },
   {

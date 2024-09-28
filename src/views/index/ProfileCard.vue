@@ -1,7 +1,7 @@
 <template>
   <v-card title="Profile">
     <template v-slot:prepend>
-      <avatar icon="mdi-account-tie" />
+      <avatar icon="$mdiAccountTie" />
     </template>
     <v-card-text class="pt-0">
       <v-list density="compact" lines="three">
@@ -35,7 +35,7 @@
           text="スタートアップにて開発全般担当。PoC用ウェブアプリ、PoC用デバイスファームウェア用アプリ、サーバ、データレイク開発、データ分析等。"
           sub-text=" <small>General Manager, Engineering, 現職</small>"
           av-href="https://ai6.jp/"
-          av-icon="mdi-brain"
+          av-icon="$mdiBrain"
           av-tooltip="ai6 株式会社"
         />
         <list-item
@@ -43,7 +43,7 @@
           text="麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システム開発・運用担当。"
           sub-text="<small>取締役, 現職</small>"
           av-href="https://bodydesign.cocodakara.net/"
-          av-icon="mdi-dumbbell"
+          av-icon="$mdiDumbbell"
           av-tooltip="CoCoDakara BodyDesign"
         />
         <list-item
@@ -57,14 +57,14 @@
           title="人狼知能大会 <wbr />プロトコル部門"
           text="第2回大会 5位・第3回大会 5位・GAT2017プレ大会 1位"
           av-href="http://aiwolf.org/"
-          av-icon="mdi-dog"
+          av-icon="$mdiDog"
           av-tooltip="人狼知能ウェブサイト"
         />
         <list-item
           title="人狼知能大会 <wbr />第3回大会 <wbr /> 自然言語部門"
           text="総合優秀賞+人狼ゲーム賞"
           av-href="https://www.inside-games.jp/article/2017/09/05/109557.html"
-          av-icon="mdi-newspaper"
+          av-icon="$mdiNewspaper"
           av-tooltip="大会紹介ニュース記事"
         />
         <list-item
@@ -96,7 +96,7 @@
           text="メールでの英文のやり取りは5年以上日常的に行っています。"
           sub-text="会議で自在に発言できるほどではないのですが、英会話教室Gabaに3年通い、当初Level 2 だったのが Level 6 まで到達しました。"
           av-href="https://www.gaba.co.jp/aboutgaba/text_level.html"
-          av-icon="mdi-book-alphabet"
+          av-icon="$mdiBookAlphabet"
           av-tooltip="Gabaのレベル設定"
         />
       </v-list>

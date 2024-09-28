@@ -4,7 +4,7 @@
       <avatar
         href="https://github.com/mcre"
         tooltip="Github - mcre"
-        icon="mdi-github"
+        :icon="mdiGithub"
       />
     </template>
     <v-card-text>
@@ -44,7 +44,7 @@
       />
       <item-card
         title="aiwolf-4th-nlp"
-        icon="mdi-dog"
+        :icon="mdiDog"
         href="https://github.com/mcre/aiwolf-4th-nlp"
         description="人狼知能大会 自然言語部門 第4回大会に参加したときのソースコードを公開しています。"
         foot-img="/img/aiwolf-4th-nlp.webp"
@@ -66,4 +66,6 @@
 import dqwToolsImg from "@/assets/images/dqw-tools.webp";
 import faviconImg from "@/assets/images/favicon.webp";
 import lpImg from "@/assets/images/lp.webp";
+
+import { mdiGithub, mdiDog } from "@mdi/js";
 </script>
