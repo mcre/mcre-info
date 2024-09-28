@@ -13,6 +13,7 @@ import {
   mdiDumbbell,
   mdiAccountTie,
   mdiBrain,
+  mdiChevronRight,
 } from "@mdi/js";
 
 export default createVuetify({
@@ -29,6 +30,7 @@ export default createVuetify({
       mdiDumbbell,
       mdiAccountTie,
       mdiBrain,
+      mdiChevronRight,
     },
     sets: {
       mdi,
