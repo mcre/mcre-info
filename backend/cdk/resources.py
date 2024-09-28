@@ -131,6 +131,7 @@ def create_api_gateway(
         f"api-gateway-{name}",
         rest_api_name=f"{config['prefix']}-{name}",
         endpoint_types=[apigateway.EndpointType.REGIONAL],
+        min_compression_size=Size.bytes(0),
     )
     add_tags(resource)
 
@@ -158,7 +159,7 @@ def create_api_gateway(
         domain_name=custom_domain,
         rest_api=resource,
         stage=resource.deployment_stage,
-        base_path=domain_config["base_path"] if "base_path" in domain_config else None,
+        base_path=domain_config.get("base_path"),
     )
 
     route53.ARecord(
