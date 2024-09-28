@@ -198,8 +198,10 @@ def create_cloudfront(
         certificate=acm_result["certificate"],
         domain_names=[acm_result["domain_name"]],
         default_behavior=cloudfront.BehaviorOptions(
-            origin=cloudfront_origins.S3BucketOrigin.with_origin_access_control(bucket),
+            origin=cloudfront_origins.S3Origin(bucket),
             viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+            cache_policy=cloudfront.CachePolicy.CACHING_OPTIMIZED,
+            origin_request_policy=cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN,
         ),
         default_root_object="index.html",
         error_responses=[
@@ -222,7 +224,7 @@ def create_cloudfront(
     route53.ARecord(
         scope,
         f"cloudfront-a-record-{name}",
-        record_name=domain_parts if len(domain_parts) >= 3 else None,
+        record_name=".".join(domain_parts) if len(domain_parts) >= 3 else None,
         zone=acm_result["hosted_zone"],
         target=route53.RecordTarget.from_alias(
             route53_targets.CloudFrontTarget(resource)
