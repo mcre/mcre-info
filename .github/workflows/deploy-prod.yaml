@@ -135,12 +135,13 @@ jobs:
           aws-region: ap-northeast-1
 
       - name: Sync with S3
-        uses: kevin-romer/s3-sync-action@master
-        with:
-          args: --follow-symlinks --delete
+        run: |
+          aws s3 sync dist s3://${{ needs.deploy-cdk.outputs.BUCKET_DISTRIBUTION }} \
+            --follow-symlinks \
+            --delete \
+            --cache-control "max-age=2592000"
         env:
           AWS_S3_BUCKET: ${{  needs.deploy-cdk.outputs.BUCKET_DISTRIBUTION }}
-          SOURCE_DIR: dist
 
       - name: Invalidate CloudFront
         uses: badsyntax/github-action-aws-cloudfront@master

@@ -192,6 +192,23 @@ def create_cloudfront(
     bucket: s3.Bucket,
     acm_result: Dict[str, Union[acm.Certificate, route53.HostedZone, str]],
 ) -> cloudfront.Distribution:
+    custom_cache_policy = cloudfront.CachePolicy(
+        scope,
+        f"{name}-CustomCachePolicy",
+        cache_policy_name=f"{name}-CustomCachePolicy",
+        comment="Custom cache policy for efficient caching in browsers",
+        default_ttl=Duration.days(30),
+        max_ttl=Duration.days(365),
+        min_ttl=Duration.seconds(0),
+        header_behavior=cloudfront.CacheHeaderBehavior.allow_list(
+            "Cache-Control", "Expires"
+        ),
+        cookie_behavior=cloudfront.CacheCookieBehavior.none(),
+        query_string_behavior=cloudfront.CacheQueryStringBehavior.all(),
+        enable_accept_encoding_gzip=True,
+        enable_accept_encoding_brotli=True,
+    )
+
     resource = cloudfront.Distribution(
         scope,
         f"cloudfront-distribution-{name}",
@@ -200,7 +217,7 @@ def create_cloudfront(
         default_behavior=cloudfront.BehaviorOptions(
             origin=cloudfront_origins.S3Origin(bucket),
             viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-            cache_policy=cloudfront.CachePolicy.CACHING_OPTIMIZED,
+            cache_policy=custom_cache_policy,
             origin_request_policy=cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN,
         ),
         default_root_object="index.html",
