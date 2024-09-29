@@ -118,8 +118,22 @@ jobs:
 
       - name: Write CDK outputs to .env.production
         run: |
-          echo "VITE_DISTRIBUTION_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_DISTRIBUTION }}" >> .env.production
-          echo "VITE_API_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_API }}" >> .env.production
+          if grep -q "^VITE_DISTRIBUTION_DOMAIN_NAME=" .env.production; then
+            sed -i 's/^VITE_DISTRIBUTION_DOMAIN_NAME=.*/VITE_DISTRIBUTION_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_DISTRIBUTION }}/' .env.production
+          else
+            echo "VITE_DISTRIBUTION_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_DISTRIBUTION }}" >> .env.production
+          fi
+
+          if grep -q "^VITE_API_DOMAIN_NAME=" .env.production; then
+            sed -i 's/^VITE_API_DOMAIN_NAME=.*/VITE_API_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_API }}/' .env.production
+          else
+            echo "VITE_API_DOMAIN_NAME=${{ needs.deploy-cdk.outputs.DOMAIN_NAME_API }}" >> .env.production
+          fi
+
+      - name: Log .env.production changes
+        run: |
+          echo "Updated .env.production:"
+          cat .env.production
 
       - name: npm ci, build
         run: |
