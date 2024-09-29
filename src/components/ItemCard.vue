@@ -13,9 +13,7 @@
     <template v-slot:title>
       <span class="wordwrap">{{ title }}</span>
     </template>
-    <a :href="href" target="_blank" rel="noopener noreferrer" v-if="headImg">
-      <v-img class="mx-4 ma-4" v-if="headImg" :src="headImg" :alt="imgAlt" />
-    </a>
+    <v-img class="mx-4 ma-4" v-if="headImg" :src="headImg" :alt="imgAlt" />
     <v-card-text v-html="description" />
     <v-container v-if="youtube" class="responsive-style">
       <v-lazy>
