@@ -10,6 +10,7 @@ module.exports = {
       /^fade/,
       /^v-overlay/,
       /^v-tooltip/,
+      /^v-ripple/,
     ],
     greedy: [
       /data-v-.*/,
