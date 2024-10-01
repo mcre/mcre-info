@@ -1,13 +1,19 @@
 <template>
   <span>
     <template v-if="href">
-      <v-tooltip v-if="tooltip" :text="tooltip" location="top">
+      <v-tooltip
+        v-if="tooltip"
+        :text="tooltip"
+        location="top"
+        aria-label="Name"
+      >
         <template v-slot:activator="{ props }">
           <a
             :href="href"
             target="_blank"
             rel="noopener noreferrer"
             v-bind="props"
+            :aria-label="`${tooltip} を新しいウィンドウで開く`"
           >
             <v-avatar color="white" variant="elevated">
               <template v-if="img">
