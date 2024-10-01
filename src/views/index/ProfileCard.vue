@@ -4,7 +4,7 @@
       <avatar icon="$mdiAccountTie" />
     </template>
     <v-card-text class="pt-0">
-      <v-list density="compact" lines="three" :role="false">
+      <v-list density="compact" lines="three" :role="null">
         <list-item
           title="mcre (FUJITA Shinya)"
           text="連絡はXのDMまで"
