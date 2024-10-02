@@ -11,6 +11,7 @@ module.exports = {
       /^v-overlay/,
       /^v-tooltip/,
       /^v-ripple/,
+      /^v-img/,
     ],
     greedy: [
       /data-v-.*/,

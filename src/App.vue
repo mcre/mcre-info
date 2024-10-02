@@ -7,7 +7,11 @@
       <v-container>
         <v-row justify="center">
           <v-avatar size="128">
-            <v-img :src="faceImg" :lazy-src="lazyImg" alt="私の顔写真" cover />
+            <v-img :src="faceImg" alt="私の顔写真" cover>
+              <template #placeholder>
+                <v-skeleton-loader type="image" />
+              </template>
+            </v-img>
           </v-avatar>
         </v-row>
         <v-row class="mt-10" justify="center">
@@ -69,5 +73,4 @@
 
 <script setup lang="ts">
 import faceImg from "@/assets/images/face01.webp";
-import lazyImg from "@/assets/images/lazy.webp";
 </script>

@@ -14,6 +14,7 @@
         :href="article.link"
         :description="article.description"
         :head-img="article.enclosure"
+        :head-img-aspect-ratio="1.905"
         :img-alt="article.title"
       />
     </v-card-text>

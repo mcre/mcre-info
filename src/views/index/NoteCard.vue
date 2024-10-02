@@ -15,6 +15,7 @@
         :href="article.link"
         :description="article.description"
         :head-img="article.enclosure"
+        :head-img-aspect-ratio="1.905"
         img-alt="イメージ画像"
       />
     </v-card-text>

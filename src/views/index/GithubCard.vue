@@ -48,6 +48,7 @@
         href="https://github.com/mcre/aiwolf-4th-nlp"
         description="人狼知能大会 自然言語部門 第4回大会に参加したときのソースコードを公開しています。"
         foot-img="/img/aiwolf-4th-nlp.webp"
+        :foot-img-aspect-ratio="1.807"
         :tags="{
           Java: [],
           NLP: ['Juman', 'KNP'],
