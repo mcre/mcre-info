@@ -9,7 +9,7 @@
     </template>
     <v-card-text>
       <item-card
-        v-for="article in articles"
+        v-for="article in articles.zenn"
         :key="article.link"
         :href="article.link"
         :description="article.description"
@@ -26,20 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import { useSSRContext } from "vue";
-import { RssArticle } from "@/apis/@types/index";
+import { useRssStore } from "@/stores/rss";
 import zennImg from "@/assets/images/zenn.webp";
 
-const articles = ref<RssArticle[]>([]);
-const ssrContext = useSSRContext();
+const rssStore = useRssStore();
+const articles = rssStore.articles;
 
-if (ssrContext && ssrContext.initialState && ssrContext.initialState.articles) {
-  articles.value = ssrContext.initialState.articles;
-} else {
-  onMounted(() => {
-    useRss("zenn").then((data) => {
-      articles.value = data;
-    });
-  });
-}
+onMounted(() => {
+  rssStore.fetchRss("zenn");
+});
 </script>

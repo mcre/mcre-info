@@ -9,7 +9,7 @@
     </template>
     <v-card-text>
       <item-card
-        v-for="article in articles"
+        v-for="article in articles.note"
         :key="article.link"
         :title="article.title"
         :href="article.link"
@@ -27,20 +27,13 @@
 </template>
 
 <script setup lang="ts">
-import { useSSRContext } from "vue";
-import { RssArticle } from "@/apis/@types/index";
+import { useRssStore } from "@/stores/rss";
 import noteImg from "@/assets/images/note.webp";
 
-const articles = ref<RssArticle[]>([]);
-const ssrContext = useSSRContext();
+const rssStore = useRssStore();
+const articles = rssStore.articles;
 
-if (ssrContext && ssrContext.initialState && ssrContext.initialState.articles) {
-  articles.value = ssrContext.initialState.articles;
-} else {
-  onMounted(() => {
-    useRss("note").then((data) => {
-      articles.value = data;
-    });
-  });
-}
+onMounted(() => {
+  rssStore.fetchRss("note");
+});
 </script>
