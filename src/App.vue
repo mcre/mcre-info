@@ -7,12 +7,7 @@
       <v-container>
         <v-row justify="center">
           <v-avatar size="128">
-            <v-img
-              src="/img/face01.webp"
-              :lazy-src="lazyImg"
-              alt="私の顔写真"
-              cover
-            />
+            <v-img :src="faceImg" :lazy-src="lazyImg" alt="私の顔写真" cover />
           </v-avatar>
         </v-row>
         <v-row class="mt-10" justify="center">
@@ -73,5 +68,6 @@
 </template>
 
 <script setup lang="ts">
+import faceImg from "@/assets/images/face01.webp";
 import lazyImg from "@/assets/images/lazy.webp";
 </script>
