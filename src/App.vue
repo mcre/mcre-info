@@ -30,24 +30,7 @@
             </v-row>
             <v-row>
               <v-col>
-                <github-card />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
                 <youtube-card />
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-col cols="12" sm="10" md="6" lg="6" xl="4">
-            <v-row>
-              <v-col>
-                <zenn-card />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <note-card />
               </v-col>
             </v-row>
             <v-row>
@@ -58,6 +41,23 @@
             <v-row>
               <v-col>
                 <x-card />
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col cols="12" sm="10" md="6" lg="6" xl="4">
+            <v-row>
+              <v-col>
+                <github-card />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <zenn-card />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <note-card />
               </v-col>
             </v-row>
           </v-col>
