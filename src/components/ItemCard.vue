@@ -6,6 +6,7 @@
     :href="href"
     target="_blank"
     rel="noopener noreferrer"
+    :aria-label="`${imgAlt} へのリンク`"
   >
     <template v-slot:prepend v-if="title && (img || icon)">
       <avatar :img="img" :icon="icon" />

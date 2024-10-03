@@ -21,8 +21,8 @@
                   :src="img"
                   alt="avatar"
                   loading="lazy"
-                  max-height="28"
-                  max-width="28"
+                  width="28"
+                  height="28"
                 />
               </template>
               <template v-else>
@@ -39,8 +39,8 @@
               :src="img"
               loading="lazy"
               alt="avatar"
-              max-height="28"
-              max-width="28"
+              height="28"
+              width="28"
             />
           </template>
           <template v-else>
@@ -52,13 +52,7 @@
 
     <v-avatar v-else color="white" variant="flat">
       <template v-if="img">
-        <img
-          :src="img"
-          loading="lazy"
-          alt="avatar"
-          max-height="28"
-          max-width="28"
-        />
+        <img :src="img" loading="lazy" alt="avatar" height="28" width="28" />
       </template>
       <template v-else>
         <v-icon :icon="icon" />
