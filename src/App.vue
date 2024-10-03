@@ -3,7 +3,7 @@
     <v-app-bar color="primary" collapse>
       <h1 class="font-weight-bold mx-2" style="font-size: 1.4rem">mcre.info</h1>
     </v-app-bar>
-    <v-main>
+    <v-main style="--v-layout-top: 64px">
       <v-container>
         <v-row justify="center">
           <v-avatar size="128">
