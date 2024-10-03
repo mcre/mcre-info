@@ -9,7 +9,7 @@
           title="mcre (FUJITA Shinya)"
           text="連絡はXのDMまで"
           av-href="https://x.com/m_cre"
-          :av-img="xImg"
+          av-img="/img/x.webp"
           av-tooltip="X"
         />
         <subheader text="出身校" />
@@ -55,7 +55,3 @@
     </v-card-text>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import xImg from "@/assets/images/x.webp";
-</script>

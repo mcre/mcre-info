@@ -17,7 +17,13 @@
           >
             <v-avatar color="white" variant="elevated">
               <template v-if="img">
-                <v-img :src="img" alt="avatar" max-height="28" max-width="28" />
+                <img
+                  :src="img"
+                  alt="avatar"
+                  loading="lazy"
+                  max-height="28"
+                  max-width="28"
+                />
               </template>
               <template v-else>
                 <v-icon :icon="icon" />
@@ -29,7 +35,13 @@
       <a v-else :href="href" target="_blank" rel="noopener noreferrer">
         <v-avatar color="white" variant="elevated">
           <template v-if="img">
-            <v-img :src="img" alt="avatar" max-height="28" max-width="28" />
+            <img
+              :src="img"
+              loading="lazy"
+              alt="avatar"
+              max-height="28"
+              max-width="28"
+            />
           </template>
           <template v-else>
             <v-icon :icon="icon" />
@@ -40,7 +52,13 @@
 
     <v-avatar v-else color="white" variant="flat">
       <template v-if="img">
-        <v-img :src="img" alt="avatar" max-height="28" max-width="28" />
+        <img
+          :src="img"
+          loading="lazy"
+          alt="avatar"
+          max-height="28"
+          max-width="28"
+        />
       </template>
       <template v-else>
         <v-icon :icon="icon" />

@@ -6,7 +6,7 @@
     <v-card-text>
       <item-card
         title="DQW Tools"
-        :img="dqwToolsImg"
+        img="/img/dqw-tools.webp"
         href="https://dqw.mcre.info/"
         description="DQW(ドラゴンクエストウォーク)のプレイに役立つ、こころ道クエスト検索ツールを公開しています。"
         :tags="{
@@ -15,7 +15,7 @@
       />
       <item-card
         title="CoCoDakara Body Design"
-        :img="cocodakaraImg"
+        img="/img/cocodakara.webp"
         href="https://bodydesign.cocodakara.net/"
         description="麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システム開発・運用を担当しています。"
         :tags="{
@@ -25,7 +25,7 @@
       />
       <item-card
         title="熟語パズル"
-        :img="jukugoImg"
+        img="/img/jukugo.webp"
         href="https://tools.mcre.info/jukugo"
         description="いわゆる「和同開珎パズル」を自動で解いてくれるソルバーです。"
         :tags="{
@@ -36,9 +36,3 @@
     </v-card-text>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import cocodakaraImg from "@/assets/images/cocodakara.webp";
-import jukugoImg from "@/assets/images/jukugo.webp";
-import dqwToolsImg from "@/assets/images/dqw-tools.webp";
-</script>

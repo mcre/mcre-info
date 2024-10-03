@@ -18,38 +18,31 @@
 </template>
 
 <script setup lang="ts">
-import xImg from "@/assets/images/x.webp";
-import wakatimeImg from "@/assets/images/wakatime.webp";
-import noteImg from "@/assets/images/note.webp";
-import zennImg from "@/assets/images/zenn.webp";
-import laprasImg from "@/assets/images/lapras.webp";
-import wantedlyImg from "@/assets/images/wantedly.webp";
-
 const avatars = [
   {
     href: "https://x.com/m_cre",
-    img: xImg,
+    img: "/img/x.webp",
     tooltip: "X",
   },
   { href: "https://github.com/mcre", icon: "$mdiGithub", tooltip: "GitHub" },
   {
     href: "https://wakatime.com/@mcre",
-    img: wakatimeImg,
+    img: "/img/wakatime.webp",
     tooltip: "WakaTime",
   },
   {
     href: "https://note.com/m_cre/",
-    img: noteImg,
+    img: "/img/note.webp",
     tooltip: "note",
   },
   {
     href: "https://zenn.dev/m_cre",
-    img: zennImg,
+    img: "/img/zenn.webp",
     tooltip: "Zenn",
   },
   {
     href: "https://lapras.com/public/NCTOWDE",
-    img: laprasImg,
+    img: "/img/lapras.webp",
     tooltip: "LAPRAS",
   },
   {
@@ -59,7 +52,7 @@ const avatars = [
   },
   {
     href: "https://www.wantedly.com/id/fujita_shinya",
-    img: wantedlyImg,
+    img: "/img/wantedly.webp",
     tooltip: "Wantedly",
   },
 ];

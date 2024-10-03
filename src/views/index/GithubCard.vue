@@ -10,7 +10,7 @@
     <v-card-text>
       <item-card
         title="mcre-info"
-        :img="faviconImg"
+        img="/img/favicon.webp"
         href="https://github.com/mcre/mcre-info"
         description="このサイトのソースコードを公開しています。"
         :tags="{
@@ -19,7 +19,7 @@
       />
       <item-card
         title="dqw-tools"
-        :img="dqwToolsImg"
+        img="/img/dqw-tools.webp"
         href="https://github.com/mcre/dqw-tools"
         description="DQW(ドラゴンクエストウォーク)のこころ道クエスト検索ツールのソースコードを公開しています。"
         :tags="{
@@ -28,7 +28,7 @@
       />
       <item-card
         title="mcre-tools"
-        :img="faviconImg"
+        img="/img/favicon.webp"
         href="https://github.com/mcre/mcre-tools"
         description="「熟語パズル」などのツールのソースコード。"
         :tags="{
@@ -37,7 +37,7 @@
       />
       <item-card
         title="listening-paperback"
-        :img="lpImg"
+        img="/img/lp.webp"
         href="https://github.com/mcre/listening-paperback"
         description="Youtubeチャンネル 「聴く」名作文庫 の動画を生成するためのプログラムを公開しています。"
         :tags="{ Python: ['MoviePy'], AWS: ['Polly'], TeX: ['jlreq'] }"
@@ -48,7 +48,7 @@
         href="https://github.com/mcre/aiwolf-4th-nlp"
         description="人狼知能大会 自然言語部門 第4回大会に参加したときのソースコードを公開しています。"
         foot-img="/img/aiwolf-4th-nlp.webp"
-        :foot-img-aspect-ratio="1.807"
+        foot-img-aspect-ratio="1.807"
         :tags="{
           Java: [],
           NLP: ['Juman', 'KNP'],
@@ -64,9 +64,5 @@
 </template>
 
 <script setup lang="ts">
-import dqwToolsImg from "@/assets/images/dqw-tools.webp";
-import faviconImg from "@/assets/images/favicon.webp";
-import lpImg from "@/assets/images/lp.webp";
-
 import { mdiGithub, mdiDog } from "@mdi/js";
 </script>

@@ -13,17 +13,13 @@
     <template v-slot:title>
       <span class="wordwrap">{{ title }}</span>
     </template>
-    <v-img
-      class="mx-4 ma-4"
+    <img
       v-if="headImg"
       :src="headImg"
       :alt="imgAlt"
-      :aspect-ratio="headImgAspectRatio"
-    >
-      <template #placeholder>
-        <v-skeleton-loader type="image" />
-      </template>
-    </v-img>
+      :style="{ aspectRatio: headImgAspectRatio, width: '100%' }"
+      loading="lazy"
+    />
 
     <v-card-text v-html="description" />
     <v-container v-if="youtube" class="responsive-style">
@@ -39,17 +35,13 @@
         />
       </v-lazy>
     </v-container>
-    <v-img
-      class="mx-4"
+    <img
       v-if="footImg"
       :src="footImg"
       :alt="imgAlt"
-      :aspect-ratio="footImgAspectRatio"
-    >
-      <template #placeholder>
-        <v-skeleton-loader type="image" />
-      </template>
-    </v-img>
+      :style="{ aspectRatio: footImgAspectRatio, width: '100%' }"
+      loading="lazy"
+    />
 
     <v-card-actions v-if="Object.keys(tags).length > 0">
       <v-item-group>
@@ -95,16 +87,16 @@ defineProps({
     default: "",
   },
   headImgAspectRatio: {
-    type: Number,
-    default: 1.905,
+    type: String,
+    default: "1 / 1",
   },
   footImg: {
     type: String,
     default: "",
   },
   footImgAspectRatio: {
-    type: Number,
-    default: 1.905,
+    type: String,
+    default: "1 / 1",
   },
   imgAlt: {
     type: String,

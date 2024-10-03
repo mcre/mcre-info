@@ -1,7 +1,11 @@
 <template>
   <v-card title="Posts">
     <template v-slot:prepend>
-      <avatar href="https://x.com/m_cre" :img="xImg" tooltip="X - m_cre" />
+      <avatar
+        href="https://x.com/m_cre"
+        img="/img/x.webp"
+        tooltip="X - m_cre"
+      />
     </template>
     <v-card-text>
       <v-lazy>
@@ -15,7 +19,3 @@
     </v-card-actions>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import xImg from "@/assets/images/x.webp";
-</script>

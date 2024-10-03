@@ -5,7 +5,7 @@
         <avatar
           href="https://note.com/m_cre/"
           tooltip="note - mcre"
-          :img="noteImg"
+          img="/img/note.webp"
         />
       </template>
       <v-card-text>
@@ -16,7 +16,7 @@
           :href="article.link"
           :description="article.description"
           :head-img="article.enclosure"
-          :head-img-aspect-ratio="1.905"
+          head-img-aspect-ratio="1.905"
           img-alt="イメージ画像"
         />
       </v-card-text>
@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import { useRssStore } from "@/stores/rss";
-import noteImg from "@/assets/images/note.webp";
 
 const rootElement = ref<HTMLElement | null>(null);
 const rssStore = useRssStore();

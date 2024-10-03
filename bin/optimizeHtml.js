@@ -10,17 +10,45 @@ async function processFiles() {
     const filePath = path.join(distPath, file);
     let html = fs.readFileSync(filePath, 'utf-8');
 
-    // <script>タグを最下部に移動し、deferを追加
-    let scripts = '';
+    let vueScript = '';
     html = html.replace(/<script\s+([^>]*type="module"[^>]*)><\/script>/g, (match, attrs) => {
-      if (!attrs.includes('defer')) {
-        attrs += ' defer';
+      if (attrs.includes('src="')) {
+        const srcMatch = attrs.match(/src="([^"]+)"/);
+        if (srcMatch) {
+          vueScript = srcMatch[1];
+        }
       }
-      scripts += `<script ${attrs}></script>\n`;
       return '';
     });
-    html = html.replace('</body>', `${scripts}</body>`);
 
+    // スクロールするまでjsをロードしない
+    const scrollLoadScript = `
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let hasLoaded = false;
+
+        function loadVueBundle() {
+          if (!hasLoaded) {
+            const script = document.createElement('script');
+            script.src = '${vueScript}';
+            script.defer = true;
+            document.body.appendChild(script);
+            hasLoaded = true;
+            window.removeEventListener('scroll', onScroll);
+          }
+        }
+
+        function onScroll() {
+          loadVueBundle();
+        }
+
+        window.addEventListener('scroll', onScroll, { once: true });
+      });
+    </script>
+    `;
+    html = html.replace('</body>', `${scrollLoadScript}</body>`);
+
+    // HTMLの最適化（minify）
     const minifiedHtml = await minify(html, {
       collapseWhitespace: true,
       removeComments: true,

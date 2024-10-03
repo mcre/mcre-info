@@ -4,7 +4,7 @@
       <template v-slot:prepend>
         <avatar
           href="https://zenn.dev/m_cre"
-          :img="zennImg"
+          img="/img/zenn.webp"
           tooltip="Zenn - m_cre"
         />
       </template>
@@ -15,7 +15,7 @@
           :href="article.link"
           :description="article.description"
           :head-img="article.enclosure"
-          :head-img-aspect-ratio="1.905"
+          head-img-aspect-ratio="1.905"
           :img-alt="article.title"
         />
       </v-card-text>
@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
 import { useRssStore } from "@/stores/rss";
-import zennImg from "@/assets/images/zenn.webp";
 
 const rootElement = ref<HTMLElement | null>(null);
 const rssStore = useRssStore();

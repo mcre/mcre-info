@@ -3,7 +3,7 @@
     <template v-slot:prepend>
       <avatar
         href="https://wakatime.com/@mcre"
-        :img="wakatimeImg"
+        img="/img/wakatime.webp"
         tooltip="WakaTime - mcre"
       />
     </template>
@@ -17,7 +17,3 @@
     </v-card-text>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import wakatimeImg from "@/assets/images/wakatime.webp";
-</script>
