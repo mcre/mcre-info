@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "npm run api:build && concurrently \"vite\" \"npm run api:watch\"",
     "build": "npm run sitemap:build && vue-tsc --noEmit && vite-ssg build",
-    "postbuild": "purgecss --config purgecss.config.js",
+    "postbuild": "purgecss --config ./purgecss.config.js && node ./bin/generateCriticalCss.js",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-path .gitignore",
     "api:build": "rm -rf ./tmp-apis && npx openapi2aspida -o=./tmp-apis/ && rsync -a --delete ./tmp-apis/ ./src/apis/ && rm -rf ./tmp-apis",
@@ -27,6 +27,7 @@
     "@vue/eslint-config-typescript": "^13.0.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^9.0.1",
+    "critical": "^7.2.1",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
