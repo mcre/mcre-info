@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "npm run api:build && concurrently \"vite\" \"npm run api:watch\"",
     "build": "npm run sitemap:build && vue-tsc --noEmit && vite-ssg build",
-    "postbuild": "purgecss --config ./purgecss.config.js && node ./bin/generateCriticalCss.js",
+    "postbuild": "purgecss --config ./purgecss.config.js && node ./bin/generateCriticalCss.js && node ./bin/optimizeHtml.js",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-path .gitignore",
     "api:build": "rm -rf ./tmp-apis && npx openapi2aspida -o=./tmp-apis/ && rsync -a --delete ./tmp-apis/ ./src/apis/ && rm -rf ./tmp-apis",
@@ -37,6 +37,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.4.0",
     "eslint-plugin-vue": "^9.27.0",
+    "html-minifier-terser": "^7.2.0",
     "pinia": "^2.2.4",
     "purgecss": "^6.0.0",
     "sass": "1.77.6",
