@@ -8,14 +8,17 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Avatar: typeof import('./components/Avatar.vue')['default']
+    copy: typeof import('./views/index/ProfileCard copy.vue')['default']
     GithubCard: typeof import('./views/index/GithubCard.vue')['default']
     ItemCard: typeof import('./components/ItemCard.vue')['default']
     ListItem: typeof import('./components/ListItem.vue')['default']
     MoreBtn: typeof import('./components/MoreBtn.vue')['default']
     NoteCard: typeof import('./views/index/NoteCard.vue')['default']
     ProfileCard: typeof import('./views/index/ProfileCard.vue')['default']
+    SkillCard: typeof import('./views/index/SkillCard.vue')['default']
     SnsRow: typeof import('./views/index/SnsRow.vue')['default']
     Subheader: typeof import('./components/Subheader.vue')['default']
+    SubProfileCard: typeof import('./views/index/SubProfileCard.vue')['default']
     TagChip: typeof import('./components/TagChip.vue')['default']
     WakaTimeCard: typeof import('./views/index/WakaTimeCard.vue')['default']
     WebsiteCard: typeof import('./views/index/WebsiteCard.vue')['default']

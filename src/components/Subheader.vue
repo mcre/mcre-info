@@ -1,5 +1,5 @@
 <template>
-  <v-list-subheader class="mt-8">
+  <v-list-subheader>
     {{ text }}
     <v-icon style="margin-bottom: 4px">$mdiChevronRight</v-icon>
   </v-list-subheader>

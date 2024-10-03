@@ -14,6 +14,7 @@ import {
   mdiAccountTie,
   mdiBrain,
   mdiChevronRight,
+  mdiArmFlex,
 } from "@mdi/js";
 
 export default createVuetify({
@@ -31,6 +32,7 @@ export default createVuetify({
       mdiAccountTie,
       mdiBrain,
       mdiChevronRight,
+      mdiArmFlex,
     },
     sets: {
       mdi,

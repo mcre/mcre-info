@@ -25,6 +25,11 @@
             </v-row>
             <v-row>
               <v-col>
+                <skill-card />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
                 <website-card />
               </v-col>
             </v-row>
