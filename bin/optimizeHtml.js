@@ -10,13 +10,15 @@ async function processFiles() {
     const filePath = path.join(distPath, file);
     let html = fs.readFileSync(filePath, 'utf-8');
 
-    // <script>タグを最下部に移動
+    // <script>タグを最下部に移動し、deferを追加
     let scripts = '';
     html = html.replace(/<script\s+([^>]*type="module"[^>]*)><\/script>/g, (match, attrs) => {
+      if (!attrs.includes('defer')) {
+        attrs += ' defer';
+      }
       scripts += `<script ${attrs}></script>\n`;
       return '';
     });
-
     html = html.replace('</body>', `${scripts}</body>`);
 
     const minifiedHtml = await minify(html, {
