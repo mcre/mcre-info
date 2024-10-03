@@ -18,27 +18,20 @@
         content="mcre (FUJITA Shinya) IoTスタートアップ会社員+ITフリーランス ポートフォリオサイト" />
     <meta id="tw-card" name="twitter:card" content="summary" />
     <meta id="tw-image" name="twitter:image" content="https://mcre.info/img/apple-touch-icon.png" />
-    <title>mcre.info</title>
     <link rel="preconnect" href="https://www.googletagmanager.com">
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-
-        gtag('js', new Date());
-        gtag('config', 'G-EVL1PP92QT');
-
-        window.addEventListener('load', function () {
-            var gtagScript = document.createElement('script');
-            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-EVL1PP92QT';
-            gtagScript.defer = true;
-            document.head.appendChild(gtagScript);
-        });
-    </script>
+    <title>mcre.info</title>
 </head>
 
 <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-EVL1PP92QT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVL1PP92QT');
+    </script>
 </body>
 
 </html>
