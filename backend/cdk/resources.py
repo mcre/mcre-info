@@ -215,10 +215,9 @@ def create_cloudfront(
         certificate=acm_result["certificate"],
         domain_names=[acm_result["domain_name"]],
         default_behavior=cloudfront.BehaviorOptions(
-            origin=cloudfront_origins.S3Origin(bucket),
+            origin=cloudfront_origins.S3BucketOrigin.with_origin_access_control(bucket),
             viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
             cache_policy=custom_cache_policy,
-            origin_request_policy=cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN,
         ),
         default_root_object="index.html",
         error_responses=[
