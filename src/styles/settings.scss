@@ -1,18 +1,10 @@
-/**
- * src/styles/settings.scss
- *
- * Configures SASS variables and Vuetify overwrites
- */
+$custom-font-family: 'Zen Maru Gothic', sans-serif;
 
-// https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
+@use 'vuetify/settings' with (
+  $body-font-family: $custom-font-family,
+  $heading-font-family: $custom-font-family
+);
 
 .v-card-title {
   font-weight: 700 !important;
-}
-
-.text-body-1 {
-  font-family: "Zen Maru Gothic", sans-serif;
 }
