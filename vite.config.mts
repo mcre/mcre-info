@@ -3,6 +3,7 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import Vue from "@vitejs/plugin-vue";
 import Vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+import "vite-ssg";
 
 // Utilities
 import { defineConfig } from "vite";
@@ -54,5 +55,14 @@ export default defineConfig({
   },
   ssr: {
     noExternal: ["vuetify", "aspida", "@aspida/fetch"],
+  },
+  ssgOptions: {
+    script: "async defer",
+    formatting: "minify",
+    dirStyle: "nested",
+    crittersOptions: {
+      preload: "media",
+      pruneSource: true,
+    },
   },
 });

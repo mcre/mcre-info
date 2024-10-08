@@ -14,6 +14,8 @@ declare module 'vue' {
     MoreBtn: typeof import('./components/MoreBtn.vue')['default']
     NoteCard: typeof import('./views/index/NoteCard.vue')['default']
     ProfileCard: typeof import('./views/index/ProfileCard.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
     SkillCard: typeof import('./views/index/SkillCard.vue')['default']
     SnsRow: typeof import('./views/index/SnsRow.vue')['default']
     Subheader: typeof import('./components/Subheader.vue')['default']
