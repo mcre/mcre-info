@@ -1,10 +1,7 @@
-import os
-import string
 from typing import Dict, Union
 
 from aws_cdk import (
     Stack,
-    Tags,
     Duration,
     RemovalPolicy,
     Size,
@@ -22,11 +19,6 @@ from aws_cdk import (
 from config import get_env_config
 
 config = get_env_config()
-
-
-def add_tags(resource) -> None:
-    for tag in config["tags"]:
-        Tags.of(resource).add(tag["key"], tag["value"])
 
 
 def create_acm_certificate(
@@ -49,7 +41,6 @@ def create_acm_certificate(
         domain_name=domain_name,
         validation=acm.CertificateValidation.from_dns(existing_hosted_zone),
     )
-    add_tags(resource)
 
     return {
         "certificate": resource,
@@ -97,7 +88,6 @@ def create_lambda_function(
             f"{iam_role_name}-policy": iam.PolicyDocument(statements=policies)
         },
     )
-    add_tags(iam_role)
 
     resource = lambda_.Function(
         scope,
@@ -114,8 +104,6 @@ def create_lambda_function(
         environment=environment,
         layers=layers,
     )
-
-    add_tags(resource)
     return resource
 
 
@@ -133,7 +121,6 @@ def create_api_gateway(
         endpoint_types=[apigateway.EndpointType.REGIONAL],
         min_compression_size=Size.bytes(0),
     )
-    add_tags(resource)
 
     lambda_integration = apigateway.LambdaIntegration(target_lambda)
     proxy_resource = resource.root.add_resource("{proxy+}")
@@ -150,7 +137,6 @@ def create_api_gateway(
         endpoint_type=apigateway.EndpointType.REGIONAL,
         security_policy=apigateway.SecurityPolicy.TLS_1_2,
     )
-    add_tags(custom_domain)
 
     domain_config = config["api-gateway"]["domain"][name]
     apigateway.BasePathMapping(
@@ -182,7 +168,6 @@ def create_s3_bucket(scope: Stack, name: str) -> s3.Bucket:
         bucket_name=f"{config['prefix']}-{name}",
         removal_policy=RemovalPolicy.RETAIN if dp else RemovalPolicy.DESTROY,
     )
-    add_tags(resource)
     return resource
 
 
@@ -246,8 +231,6 @@ def create_cloudfront(
             route53_targets.CloudFrontTarget(resource)
         ),
     )
-
-    add_tags(resource)
     return resource
 
 
@@ -311,6 +294,4 @@ def create_iam_role_github_actions(scope: Stack, policies: list = []) -> iam.Rol
             )
         },
     )
-
-    add_tags(resource)
     return resource
