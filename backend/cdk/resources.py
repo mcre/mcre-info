@@ -31,7 +31,7 @@ def create_acm_certificate(
         zone_name=domain_config["zone_name"],
     )
 
-    if "name" in domain_config:
+    if "name" in domain_config and domain_config["name"] != "":
         domain_name = f"{domain_config['name']}.{domain_config['zone_name']}"
     else:
         domain_name = domain_config["zone_name"]
@@ -138,7 +138,7 @@ def create_api_gateway(
         security_policy=apigateway.SecurityPolicy.TLS_1_2,
     )
 
-    domain_config = config["api-gateway"]["domain"][name]
+    domain_config = config["api-gateway"][name]["domain"]
     apigateway.BasePathMapping(
         scope,
         f"base-path-mapping-{name}",

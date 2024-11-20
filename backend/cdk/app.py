@@ -49,14 +49,14 @@ lambda_api = create_lambda_function(
 )
 
 # api-gateway
-dist_domain_config = config["cloudfront"]["domain"]["dist"]
-if "name" in dist_domain_config:
+dist_domain_config = config["cloudfront"]["dist"]["domain"]
+if "name" in dist_domain_config and dist_domain_config["name"] != "":
     dist_domain_name = f"{dist_domain_config['name']}.{dist_domain_config['zone_name']}"
 else:
     dist_domain_name = dist_domain_config["zone_name"]
 
 acm_result_api = create_acm_certificate(
-    stack, "api", config["api-gateway"]["domain"]["api"]
+    stack, "api", config["api-gateway"]["api"]["domain"]
 )
 create_api_gateway(
     stack,
@@ -83,7 +83,7 @@ bucket_distribution = create_s3_bucket(stack_us, "dist")
 
 # ACM
 acm_result_dist = create_acm_certificate(
-    stack_us, "dist", config["cloudfront"]["domain"]["dist"]
+    stack_us, "dist", config["cloudfront"]["dist"]["domain"]
 )
 
 # CloudFront
