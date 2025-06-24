@@ -16,7 +16,7 @@
           </v-avatar>
         </v-row>
         <v-row class="mt-10" justify="center">
-          <p>一生プログラミングします。</p>
+          <p>ものづくり欲と、ものがたり欲。</p>
         </v-row>
         <sns-row class="mt-6" />
       </v-container>
