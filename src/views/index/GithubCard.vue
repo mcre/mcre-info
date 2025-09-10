@@ -15,6 +15,7 @@
         description="このサイトのソースコードを公開しています。"
         :tags="{
           Vue3: ['Vuetify3'],
+          AWS: ['API-Gateway', 'CDK', 'CloudFront'],
         }"
       />
       <item-card
@@ -24,6 +25,7 @@
         description="DQW(ドラゴンクエストウォーク)のこころ道クエスト検索ツールのソースコードを公開しています。"
         :tags="{
           Vue3: ['Vuetify3'],
+          AWS: ['API-Gateway', 'CDK', 'CloudFront'],
         }"
       />
       <item-card
@@ -32,7 +34,8 @@
         href="https://github.com/mcre/mcre-tools"
         description="「熟語パズル」などのツールのソースコード。"
         :tags="{
-          AWS: ['API-Gateway', 'DynamoDB', 'CDK'],
+          Vue3: ['Vuetify3'],
+          AWS: ['API-Gateway', 'DynamoDB', 'Lambda', 'CDK', 'CloudFront'],
         }"
       />
       <item-card

@@ -28,7 +28,7 @@ Github Actions自体でもCDKのDeployを行っているが、そのためのIAM
 
 仮想環境の作成
 
-```
+``` sh
 cd backend/cdk
 python -m venv .venv
 source .venv/bin/activate
@@ -37,7 +37,7 @@ python -m pip install -r requirements.txt
 
 仮想環境の入り方
 
-```
+``` sh
 cd backend/cdk
 source .venv/bin/activate
 ```
@@ -48,24 +48,24 @@ source .venv/bin/activate
 
 CDK から CloudFormation Template をつくる。
 
-```
+``` sh
 cdk --profile m_cre-super-user synth
 ```
 
 synth が通ったあとはデプロイする
 
-```
+``` sh
 cdk --profile m_cre-super-user deploy --all
 ```
 
 (差分を見るとき)
 
-```
+``` sh
 cdk --profile m_cre-super-user diff
 ```
 
 (破棄するとき)
 
-```
+``` sh
 cdk --profile m_cre-super-user destroy
 ```

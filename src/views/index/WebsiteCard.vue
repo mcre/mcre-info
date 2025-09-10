@@ -5,12 +5,23 @@
     </template>
     <v-card-text>
       <item-card
+        title="けんみんラボ"
+        img="/img/kenmin-lab.png"
+        href="https://kenmi-lab.net"
+        description="習慣・方言などの都道府県ごとの違いを、だれでも投票できます。"
+        :tags="{
+          Vue3: ['Vuetify3'],
+          AWS: ['API-Gateway', 'DynamoDB', 'Lambda', 'CDK', 'CloudFront'],
+        }"
+      />
+      <item-card
         title="DQW Tools"
         img="/img/dqw-tools.webp"
         href="https://dqw.mcre.info/"
         description="DQW(ドラゴンクエストウォーク)のプレイに役立つ、こころ道クエスト検索ツールを公開しています。"
         :tags="{
           Vue3: ['Vuetify3'],
+          AWS: ['API-Gateway', 'CDK', 'CloudFront'],
         }"
       />
       <item-card
@@ -30,7 +41,7 @@
         description="いわゆる「和同開珎パズル」を自動で解いてくれるソルバーです。"
         :tags="{
           Vue3: ['Vuetify3'],
-          AWS: ['API-Gateway', 'DynamoDB', 'CDK'],
+          AWS: ['API-Gateway', 'DynamoDB', 'Lambda', 'CDK', 'CloudFront'],
         }"
       />
     </v-card-text>
