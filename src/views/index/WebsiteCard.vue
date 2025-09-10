@@ -7,7 +7,7 @@
       <item-card
         title="けんみんラボ"
         img="/img/kenmin-lab.png"
-        href="https://kenmi-lab.net"
+        href="https://kenmin-lab.net"
         description="習慣・方言などの都道府県ごとの違いを、だれでも投票できます。"
         :tags="{
           Vue3: ['Vuetify3'],
