@@ -22,7 +22,7 @@
       loading="lazy"
     />
 
-    <v-card-text v-html="description" />
+    <v-card-text class="wordwrap" v-text="plainDescription" />
     <v-container v-if="youtube" class="responsive-style">
       <v-lazy>
         <iframe
@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: "",
@@ -107,6 +107,13 @@ defineProps({
     type: Object as () => { [key: string]: string[] },
     default: () => ({}),
   },
+});
+
+const plainDescription = computed(() => {
+  // descriptionのHTMLタグを除去しプレーンテキストにする
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(props.description, "text/html");
+  return doc.body.textContent ?? "";
 });
 </script>
 

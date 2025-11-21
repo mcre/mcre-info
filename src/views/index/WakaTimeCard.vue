@@ -18,11 +18,21 @@
 
 <script>
 export default {
+  data() {
+    return {
+      observer: null,
+    };
+  },
   mounted() {
     const embedContainer = this.$refs.lazyEmbedContainer;
 
+    if (!(embedContainer instanceof HTMLElement)) {
+      console.warn("lazyEmbedContainer is not available");
+      return;
+    }
+
     // Intersection Observerを使用して要素が画面内に入った時にembedを作成
-    const observer = new IntersectionObserver(
+    this.observer = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -43,7 +53,13 @@ export default {
     );
 
     // 監視を開始
-    observer.observe(embedContainer);
+    this.observer.observe(embedContainer);
+  },
+  beforeUnmount() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
   },
 };
 </script>
