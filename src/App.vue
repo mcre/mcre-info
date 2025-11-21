@@ -19,52 +19,19 @@
           <p>ものづくり欲と、ものがたり欲。</p>
         </v-row>
         <sns-row class="mt-6" />
-      </v-container>
-      <v-container>
-        <v-row justify="center">
+
+        <v-row class="mt-10" justify="center">
           <v-col cols="12" sm="10" md="6" lg="6" xl="4">
-            <v-row>
-              <v-col>
-                <profile-card />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <skill-card />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <website-card />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <youtube-card />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <waka-time-card />
-              </v-col>
-            </v-row>
+            <profile-card class="mb-4" />
+            <skill-card class="mb-4" />
+            <website-card class="mb-4" />
+            <youtube-card class="mb-4" />
+            <waka-time-card />
           </v-col>
           <v-col cols="12" sm="10" md="6" lg="6" xl="4">
-            <v-row>
-              <v-col>
-                <github-card />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <zenn-card />
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <note-card />
-              </v-col>
-            </v-row>
+            <github-card class="mb-4" />
+            <zenn-card class="mb-4" />
+            <note-card />
           </v-col>
         </v-row>
       </v-container>

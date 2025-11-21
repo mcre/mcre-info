@@ -23,7 +23,7 @@ export default defineConfig({
     }),
     Components({
       dts: "src/components.d.ts",
-      dirs: ["src/components", "src/views", "src/store"],
+      dirs: ["src/components", "src/views", "src/stores"],
     }),
     Vue({
       template: { transformAssetUrls },
