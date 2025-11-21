@@ -65,11 +65,6 @@
                 <note-card />
               </v-col>
             </v-row>
-            <v-row>
-              <v-col>
-                <x-card />
-              </v-col>
-            </v-row>
           </v-col>
         </v-row>
       </v-container>

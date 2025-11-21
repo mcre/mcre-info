@@ -22,8 +22,6 @@ declare module 'vue' {
     TagChip: typeof import('./components/TagChip.vue')['default']
     WakaTimeCard: typeof import('./views/index/WakaTimeCard.vue')['default']
     WebsiteCard: typeof import('./views/index/WebsiteCard.vue')['default']
-    XCard: typeof import('./views/index/XCard.vue')['default']
-    XEmbedded: typeof import('./components/XEmbedded.vue')['default']
     YoutubeCard: typeof import('./views/index/YoutubeCard.vue')['default']
     ZennCard: typeof import('./views/index/ZennCard.vue')['default']
   }
