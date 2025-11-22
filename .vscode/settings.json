@@ -1,6 +1,34 @@
 {
+  // -- エディタ設定 --
+  "editor.minimap.enabled": false, // ミニマップを非表示にする
+  "editor.renderControlCharacters": true, // 制御文字を表示する
+  "editor.suggestSelection": "first", // サジェスト一覧の初期表示項目設定
+  "workbench.iconTheme": "vscode-icons",
+  "window.zoomLevel": 0, // 画面全体の表示サイズはデフォルト
+  "files.autoGuessEncoding": true, // ファイルの自動エンコードを実施
+  "editor.renderLineHighlight": "all", // 選択行の行番号をハイライトする
+  "editor.bracketPairColorization.enabled": true, // 括弧の対応を色付ける,
+
+  // -- format / lint --
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.insertFinalNewline": true, // ファイルの末尾を改行で終わらせる
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "eslint.run": "onSave",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript", "typescript", "vue"],
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "[json]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[scss]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
   },
   "cSpell.words": [
     "aiwolf",
@@ -14,12 +42,15 @@
     "edgelambda",
     "esbenp",
     "fontsource",
+    "FUJITA",
+    "Gaba",
     "iconsets",
     "jlreq",
     "jmwj",
     "jukugo",
     "Juman",
     "kenmin",
+    "Keras",
     "LAPRAS",
     "Maru",
     "materialdesignicons",
@@ -34,6 +65,7 @@
     "Prerender",
     "purgecss",
     "runtimes",
+    "Shinya",
     "unplugin",
     "urlset",
     "venv",
