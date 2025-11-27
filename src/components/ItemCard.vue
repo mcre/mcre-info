@@ -110,10 +110,8 @@ const props = defineProps({
 });
 
 const plainDescription = computed(() => {
-  // descriptionのHTMLタグを除去しプレーンテキストにする
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(props.description, "text/html");
-  return doc.body.textContent ?? "";
+  // descriptionのHTMLタグを除去しプレーンテキストにする（SSR環境でも動作させるため正規表現で処理）
+  return props.description.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 });
 </script>
 
