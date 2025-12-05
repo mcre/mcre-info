@@ -2,7 +2,7 @@
   <v-list-item>
     <v-list-item-title v-html="title" />
     <v-list-item-subtitle v-if="bullet && subtitles.length" class="wordwrap">
-      <ul class="pl-4 my-1">
+      <ul class="pl-6 my-1">
         <li v-for="(line, index) in subtitles" :key="index" v-html="line" />
       </ul>
     </v-list-item-subtitle>

@@ -44,7 +44,7 @@
           title="ITフリーランス"
           :texts="['Webアプリ開発等', '<small>現職</small>']"
         />
-        <subheader text="学歴" />
+        <subheader text="学歴" class="mt-8" />
         <list-item
           title="旭川工業高等専門学校"
           :texts="[

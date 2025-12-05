@@ -24,6 +24,7 @@
         <v-row v-if="mdAndUp" class="mt-10" justify="center">
           <v-col cols="12" sm="10" md="6" lg="6" xl="4">
             <profile-card class="mb-4" />
+            <hobby-card class="mb-4" />
             <zenn-card class="mb-4" />
             <github-card class="mb-4" />
             <website-card class="mb-4" />
@@ -32,7 +33,7 @@
           <v-col cols="12" sm="10" md="6" lg="6" xl="4">
             <skill-card class="mb-4" />
             <note-card class="mb-4" />
-            <waka-time-card class="mb-4"/>
+            <waka-time-card class="mb-4" />
           </v-col>
         </v-row>
 
@@ -41,8 +42,9 @@
           <v-col cols="12" sm="10" md="6" lg="6" xl="4">
             <profile-card class="mb-4" />
             <skill-card class="mb-4" />
+            <hobby-card class="mb-4" />
             <zenn-card class="mb-4" />
-            <note-card class="mb-4"/>
+            <note-card class="mb-4" />
             <github-card class="mb-4" />
             <website-card class="mb-4" />
             <youtube-card class="mb-4" />
