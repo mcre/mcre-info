@@ -14,31 +14,22 @@
         />
         <subheader text="職歴" class="mt-8" />
         <list-item
-          title="ソフトバンク(株)"
+          title="ソフトバンク (株)"
           :texts="[
             '営業施策分析、契約者数予測、データ分析システム企画・開発・運用、スポーツデータの機械学習分析など',
             '<small>※ウィルコム入社後 吸収合併</small>',
           ]"
         />
         <list-item
-          title="ai6(株)"
+          title="ai6 (株)"
           :texts="[
             'スタートアップにて開発全般担当。PoC用ウェブアプリ、デバイス関連開発、クラウドシステム、データレイク開発、データ分析等。',
-            '<small>テックリード, 現職</small>',
+            '<small>テックリード</small>',
           ]"
-          av-href="https://ai6.jp/"
-          av-icon="$mdiBrain"
-          av-tooltip="ai6 株式会社"
         />
         <list-item
-          title="CoCoDakara(株)"
-          :texts="[
-            '麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システム開発・運用担当。',
-            '<small>取締役, 現職</small>',
-          ]"
-          av-href="https://bodydesign.cocodakara.net/"
-          av-icon="$mdiDumbbell"
-          av-tooltip="CoCoDakara BodyDesign"
+          title="(株) HEARTBEATS"
+          :texts="['<small>フロントエンジニア, 現職</small>']"
         />
         <list-item
           title="ITフリーランス"
