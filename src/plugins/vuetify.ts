@@ -21,6 +21,13 @@ import { mdi } from "vuetify/iconsets/mdi-svg";
 import "vuetify/styles";
 
 export default createVuetify({
+  ssr: true,
+  defaults: {
+    VProgressLinear: {
+      bgOpacity: 0.12,
+      bufferOpacity: 0.12,
+    },
+  },
   icons: {
     defaultSet: "mdi",
     aliases: {

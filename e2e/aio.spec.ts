@@ -236,6 +236,16 @@ test("SSG HTML keeps lightweight RSS links in the initial response", async ({
   );
 });
 
+test("SSG HTML avoids Vuetify SSR regressions", async ({ request }) => {
+  const response = await request.get("/");
+  expect(response.ok()).toBe(true);
+
+  const html = await response.text();
+  expect(html).not.toContain("data-allow-mismatch");
+  expect(html).not.toContain("NaN");
+  expect(html).not.toContain("opacity:NaN");
+});
+
 test("LCP profile image is prioritized in the initial HTML", async ({
   page,
 }) => {
@@ -288,6 +298,66 @@ test("profile images provide high-density variants", async ({ page }) => {
         image.srcset === "/img/x.webp, /img/x-2x.webp 2x",
     ),
   ).toBe(true);
+});
+
+test("social image link icons fit inside their buttons after preview build", async ({
+  page,
+}) => {
+  const imageLabels = ["X", "WakaTime", "Zenn", "note", "LAPRAS", "Wantedly"];
+  const viewports = [
+    { height: 900, width: 1280 },
+    { height: 844, width: 390 },
+  ];
+
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+
+    const socialNav = page.getByRole("navigation", {
+      name: "外部プロフィール",
+    });
+
+    for (const label of imageLabels) {
+      const icon = socialNav.getByAltText(label);
+      const link = socialNav.getByRole("link", {
+        name: `${label} を新しいウィンドウで開く`,
+      });
+
+      await expect(icon).toBeVisible();
+      await expect(link).toBeVisible();
+      await expect(icon).toHaveCSS("display", "block");
+      await expect(icon).toHaveCSS("object-fit", "contain");
+
+      const imageState = await icon.evaluate((image) => {
+        const htmlImage = image as HTMLImageElement;
+        return {
+          hasAvatarAncestor: Boolean(htmlImage.closest(".v-avatar")),
+          naturalHeight: htmlImage.naturalHeight,
+          naturalWidth: htmlImage.naturalWidth,
+        };
+      });
+      expect(imageState.hasAvatarAncestor).toBe(false);
+      expect(imageState.naturalWidth).toBeGreaterThan(0);
+      expect(imageState.naturalHeight).toBeGreaterThan(0);
+
+      const iconBox = await icon.boundingBox();
+      const linkBox = await link.boundingBox();
+      if (!iconBox || !linkBox) {
+        throw new Error(`${label} icon or link box was not available`);
+      }
+
+      expect(iconBox.width).toBeLessThanOrEqual(32);
+      expect(iconBox.height).toBeLessThanOrEqual(32);
+      expect(iconBox.x).toBeGreaterThanOrEqual(linkBox.x);
+      expect(iconBox.y).toBeGreaterThanOrEqual(linkBox.y);
+      expect(iconBox.x + iconBox.width).toBeLessThanOrEqual(
+        linkBox.x + linkBox.width,
+      );
+      expect(iconBox.y + iconBox.height).toBeLessThanOrEqual(
+        linkBox.y + linkBox.height,
+      );
+    }
+  }
 });
 
 test("large lazy project image stays compressed", async () => {

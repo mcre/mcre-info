@@ -1,17 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar
-      class="brand-app-bar"
-      collapse
-      color="primary"
-      data-allow-mismatch="style"
-    >
+    <v-app-bar class="brand-app-bar" collapse color="primary">
       <h1 class="font-weight-bold mx-2" style="font-size: 1.25rem">
         mcre.info
       </h1>
     </v-app-bar>
 
-    <v-main data-allow-mismatch="style" style="--v-layout-top: 64px">
+    <v-main>
       <v-container class="page-container">
         <v-row justify="center">
           <v-avatar size="128">
