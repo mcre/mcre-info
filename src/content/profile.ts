@@ -177,7 +177,7 @@ export const profile: ProfileContent = {
     },
     {
       title: "(株) HEARTBEATS",
-      description: ["フロントエンジニア。"],
+      description: ["フロントエンジニア・データエンジニア。"],
       note: "現職。",
     },
     {
