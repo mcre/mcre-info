@@ -164,7 +164,7 @@ test("webfont assets are split by unicode range", async () => {
   expect(fontWeights).toEqual(new Set([400, 700]));
 });
 
-test("SSG HTML keeps RSS payload out of the initial response", async ({
+test("SSG HTML keeps lightweight RSS links in the initial response", async ({
   request,
 }) => {
   const response = await request.get("/");
@@ -172,10 +172,15 @@ test("SSG HTML keeps RSS payload out of the initial response", async ({
 
   const html = await response.text();
   expect(html).toContain('<html lang="ja">');
-  expect(html).not.toContain("Generated article");
+  expect(html).toContain('"rss"');
+  expect(html).toContain('"note"');
+  expect(html).toContain('"zenn"');
+  expect(html).toContain("https://note.com/");
+  expect(html).toContain("https://zenn.dev/");
+  expect(html).not.toContain("Article description");
   expect(html).not.toContain("assets.st-note.com");
   expect(html).not.toContain("res.cloudinary.com");
-  expect(html).not.toContain('"pinia":{"rss"');
+  expect(html).not.toContain('"enclosure"');
 });
 
 test("LCP profile image is prioritized in the initial HTML", async ({

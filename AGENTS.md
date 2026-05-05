@@ -45,6 +45,8 @@
 ## SSG / 表示検証
 
 - このサイトでは `dist/index.html` が検索エンジンと crawler に見せる主要成果物である。
+- note / Zenn のRSS記事はSEO上重要なコンテンツとして扱う。PageSpeed改善でも、SSG時点の記事タイトル・リンク・publishedの軽量露出は維持する。
+- RSSの初期HTML露出では本文・description・`enclosure`・外部画像URLを埋め込まない。クライアント側でカードが表示領域に入ったらRSS APIから完全版を取得する。
 - 見た目の最終判断は `npm run dev` ではなく、`npm run build` 後の `npm run preview` で行う。
 - `npm run e2e` は `npm run build` 後の `vite preview` に対して実行する。dev server だけを見て通した扱いにしない。
 - SSR と CSR の差が大きくなる実装は避ける。主要レイアウトは `useDisplay()` で DOM を出し分けず、Vuetify の grid や CSS のレスポンシブ指定で調整する。

@@ -61,6 +61,9 @@ const props = defineProps<{
 
 const rssStore = useRssStore();
 const articles = computed(() => rssStore.articles[props.source]);
+const hasFullArticles = computed(() =>
+  articles.value.some((article) => article.description || article.enclosure),
+);
 const rootElement = ref<HTMLElement | null>(null);
 const hasFetched = ref(false);
 let observer: IntersectionObserver | null = null;
@@ -74,7 +77,7 @@ const fetchRssOnce = () => {
 };
 
 onMounted(async () => {
-  if (articles.value.length > 0) return;
+  if (hasFullArticles.value) return;
 
   await nextTick();
   if (!rootElement.value) {
