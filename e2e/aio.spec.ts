@@ -166,6 +166,27 @@ test("webfont assets are split by unicode range", async () => {
   expect(fontWeights).toEqual(new Set([400, 700]));
 });
 
+test("webfont loading stays out of the initial performance window", async ({
+  page,
+}) => {
+  const earlyFontRequests: string[] = [];
+
+  page.on("request", (request) => {
+    const url = request.url();
+    if (
+      url.includes("/assets/fonts-") ||
+      url.includes("/assets/zen-maru-gothic-")
+    ) {
+      earlyFontRequests.push(url);
+    }
+  });
+
+  await page.goto("/");
+  await page.waitForTimeout(3000);
+
+  expect(earlyFontRequests).toEqual([]);
+});
+
 test("SSG HTML keeps lightweight RSS links in the initial response", async ({
   request,
 }) => {

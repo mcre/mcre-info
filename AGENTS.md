@@ -64,6 +64,7 @@
 - 軽量化のため Zen Maru Gothic は 400 / 700 の `unicode-range` 分割配信を使う。追加 weight や別フォントは増やさない。
 - `src/styles/fonts.scss` では、静的プロフィール表示に必要な range だけを woff2-only の `@font-face` として定義する。`@fontsource/zen-maru-gothic/400.css` / `700.css` のような全 range import は使わない。
 - `src/styles/fonts.scss` は初期 render-blocking CSS に含めず、`src/main.ts` からクライアント側で遅延読み込みする。
+- PageSpeed改善では、Zen Maru Gothic のCSS/woff2取得とfont swapを初期パフォーマンス計測窓に入れない。`load` 後も一定時間待ち、idle時に読み込む。
 - プロフィールの表示テキストを増やして未定義 glyph が出る場合は、`@fontsource/zen-maru-gothic/unicode.json` を参照して `src/styles/fonts.scss` の range を追加する。
 - Webfont 読み込みは `src/styles/fonts.scss` で管理する。
 

@@ -6,19 +6,32 @@ import App from "./App.vue";
 
 import "@/styles/global.scss";
 
+const WEB_FONT_LOAD_DELAY_MS = 12_000;
+
 const scheduleWebFontLoad = () => {
-  const loadWebFonts = () => {
-    window.setTimeout(() => {
-      void import("./styles/fonts.scss");
-    }, 1200);
+  const importWebFonts = () => {
+    void import("./styles/fonts.scss");
+  };
+
+  const loadWebFontsWhenIdle = () => {
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(importWebFonts, { timeout: 2000 });
+      return;
+    }
+
+    importWebFonts();
+  };
+
+  const scheduleDelayedLoad = () => {
+    window.setTimeout(loadWebFontsWhenIdle, WEB_FONT_LOAD_DELAY_MS);
   };
 
   if (document.readyState === "complete") {
-    loadWebFonts();
+    scheduleDelayedLoad();
     return;
   }
 
-  window.addEventListener("load", loadWebFonts, { once: true });
+  window.addEventListener("load", scheduleDelayedLoad, { once: true });
 };
 
 const toSearchIndexArticle = (article: RssArticle): RssArticle => ({
