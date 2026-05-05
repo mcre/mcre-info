@@ -8,7 +8,11 @@
     variant="outlined"
   >
     <template v-if="title && (img || icon)" #prepend>
-      <Avatar :icon="icon" :img="img" />
+      <Avatar
+        :icon="icon"
+        :img="img"
+        :img-srcset="getHighDensityImageSrcset(img)"
+      />
     </template>
 
     <template #title>
@@ -68,6 +72,8 @@
 </template>
 
 <script setup lang="ts">
+import { getHighDensityImageSrcset } from "@/utils/imageSrcset";
+
 const props = defineProps({
   title: {
     type: String,

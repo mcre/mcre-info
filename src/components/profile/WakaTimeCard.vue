@@ -4,6 +4,7 @@
       <ProfileAvatar
         href="https://wakatime.com/@mcre"
         image="/img/wakatime.webp"
+        :image-srcset="getHighDensityImageSrcset('/img/wakatime.webp')"
         label="WakaTime"
       />
     </template>
@@ -19,6 +20,8 @@
 </template>
 
 <script setup lang="ts">
+import { getHighDensityImageSrcset } from "@/utils/imageSrcset";
+
 const lazyEmbedContainer = ref<HTMLElement | null>(null);
 let observer: IntersectionObserver | null = null;
 

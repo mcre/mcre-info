@@ -14,7 +14,9 @@
               fetchpriority="high"
               height="128"
               loading="eager"
+              sizes="128px"
               src="/img/face01.webp"
+              :srcset="getHighDensityImageSrcset('/img/face01.webp')"
               width="128"
             />
           </v-avatar>
@@ -88,6 +90,8 @@
 </template>
 
 <script setup lang="ts">
+import { getHighDensityImageSrcset } from "@/utils/imageSrcset";
+
 const jsonLd = computed(() => JSON.stringify(buildProfileJsonLd(profile)));
 
 useHead({
@@ -105,7 +109,13 @@ useHead({
   ],
   link: [
     { rel: "canonical", href: profile.url },
-    { rel: "preload", href: "/img/face01.webp", as: "image" },
+    {
+      rel: "preload",
+      href: "/img/face01.webp",
+      as: "image",
+      imagesizes: "128px",
+      imagesrcset: getHighDensityImageSrcset("/img/face01.webp"),
+    },
   ],
   script: [
     {

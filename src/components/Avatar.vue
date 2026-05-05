@@ -14,7 +14,9 @@
             :alt="avatarLabel"
             height="28"
             loading="lazy"
+            :sizes="imgSrcset ? '28px' : undefined"
             :src="img"
+            :srcset="imgSrcset || undefined"
             width="28"
           />
         </template>
@@ -31,7 +33,9 @@
           :alt="avatarLabel"
           height="28"
           loading="lazy"
+          :sizes="imgSrcset ? '28px' : undefined"
           :src="img"
+          :srcset="imgSrcset || undefined"
           width="28"
         />
       </template>
@@ -58,6 +62,10 @@ const props = defineProps({
     default: "",
   },
   img: {
+    type: String,
+    default: "",
+  },
+  imgSrcset: {
     type: String,
     default: "",
   },

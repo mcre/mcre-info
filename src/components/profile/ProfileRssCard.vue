@@ -2,7 +2,12 @@
   <div ref="rootElement">
     <v-card :title="title">
       <template #prepend>
-        <Avatar :href="href" :img="image" :tooltip="`${title} - mcre`" />
+        <Avatar
+          :href="href"
+          :img="image"
+          :img-srcset="getHighDensityImageSrcset(image)"
+          :tooltip="`${title} - mcre`"
+        />
       </template>
 
       <v-card-text>
@@ -45,6 +50,8 @@
 </template>
 
 <script setup lang="ts">
+import { getHighDensityImageSrcset } from "@/utils/imageSrcset";
+
 const props = defineProps<{
   href: string;
   image: string;

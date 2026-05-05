@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -186,6 +186,43 @@ test("LCP profile image is prioritized in the initial HTML", async ({
   const face = page.getByAltText("mcre (FUJITA Shinya) の顔写真");
   await expect(face).toHaveAttribute("fetchpriority", "high");
   await expect(face).toHaveAttribute("loading", "eager");
+});
+
+test("profile images provide high-density variants", async ({ page }) => {
+  await page.goto("/");
+
+  const face = page.getByAltText("mcre (FUJITA Shinya) の顔写真");
+  await expect(face).toHaveAttribute(
+    "srcset",
+    "/img/face01.webp 1x, /img/face01-2x.webp 2x",
+  );
+  await expect(face).toHaveAttribute("sizes", "128px");
+
+  const avatarSources = {
+    LAPRAS: "lapras",
+    WakaTime: "wakatime",
+    Wantedly: "wantedly",
+    X: "x",
+    Zenn: "zenn",
+    note: "note",
+  };
+
+  for (const [label, fileName] of Object.entries(avatarSources)) {
+    const avatar = page.getByAltText(label).first();
+    await expect(avatar).toHaveAttribute(
+      "srcset",
+      `/img/${fileName}.webp 1x, /img/${fileName}-2x.webp 2x`,
+    );
+    await expect(avatar).toHaveAttribute("sizes", "28px");
+  }
+});
+
+test("large lazy project image stays compressed", async () => {
+  const image = await stat(
+    path.join(repositoryRoot, "dist", "img", "aiwolf-4th-nlp.webp"),
+  );
+
+  expect(image.size).toBeLessThan(40 * 1024);
 });
 
 test("profile page avoids known accessibility regressions", async ({

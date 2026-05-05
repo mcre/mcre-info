@@ -12,6 +12,7 @@
           :href="link.url"
           :icon="link.icon || '$mdiWeb'"
           :img="link.image"
+          :img-srcset="getHighDensityImageSrcset(link.image)"
           :tooltip="link.title"
         />
       </v-col>
@@ -21,6 +22,7 @@
 
 <script setup lang="ts">
 import type { ProfileLink } from "@/content/profile";
+import { getHighDensityImageSrcset } from "@/utils/imageSrcset";
 
 defineProps<{
   links: ProfileLink[];
