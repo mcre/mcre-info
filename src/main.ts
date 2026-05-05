@@ -6,9 +6,12 @@ import App from "./App.vue";
 
 import "@/styles/global.scss";
 
+const normalizeSearchIndexText = (text: string) =>
+  text.replace(/\s+/g, " ").trim();
+
 const toSearchIndexArticle = (article: RssArticle): RssArticle => ({
   link: article.link,
-  title: article.title,
+  title: normalizeSearchIndexText(article.title),
   description: "",
   published: article.published,
 });
@@ -28,13 +31,17 @@ const fetchRssForInitialState = async () => {
   rssStore.error = null;
 };
 
-export const createApp = ViteSSG(App, async ({ app, initialState }) => {
-  const { pinia } = registerPlugins(app);
+export const createApp = ViteSSG(
+  App,
+  async ({ app, initialState }) => {
+    const { pinia } = registerPlugins(app);
 
-  if (import.meta.env.SSR) {
-    await fetchRssForInitialState();
-    initialState.pinia = pinia.state.value;
-  } else {
-    pinia.state.value = initialState.pinia || {};
-  }
-});
+    if (import.meta.env.SSR) {
+      await fetchRssForInitialState();
+      initialState.pinia = pinia.state.value;
+    } else {
+      pinia.state.value = initialState.pinia || {};
+    }
+  },
+  { hydration: true },
+);

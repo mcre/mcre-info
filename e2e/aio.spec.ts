@@ -147,6 +147,32 @@ test("page does not request local webfonts", async ({ page }) => {
   expect(fontRequests).toEqual([]);
 });
 
+test("client hydrates the SSG markup instead of remounting it", async ({
+  page,
+}) => {
+  const hydrationWarnings: string[] = [];
+
+  page.on("console", (message) => {
+    const text = message.text();
+    if (
+      ["error", "warning"].includes(message.type()) &&
+      /hydration|mismatch/i.test(text)
+    ) {
+      hydrationWarnings.push(text);
+    }
+  });
+
+  const mainTs = await readFile(path.join(repositoryRoot, "src", "main.ts"), {
+    encoding: "utf8",
+  });
+
+  expect(mainTs).toContain("hydration: true");
+
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+  expect(hydrationWarnings).toEqual([]);
+});
+
 test("offscreen profile cards defer their rendering work", async () => {
   const html = await readFile(
     path.join(repositoryRoot, "dist", "index.html"),
@@ -226,7 +252,7 @@ test("profile images provide high-density variants", async ({ page }) => {
   const face = page.getByAltText("mcre (FUJITA Shinya) の顔写真");
   await expect(face).toHaveAttribute(
     "srcset",
-    "/img/face01.webp 1x, /img/face01-2x.webp 2x",
+    "/img/face01.webp, /img/face01-2x.webp 2x",
   );
   await expect(face).toHaveAttribute("sizes", "128px");
 
@@ -243,7 +269,7 @@ test("profile images provide high-density variants", async ({ page }) => {
     const avatar = page.getByAltText(label).first();
     await expect(avatar).toHaveAttribute(
       "srcset",
-      `/img/${fileName}.webp 1x, /img/${fileName}-2x.webp 2x`,
+      `/img/${fileName}.webp, /img/${fileName}-2x.webp 2x`,
     );
     await expect(avatar).toHaveAttribute("sizes", "28px");
   }
@@ -259,7 +285,7 @@ test("profile images provide high-density variants", async ({ page }) => {
     xAvatars.every(
       (image) =>
         image.sizes === "28px" &&
-        image.srcset === "/img/x.webp 1x, /img/x-2x.webp 2x",
+        image.srcset === "/img/x.webp, /img/x-2x.webp 2x",
     ),
   ).toBe(true);
 });

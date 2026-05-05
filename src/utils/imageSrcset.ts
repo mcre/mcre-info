@@ -11,5 +11,5 @@ const highDensityImages = new Set([
 export const getHighDensityImageSrcset = (image?: string) => {
   if (!image || !highDensityImages.has(image)) return undefined;
 
-  return `${image} 1x, ${image.replace(/\.webp$/, "-2x.webp")} 2x`;
+  return `${image}, ${image.replace(/\.webp$/, "-2x.webp")} 2x`;
 };
