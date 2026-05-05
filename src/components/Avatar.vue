@@ -1,12 +1,41 @@
 <template>
   <span>
+    <v-tooltip v-if="href && tooltip" location="top" :text="tooltip">
+      <template #activator="{ props: activatorProps }">
+        <a
+          v-bind="activatorProps"
+          :aria-label="linkLabel"
+          :href="href"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <v-avatar color="white" variant="elevated">
+            <template v-if="img">
+              <img
+                :alt="avatarLabel"
+                height="28"
+                loading="lazy"
+                :sizes="imgSrcset ? '28px' : undefined"
+                :src="img"
+                :srcset="imgSrcset || undefined"
+                width="28"
+              />
+            </template>
+
+            <template v-else>
+              <v-icon :icon="icon" />
+            </template>
+          </v-avatar>
+        </a>
+      </template>
+    </v-tooltip>
+
     <a
-      v-if="href"
+      v-else-if="href"
       :aria-label="linkLabel"
       :href="href"
       rel="noopener noreferrer"
       target="_blank"
-      :title="tooltip || undefined"
     >
       <v-avatar color="white" variant="elevated">
         <template v-if="img">

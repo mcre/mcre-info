@@ -16,6 +16,12 @@ const avatarStub = {
   template: '<span data-testid="avatar" />',
 };
 
+const tooltipStub = {
+  props: ["text"],
+  template:
+    '<span data-testid="tooltip"><slot name="activator" :props="{}" /></span>',
+};
+
 describe("SocialLinks", () => {
   it("renders image based SNS links as fixed img icons without Vuetify avatars", () => {
     const links: ProfileLink[] = [
@@ -46,6 +52,7 @@ describe("SocialLinks", () => {
           Avatar: avatarStub,
           VCol: colStub,
           VRow: rowStub,
+          VTooltip: tooltipStub,
         },
       },
     });
@@ -77,5 +84,6 @@ describe("SocialLinks", () => {
     expect(lineIcon.element.closest(".v-avatar")).toBeNull();
 
     expect(wrapper.findAll('[data-testid="avatar"]')).toHaveLength(1);
+    expect(wrapper.findAll('[data-testid="tooltip"]')).toHaveLength(2);
   });
 });

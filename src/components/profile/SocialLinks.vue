@@ -8,26 +8,29 @@
         cols="3"
         sm="1"
       >
-        <a
-          v-if="link.image"
-          :aria-label="socialLinkLabel(link)"
-          class="social-link"
-          :href="link.url"
-          rel="noopener noreferrer"
-          target="_blank"
-          :title="link.title"
-        >
-          <img
-            :alt="link.title"
-            :class="socialIconClasses(link)"
-            height="28"
-            loading="lazy"
-            sizes="28px"
-            :src="link.image"
-            :srcset="socialImageSrcset(link)"
-            width="28"
-          />
-        </a>
+        <v-tooltip v-if="link.image" location="top" :text="link.title">
+          <template #activator="{ props: activatorProps }">
+            <a
+              v-bind="activatorProps"
+              :aria-label="socialLinkLabel(link)"
+              class="social-link"
+              :href="link.url"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <img
+                :alt="link.title"
+                :class="socialIconClasses(link)"
+                height="28"
+                loading="lazy"
+                sizes="28px"
+                :src="link.image"
+                :srcset="socialImageSrcset(link)"
+                width="28"
+              />
+            </a>
+          </template>
+        </v-tooltip>
 
         <Avatar
           v-else

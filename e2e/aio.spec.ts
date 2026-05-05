@@ -360,6 +360,32 @@ test("social image link icons fit inside their buttons after preview build", asy
   }
 });
 
+test("avatar links show Vuetify tooltips on hover", async ({ page }) => {
+  await page.goto("/");
+
+  const socialNav = page.getByRole("navigation", {
+    name: "外部プロフィール",
+  });
+
+  await socialNav
+    .getByRole("link", { name: "X を新しいウィンドウで開く" })
+    .hover();
+  await expect(page.getByRole("tooltip", { name: "X" })).toBeVisible();
+
+  await socialNav
+    .getByRole("link", { name: "GitHub を新しいウィンドウで開く" })
+    .hover();
+  await expect(page.getByRole("tooltip", { name: "GitHub" })).toBeVisible();
+
+  const wakaTimeCard = page.locator(".v-card").filter({
+    has: page.locator(".v-card-title", { hasText: "WakaTime" }),
+  });
+  await wakaTimeCard
+    .getByRole("link", { name: "WakaTime を新しいウィンドウで開く" })
+    .hover();
+  await expect(page.getByRole("tooltip", { name: "WakaTime" })).toBeVisible();
+});
+
 test("large lazy project image stays compressed", async () => {
   const image = await stat(
     path.join(repositoryRoot, "dist", "img", "aiwolf-4th-nlp.webp"),
