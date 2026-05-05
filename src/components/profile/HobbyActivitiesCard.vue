@@ -5,7 +5,7 @@
     </template>
 
     <v-card-text class="pt-0">
-      <v-list density="compact" lines="three" :role="null">
+      <v-list density="compact" lines="three" role="list">
         <template v-for="section in sections" :key="section.title">
           <Subheader
             :class="{ 'mt-8': section !== sections[0] }"

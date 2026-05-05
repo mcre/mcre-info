@@ -111,9 +111,39 @@ test("webfont assets are split by unicode range", async () => {
     "utf8",
   );
   expect(Buffer.byteLength(appCss, "utf8")).toBeLessThan(360 * 1024);
+  expect(appCss).not.toContain("@font-face");
+  expect(appCss).not.toContain("zen-maru-gothic-");
+
+  const fontCssNames: string[] = [];
+  for (const assetName of assetNames) {
+    if (
+      assetName === appCssName ||
+      !assetName.startsWith("fonts-") ||
+      !assetName.endsWith(".css")
+    ) {
+      continue;
+    }
+
+    const assetCss = await readFile(
+      path.join(distAssetsPath, assetName),
+      "utf8",
+    );
+    if (assetCss.includes("Zen Maru Gothic")) {
+      fontCssNames.push(assetName);
+    }
+  }
+  expect(fontCssNames).toHaveLength(1);
+
+  const html = await readFile(
+    path.join(repositoryRoot, "dist", "index.html"),
+    "utf8",
+  );
+  expect(html).not.toContain(fontCssNames[0]);
 
   const zenFontFaceBlocks =
-    appCss.match(
+    (
+      await readFile(path.join(distAssetsPath, fontCssNames[0] ?? ""), "utf8")
+    ).match(
       /@font-face\{[^}]*font-family:(?:"Zen Maru Gothic"|Zen Maru Gothic)[^}]*\}/g,
     ) ?? [];
   expect(zenFontFaceBlocks.length).toBeGreaterThan(2);
@@ -156,4 +186,43 @@ test("LCP profile image is prioritized in the initial HTML", async ({
   const face = page.getByAltText("mcre (FUJITA Shinya) の顔写真");
   await expect(face).toHaveAttribute("fetchpriority", "high");
   await expect(face).toHaveAttribute("loading", "eager");
+});
+
+test("profile page avoids known accessibility regressions", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const orphanListItems = await page
+    .locator('[role="listitem"]')
+    .evaluateAll((items) =>
+      items
+        .filter((item) => !item.closest('[role="list"], ol, ul'))
+        .map((item) => item.textContent?.trim() ?? ""),
+    );
+  expect(orphanListItems).toEqual([]);
+
+  const emptyTooltips = await page
+    .locator('[role="tooltip"]')
+    .evaluateAll((tooltips) =>
+      tooltips
+        .filter((tooltip) => {
+          const accessibleText =
+            tooltip.textContent?.trim() ||
+            tooltip.getAttribute("aria-label") ||
+            tooltip.getAttribute("aria-labelledby") ||
+            tooltip.getAttribute("title");
+          return !accessibleText;
+        })
+        .map((tooltip) => tooltip.id || tooltip.outerHTML),
+    );
+  expect(emptyTooltips).toEqual([]);
+
+  await expect(page.getByRole("link", { name: /mcre-info/ })).toHaveAttribute(
+    "href",
+    "https://github.com/mcre/mcre-info",
+  );
+  await expect(
+    page.locator('a.v-card[aria-label="image へのリンク"]'),
+  ).toHaveCount(0);
 });

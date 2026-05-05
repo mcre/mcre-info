@@ -5,7 +5,7 @@
     </template>
 
     <v-card-text>
-      <v-list density="compact" lines="three" :role="null">
+      <v-list density="compact" lines="three" role="list">
         <template v-for="item in items" :key="item.title">
           <v-list-item>
             <v-list-item-title class="font-weight-bold">

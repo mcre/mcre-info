@@ -6,22 +6,13 @@
     :href="href"
     rel="noopener noreferrer"
     target="_blank"
+    :title="label"
   >
-    <v-tooltip location="top" :text="label">
-      <template #activator="{ props }">
-        <v-avatar v-bind="props" color="white" variant="elevated">
-          <v-img
-            v-if="image"
-            :alt="label"
-            height="28"
-            :src="image"
-            width="28"
-          />
+    <v-avatar color="white" variant="elevated">
+      <v-img v-if="image" :alt="label" height="28" :src="image" width="28" />
 
-          <v-icon v-else :icon="icon" />
-        </v-avatar>
-      </template>
-    </v-tooltip>
+      <v-icon v-else :icon="icon" />
+    </v-avatar>
   </a>
 
   <v-avatar v-else color="white" variant="flat">

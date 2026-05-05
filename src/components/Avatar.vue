@@ -1,61 +1,39 @@
 <template>
   <span>
-    <template v-if="href">
-      <v-tooltip
-        v-if="tooltip"
-        aria-label="Name"
-        location="top"
-        :text="tooltip"
-      >
-        <template #activator="{ props }">
-          <a
-            v-bind="props"
-            :aria-label="`${tooltip} を新しいウィンドウで開く`"
-            :href="href"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <v-avatar color="white" variant="elevated">
-              <template v-if="img">
-                <img
-                  alt="avatar"
-                  height="28"
-                  loading="lazy"
-                  :src="img"
-                  width="28"
-                />
-              </template>
-
-              <template v-else>
-                <v-icon :icon="icon" />
-              </template>
-            </v-avatar>
-          </a>
+    <a
+      v-if="href"
+      :aria-label="linkLabel"
+      :href="href"
+      rel="noopener noreferrer"
+      target="_blank"
+      :title="tooltip || undefined"
+    >
+      <v-avatar color="white" variant="elevated">
+        <template v-if="img">
+          <img
+            :alt="avatarLabel"
+            height="28"
+            loading="lazy"
+            :src="img"
+            width="28"
+          />
         </template>
-      </v-tooltip>
 
-      <a v-else :href="href" rel="noopener noreferrer" target="_blank">
-        <v-avatar color="white" variant="elevated">
-          <template v-if="img">
-            <img
-              alt="avatar"
-              height="28"
-              loading="lazy"
-              :src="img"
-              width="28"
-            />
-          </template>
-
-          <template v-else>
-            <v-icon :icon="icon" />
-          </template>
-        </v-avatar>
-      </a>
-    </template>
+        <template v-else>
+          <v-icon :icon="icon" />
+        </template>
+      </v-avatar>
+    </a>
 
     <v-avatar v-else color="white" variant="flat">
       <template v-if="img">
-        <img alt="avatar" height="28" loading="lazy" :src="img" width="28" />
+        <img
+          :alt="avatarLabel"
+          height="28"
+          loading="lazy"
+          :src="img"
+          width="28"
+        />
       </template>
 
       <template v-else>
@@ -66,7 +44,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   href: {
     type: String,
     default: "",
@@ -84,4 +62,11 @@ defineProps({
     default: "",
   },
 });
+
+const avatarLabel = computed(() => props.tooltip || "avatar");
+const linkLabel = computed(() =>
+  props.tooltip
+    ? `${props.tooltip} を新しいウィンドウで開く`
+    : "外部リンクを新しいウィンドウで開く",
+);
 </script>

@@ -1,6 +1,5 @@
 <template>
   <v-card
-    :aria-label="`${imgAlt} へのリンク`"
     class="my-2 mx-n2 mx-n2 mx-md-2"
     elevation="0"
     :href="href"

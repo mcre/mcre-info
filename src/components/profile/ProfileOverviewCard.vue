@@ -5,7 +5,7 @@
     </template>
 
     <v-card-text class="pt-0">
-      <v-list density="compact" lines="three" :role="null">
+      <v-list density="compact" lines="three" role="list">
         <ListItem
           v-for="item in content.profileItems"
           :key="item.title"
