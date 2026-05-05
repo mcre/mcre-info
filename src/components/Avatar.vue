@@ -3,28 +3,29 @@
     <template v-if="href">
       <v-tooltip
         v-if="tooltip"
-        :text="tooltip"
-        location="top"
         aria-label="Name"
+        location="top"
+        :text="tooltip"
       >
-        <template v-slot:activator="{ props }">
+        <template #activator="{ props }">
           <a
-            :href="href"
-            target="_blank"
-            rel="noopener noreferrer"
             v-bind="props"
             :aria-label="`${tooltip} を新しいウィンドウで開く`"
+            :href="href"
+            rel="noopener noreferrer"
+            target="_blank"
           >
             <v-avatar color="white" variant="elevated">
               <template v-if="img">
                 <img
-                  :src="img"
                   alt="avatar"
-                  loading="lazy"
-                  width="28"
                   height="28"
+                  loading="lazy"
+                  :src="img"
+                  width="28"
                 />
               </template>
+
               <template v-else>
                 <v-icon :icon="icon" />
               </template>
@@ -32,17 +33,19 @@
           </a>
         </template>
       </v-tooltip>
-      <a v-else :href="href" target="_blank" rel="noopener noreferrer">
+
+      <a v-else :href="href" rel="noopener noreferrer" target="_blank">
         <v-avatar color="white" variant="elevated">
           <template v-if="img">
             <img
-              :src="img"
-              loading="lazy"
               alt="avatar"
               height="28"
+              loading="lazy"
+              :src="img"
               width="28"
             />
           </template>
+
           <template v-else>
             <v-icon :icon="icon" />
           </template>
@@ -52,8 +55,9 @@
 
     <v-avatar v-else color="white" variant="flat">
       <template v-if="img">
-        <img :src="img" loading="lazy" alt="avatar" height="28" width="28" />
+        <img alt="avatar" height="28" loading="lazy" :src="img" width="28" />
       </template>
+
       <template v-else>
         <v-icon :icon="icon" />
       </template>

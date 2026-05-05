@@ -1,22 +1,24 @@
-import "vuetify/styles";
-
-import { createVuetify } from "vuetify";
-import { mdi } from "vuetify/iconsets/mdi-svg";
 import {
-  mdiYoutube,
-  mdiWeb,
-  mdiGithub,
-  mdiLinkedin,
+  mdiAccountTie,
+  mdiArmFlex,
   mdiBookAlphabet,
-  mdiNewspaper,
+  mdiBrain,
+  mdiBriefcase,
+  mdiChevronRight,
   mdiDog,
   mdiDumbbell,
-  mdiAccountTie,
   mdiGamepadVariantOutline,
-  mdiBrain,
-  mdiChevronRight,
-  mdiArmFlex,
+  mdiGithub,
+  mdiLinkedin,
+  mdiNewspaper,
+  mdiSchool,
+  mdiTools,
+  mdiWeb,
+  mdiYoutube,
 } from "@mdi/js";
+import { createVuetify } from "vuetify";
+import { mdi } from "vuetify/iconsets/mdi-svg";
+import "vuetify/styles";
 
 export default createVuetify({
   icons: {
@@ -35,6 +37,9 @@ export default createVuetify({
       mdiBrain,
       mdiChevronRight,
       mdiArmFlex,
+      mdiBriefcase,
+      mdiSchool,
+      mdiTools,
     },
     sets: {
       mdi,

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+backend/cdk/cdk.out/
+
+src/apis/
+src/auto-imports.d.ts
+src/components.d.ts
+
+public/llms.txt
+public/llms-full.txt
+public/profile.md
+public/profile.json
+public/robots.txt
+public/sitemap.xml

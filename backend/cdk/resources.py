@@ -1,4 +1,4 @@
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
 from aws_cdk import (
     Stack,
@@ -55,7 +55,7 @@ def create_lambda_layer(scope: Stack, name: str, zip_name: str):
         f"lambda-layer-{name}",
         layer_version_name=f"{config['prefix']}-{name}",
         code=lambda_.Code.from_asset(f"layers/{zip_name}.zip"),
-        compatible_runtimes=[lambda_.Runtime.PYTHON_3_12],
+        compatible_runtimes=[lambda_.Runtime.PYTHON_3_13],
     )
     return resource
 
@@ -63,11 +63,12 @@ def create_lambda_layer(scope: Stack, name: str, zip_name: str):
 def create_lambda_function(
     scope: Stack,
     name: str,
-    policies: list = [],
-    environment: dict = {},
-    layers: list = [],
+    policies: Optional[list] = None,
+    environment: Optional[dict] = None,
+    layers: Optional[list] = None,
 ) -> lambda_.Function:
-    policies.append(
+    policy_statements = list(policies or [])
+    policy_statements.append(
         iam.PolicyStatement(
             actions=[
                 "logs:CreateLogGroup",
@@ -85,7 +86,7 @@ def create_lambda_function(
         role_name=iam_role_name,
         assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
         inline_policies={
-            f"{iam_role_name}-policy": iam.PolicyDocument(statements=policies)
+            f"{iam_role_name}-policy": iam.PolicyDocument(statements=policy_statements)
         },
     )
 
@@ -95,13 +96,13 @@ def create_lambda_function(
         function_name=f"{config['prefix']}-{name}",
         code=lambda_.InlineCode("def main(event, context):\n    pass"),
         handler="main.main",
-        runtime=lambda_.Runtime.PYTHON_3_12,
+        runtime=lambda_.Runtime.PYTHON_3_13,
         memory_size=config["lambda"][name]["memory"],
         timeout=Duration.seconds(config["lambda"][name]["timeout_in_seconds"]),
         role=iam_role,
         log_retention=logs.RetentionDays.INFINITE,
         ephemeral_storage_size=Size.mebibytes(512),
-        environment=environment,
+        environment=environment or {},
         layers=layers,
     )
     return resource
@@ -112,8 +113,9 @@ def create_api_gateway(
     name: str,
     target_lambda: lambda_.Function,
     acm_result: Dict[str, Union[acm.Certificate, route53.HostedZone, str]],
-    cors_allow_origins: list = [],
+    cors_allow_origins: Optional[list] = None,
 ) -> apigateway.RestApi:
+    allow_origins = list(cors_allow_origins or [])
     resource = apigateway.RestApi(
         scope,
         f"api-gateway-{name}",
@@ -126,8 +128,8 @@ def create_api_gateway(
     proxy_resource = resource.root.add_resource("{proxy+}")
     proxy_resource.add_method("ANY", lambda_integration)
 
-    if len(cors_allow_origins) > 0:
-        proxy_resource.add_cors_preflight(allow_origins=cors_allow_origins)
+    if len(allow_origins) > 0:
+        proxy_resource.add_cors_preflight(allow_origins=allow_origins)
 
     custom_domain = apigateway.DomainName(
         scope,
@@ -167,6 +169,9 @@ def create_s3_bucket(scope: Stack, name: str) -> s3.Bucket:
         f"s3-bucket-{name}",
         bucket_name=f"{config['prefix']}-{name}",
         removal_policy=RemovalPolicy.RETAIN if dp else RemovalPolicy.DESTROY,
+        block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
+        encryption=s3.BucketEncryption.S3_MANAGED,
+        enforce_ssl=True,
     )
     return resource
 
@@ -203,6 +208,7 @@ def create_cloudfront(
             origin=cloudfront_origins.S3BucketOrigin.with_origin_access_control(bucket),
             viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
             cache_policy=custom_cache_policy,
+            response_headers_policy=cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS,
         ),
         default_root_object="index.html",
         error_responses=[
@@ -219,6 +225,24 @@ def create_cloudfront(
                 ttl=Duration.seconds(0),
             ),
         ],
+        additional_behaviors={
+            "/assets/*": cloudfront.BehaviorOptions(
+                origin=cloudfront_origins.S3BucketOrigin.with_origin_access_control(
+                    bucket
+                ),
+                viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                cache_policy=cloudfront.CachePolicy.CACHING_OPTIMIZED,
+                response_headers_policy=cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS,
+            ),
+            "/img/*": cloudfront.BehaviorOptions(
+                origin=cloudfront_origins.S3BucketOrigin.with_origin_access_control(
+                    bucket
+                ),
+                viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                cache_policy=cloudfront.CachePolicy.CACHING_OPTIMIZED,
+                response_headers_policy=cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS,
+            ),
+        },
     )
 
     domain_parts = acm_result["domain_name"].split(".")
@@ -234,15 +258,18 @@ def create_cloudfront(
     return resource
 
 
-def create_iam_role_github_actions(scope: Stack, policies: list = []) -> iam.Role:
+def create_iam_role_github_actions(
+    scope: Stack, policies: Optional[list] = None
+) -> iam.Role:
     owner = "mcre"
     repo = "mcre-info"
 
     rg = "ap-northeast-1"
     id = config["account_id"]
     cdk_identifier = config["cdk_identifier"]
+    policy_statements = list(policies or [])
 
-    policies.extend(
+    policy_statements.extend(
         [
             iam.PolicyStatement(
                 actions=["ssm:GetParameter"],
@@ -290,7 +317,7 @@ def create_iam_role_github_actions(scope: Stack, policies: list = []) -> iam.Rol
         ),
         inline_policies={
             f"{config['prefix']}-github-actions-policy": iam.PolicyDocument(
-                statements=policies
+                statements=policy_statements
             )
         },
     )

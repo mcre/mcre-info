@@ -1,10 +1,10 @@
 <template>
   <v-btn
     :href="href"
-    size="large"
-    variant="text"
-    target="_blank"
     rel="noopener noreferrer"
+    size="large"
+    target="_blank"
+    variant="text"
   >
     <span class="font-weight-bold text-decoration-underline">もっと見る</span>
   </v-btn>

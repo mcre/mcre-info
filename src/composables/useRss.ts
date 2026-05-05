@@ -1,24 +1,13 @@
-import aspida from "@aspida/fetch";
-import api from "@/apis/$api";
-import { RssArticle } from "@/apis/@types/index";
-
-const baseURL = `https://${import.meta.env.VITE_API_DOMAIN_NAME}`;
-const apiClient = api(aspida(fetch, { baseURL }));
+import type { RssArticle } from "@/apis/@types";
 
 export const useRss = async (path: "note" | "zenn"): Promise<RssArticle[]> => {
-  let response: RssArticle[];
-
   try {
-    if (path === "note") {
-      response = await apiClient.v1.rss.note.$get();
-    } else if (path === "zenn") {
-      response = await apiClient.v1.rss.zenn.$get();
-    } else {
-      throw new Error(`Unsupported path: ${path}`);
-    }
+    const apiClient = useApi().publicApiClient();
+    return path === "note"
+      ? await apiClient.v1.rss.note.$get()
+      : await apiClient.v1.rss.zenn.$get();
   } catch (error) {
-    throw new Error(`Failed to fetch RSS data: ${error}`);
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`RSSの取得に失敗しました: ${message}`, { cause: error });
   }
-
-  return response;
 };

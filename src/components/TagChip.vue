@@ -2,8 +2,8 @@
   <v-chip
     class="ml-1 mt-1 font-weight-bold"
     :class="{ 'pr-0': children && children.length > 0 }"
-    size="small"
     color="info"
+    size="small"
   >
     {{ parent }}
     <v-chip

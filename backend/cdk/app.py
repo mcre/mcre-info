@@ -4,13 +4,11 @@ from aws_cdk import (
     Stack,
     CfnOutput,
     aws_iam as iam,
-    aws_lambda as lambda_,
 )
 
 
 from resources import (
     create_acm_certificate,
-    create_lambda_layer,
     create_lambda_function,
     create_s3_bucket,
     create_cloudfront,
@@ -33,19 +31,9 @@ stack = Stack(
     tags={tag["key"]: tag["value"] for tag in config["tags"]},
 )
 
-# Lambda
-layer_requests = create_lambda_layer(stack, "requests", "requests-2.32.3")
-layer_powertools = lambda_.LayerVersion.from_layer_version_arn(
-    stack,
-    "lambda-layer-powertools",
-    "arn:aws:lambda:ap-northeast-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:78",
-)
-
-
 lambda_api = create_lambda_function(
     stack,
     "api",
-    layers=[layer_requests, layer_powertools],
 )
 
 # api-gateway

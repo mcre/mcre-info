@@ -1,56 +1,67 @@
 <template>
   <v-card
+    :aria-label="`${imgAlt} へのリンク`"
     class="my-2 mx-n2 mx-n2 mx-md-2"
-    variant="outlined"
     elevation="0"
     :href="href"
-    target="_blank"
     rel="noopener noreferrer"
-    :aria-label="`${imgAlt} へのリンク`"
+    target="_blank"
+    variant="outlined"
   >
-    <template v-slot:prepend v-if="title && (img || icon)">
-      <avatar :img="img" :icon="icon" />
+    <template v-if="title && (img || icon)" #prepend>
+      <Avatar :icon="icon" :img="img" />
     </template>
-    <template v-slot:title>
+
+    <template #title>
       <span class="wordwrap">{{ title }}</span>
     </template>
+
     <img
       v-if="headImg"
-      :src="headImg"
       :alt="imgAlt"
-      :style="{ aspectRatio: headImgAspectRatio, width: '100%' }"
       loading="lazy"
+      :src="headImg"
+      :style="{ aspectRatio: headImgAspectRatio, width: '100%' }"
     />
 
     <v-card-text class="wordwrap" v-text="plainDescription" />
+
     <v-container v-if="youtube" class="responsive-style">
       <v-lazy>
         <iframe
-          width="560"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+          "
+          allowfullscreen
+          frameborder="0"
           height="315"
           :src="`https://www.youtube.com/embed/${youtube}`"
           title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          width="560"
         />
       </v-lazy>
     </v-container>
+
     <img
       v-if="footImg"
-      :src="footImg"
       :alt="imgAlt"
-      :style="{ aspectRatio: footImgAspectRatio, width: '100%' }"
       loading="lazy"
+      :src="footImg"
+      :style="{ aspectRatio: footImgAspectRatio, width: '100%' }"
     />
 
     <v-card-actions v-if="Object.keys(tags).length > 0">
       <v-item-group>
-        <tag-chip
+        <TagChip
           v-for="(children, parent) in tags"
           :key="parent"
-          :parent="`${parent}`"
           :children="children"
+          :parent="`${parent}`"
         />
       </v-item-group>
     </v-card-actions>
@@ -111,7 +122,10 @@ const props = defineProps({
 
 const plainDescription = computed(() => {
   // descriptionのHTMLタグを除去しプレーンテキストにする（SSR環境でも動作させるため正規表現で処理）
-  return props.description.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  return props.description
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 });
 </script>
 

@@ -34,10 +34,10 @@ jobs:
       BUCKET_DISTRIBUTION: ${{ steps.output-step.outputs.BUCKET_DISTRIBUTION }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.AWS_IAM_ROLE_ARN }}
           aws-region: ap-northeast-1
@@ -51,7 +51,7 @@ jobs:
           python3 -m venv .venv
           source .venv/bin/activate
           pip install -r requirements.txt
-          cdk deploy --all --require-approval never --outputs-file cdk-outputs.json
+          CDK_ENV=prod cdk deploy --all --require-approval never --outputs-file cdk-outputs.json
 
       - name: Extract Outputs
         id: output-step
@@ -76,17 +76,17 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy-cdk
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v6
         with:
-          python-version: 3.12
+          python-version: "3.13"
 
       - name: Install Python modules
         run: pip3 install awscli
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.AWS_IAM_ROLE_ARN }}
           aws-region: ap-northeast-1
@@ -96,11 +96,12 @@ jobs:
           IFS=',' read -r -a arr <<< "${{ needs.deploy-cdk.outputs.LAMBDA_FUNCTIONS }}"
           for fn in "${arr[@]}"; do
             short_name="${fn/${{  needs.deploy-cdk.outputs.PREFIX }}-/}"
-            cd ./backend/lambda/${short_name}
+            cd ./backend/lambda/src/${short_name}
             cp ../util.py ./
+            rm -f package.zip
             zip -r package.zip *
-            cd ../../../
-            aws lambda update-function-code --function-name ${fn} --zip-file fileb://./backend/lambda/${short_name}/package.zip
+            cd ../../../../
+            aws lambda update-function-code --function-name ${fn} --zip-file fileb://./backend/lambda/src/${short_name}/package.zip
           done
 
   deploy-node:
@@ -109,11 +110,12 @@ jobs:
       - deploy-cdk
       - deploy-lambda
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
+          node-version: "24"
           cache: npm
 
       - name: Write CDK outputs to .env.production
@@ -141,7 +143,7 @@ jobs:
           npm run build --if-present
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.AWS_IAM_ROLE_ARN }}
           aws-region: ap-northeast-1

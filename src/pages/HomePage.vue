@@ -1,0 +1,120 @@
+<template>
+  <v-app>
+    <v-app-bar class="brand-app-bar" collapse color="primary">
+      <h1 class="font-weight-bold mx-2" style="font-size: 1.4rem">mcre.info</h1>
+    </v-app-bar>
+
+    <v-main style="--v-layout-top: 64px">
+      <v-container class="page-container">
+        <v-row justify="center">
+          <v-avatar size="128">
+            <img
+              alt="mcre (FUJITA Shinya) の顔写真"
+              height="128"
+              src="/img/face01.webp"
+              width="128"
+            />
+          </v-avatar>
+        </v-row>
+
+        <v-row class="mt-10" justify="center">
+          <p>{{ profile.catchphrase }}</p>
+        </v-row>
+
+        <SocialLinks class="mt-6" :links="profile.socialLinks" />
+
+        <v-row class="mt-10" justify="center">
+          <v-col cols="12" lg="6" md="6" sm="10">
+            <ProfileOverviewCard class="mb-4" :content="profile" />
+
+            <HobbyActivitiesCard
+              class="mb-4"
+              :sections="profile.hobbySections"
+            />
+
+            <ProfileRssCard
+              class="mb-4"
+              href="https://zenn.dev/m_cre"
+              image="/img/zenn.webp"
+              source="zenn"
+              title="Zenn"
+            />
+
+            <ProfileProjectsCard
+              avatar-href="https://github.com/mcre"
+              avatar-tooltip="Github - mcre"
+              class="mb-4"
+              icon="$mdiGithub"
+              more-href="https://github.com/mcre"
+              :projects="profile.githubProjects"
+              title="GitHub"
+            />
+
+            <ProfileProjectsCard
+              class="mb-4"
+              icon="$mdiWeb"
+              :projects="profile.webapps"
+              title="Webapp 開発"
+            />
+
+            <ProfileProjectsCard
+              class="mb-4"
+              icon="$mdiYoutube"
+              :projects="profile.youtubeProjects"
+              title="Youtube Channel"
+            />
+          </v-col>
+
+          <v-col cols="12" lg="6" md="6" sm="10">
+            <SkillsCard class="mb-4" :sections="profile.skillSections" />
+
+            <ProfileRssCard
+              class="mb-4"
+              href="https://note.com/m_cre/"
+              image="/img/note.webp"
+              source="note"
+              title="note"
+            />
+
+            <WakaTimeCard class="mb-4" />
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script setup lang="ts">
+const jsonLd = computed(() => JSON.stringify(buildProfileJsonLd(profile)));
+
+useHead({
+  title: profile.title,
+  meta: [
+    { name: "description", content: profile.description },
+    { property: "og:title", content: profile.title },
+    { property: "og:description", content: profile.description },
+    { property: "og:type", content: "profile" },
+    { property: "og:url", content: profile.url },
+    { property: "og:image", content: profile.image },
+    { property: "og:site_name", content: profile.siteName },
+    { name: "twitter:card", content: "summary_large_image" },
+  ],
+  link: [{ rel: "canonical", href: profile.url }],
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: jsonLd,
+    },
+  ],
+});
+</script>
+
+<style scoped>
+.brand-app-bar {
+  min-width: 128px;
+}
+
+.page-container {
+  max-width: 1185px;
+}
+</style>

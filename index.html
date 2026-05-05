@@ -1,56 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon16.png">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/img/apple-touch-icon.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon16.png" />
+    <link rel="canonical" href="https://mcre.info" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta content="mcre (FUJITA Shinya) IoTスタートアップ会社員+ITフリーランス ポートフォリオサイト" name="description" />
-    <meta property="og:type" content="website" />
+    <meta
+      name="description"
+      content="mcre (FUJITA Shinya) のプロフィール。フルスタック開発者としての職歴、スキル、制作物、技術記事、外部プロフィールをまとめています。"
+    />
+    <meta property="og:type" content="profile" />
     <meta property="og:locale" content="ja_JP" />
-    <meta property="og:site_name" content="mcre-info" />
-    <meta id="og-title" property="og:title" content="mcre-info" />
-    <meta id="og-url" property="og:url" content="https://mcre.info" />
-    <meta id="og-image" property="og:image" content="https://mcre.info/img/apple-touch-icon.png" />
-    <meta id="og-description" property="og:description"
-        content="mcre (FUJITA Shinya) IoTスタートアップ会社員+ITフリーランス ポートフォリオサイト" />
-    <meta id="tw-card" name="twitter:card" content="summary" />
-    <meta id="tw-image" name="twitter:image" content="https://mcre.info/img/apple-touch-icon.png" />
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <title>mcre.info</title>
+    <meta property="og:site_name" content="mcre.info" />
+    <meta property="og:title" content="mcre.info - mcre (FUJITA Shinya)" />
+    <meta property="og:url" content="https://mcre.info" />
+    <meta property="og:image" content="https://mcre.info/img/face01.webp" />
+    <meta
+      property="og:description"
+      content="mcre (FUJITA Shinya) のプロフィール。フルスタック開発者としての職歴、スキル、制作物、技術記事、外部プロフィールをまとめています。"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://mcre.info/img/face01.webp" />
+    <title>mcre.info - mcre (FUJITA Shinya)</title>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let hasLoadedGtag = false;
-            function loadGtagScript() {
-                if (!hasLoadedGtag) {
-                    const script = document.createElement('script');
-                    script.src = "https://www.googletagmanager.com/gtag/js?id=G-EVL1PP92QT";
-                    script.defer = true;
-                    document.body.appendChild(script);
-                    script.onload = function () {
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag() { dataLayer.push(arguments); }
-                        gtag('js', new Date());
-                        gtag('config', 'G-EVL1PP92QT');
-                    };
-                    hasLoadedGtag = true;
-                    window.removeEventListener('scroll', onScroll);
-                }
+      document.addEventListener("DOMContentLoaded", function () {
+        let hasLoadedGtag = false;
+        function loadGtagScript() {
+          if (hasLoadedGtag) return;
+          const script = document.createElement("script");
+          script.src =
+            "https://www.googletagmanager.com/gtag/js?id=G-EVL1PP92QT";
+          script.defer = true;
+          document.body.appendChild(script);
+          script.onload = function () {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
             }
-            function onScroll() {
-                loadGtagScript();
-            }
-            window.addEventListener('scroll', onScroll, { once: true });
-        });
+            gtag("js", new Date());
+            gtag("config", "G-EVL1PP92QT");
+          };
+          hasLoadedGtag = true;
+          window.removeEventListener("scroll", onScroll);
+        }
+        function onScroll() {
+          loadGtagScript();
+        }
+        window.addEventListener("scroll", onScroll, { once: true });
+      });
     </script>
-</head>
-
-<body>
+  </head>
+  <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-EVL1PP92QT"></script>
-</body>
-
+  </body>
 </html>

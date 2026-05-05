@@ -1,8 +1,9 @@
 import type { App } from "vue";
 
 import vuetify from "./vuetify";
-import { createPinia } from "pinia";
 
-export function registerPlugins(app: App) {
-  app.use(vuetify).use(createPinia());
-}
+export const registerPlugins = (app: App) => {
+  const pinia = createPinia();
+  app.use(vuetify).use(pinia);
+  return { pinia };
+};

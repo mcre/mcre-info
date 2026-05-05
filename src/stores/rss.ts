@@ -1,10 +1,4 @@
-import { defineStore } from "pinia";
-import aspida from "@aspida/fetch";
-import api from "@/apis/$api";
-import { RssArticle } from "@/apis/@types/index";
-
-const baseURL = `https://${import.meta.env.VITE_API_DOMAIN_NAME}`;
-const apiClient = api(aspida(fetch, { baseURL }));
+import type { RssArticle } from "@/apis/@types";
 
 export const useRssStore = defineStore("rss", {
   state: () => ({
@@ -21,19 +15,15 @@ export const useRssStore = defineStore("rss", {
       this.error = null;
 
       try {
-        let response: RssArticle[];
-
-        if (path === "note") {
-          response = await apiClient.v1.rss.note.$get();
-        } else if (path === "zenn") {
-          response = await apiClient.v1.rss.zenn.$get();
-        } else {
-          throw new Error(`Unsupported path: ${path}`);
-        }
+        const apiClient = useApi().publicApiClient();
+        const response: RssArticle[] =
+          path === "note"
+            ? await apiClient.v1.rss.note.$get()
+            : await apiClient.v1.rss.zenn.$get();
 
         this.articles[path] = response;
       } catch (error) {
-        this.error = `Failed to fetch RSS data: ${error}`;
+        this.error = `RSSの取得に失敗しました: ${error}`;
       } finally {
         this.loading = false;
       }

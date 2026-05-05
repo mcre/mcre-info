@@ -1,24 +1,19 @@
 import json
 import os
+from pathlib import Path
 
 
 def get_env_config():
-    env_config_path = os.path.join("config", "_env.json")
-    if not os.path.exists(env_config_path):
-        raise ValueError("Environment configuration file '_env.json' not found.")
-
-    with open(env_config_path, "r") as env_config_file:
-        env_config = json.load(env_config_file)
-
-    env = env_config.get("env")
+    cdk_dir = Path(__file__).parent
+    env = os.getenv("CDK_ENV")
     if not env:
-        raise ValueError("Environment 'env' is not set in '_env.json'.")
+        raise ValueError("Environment variable 'CDK_ENV' is not set.")
 
-    config_path = os.path.join("config", f"{env}.json")
-    if not os.path.exists(config_path):
+    config_path = cdk_dir / "config" / f"{env}.json"
+    if not config_path.exists():
         raise ValueError(f"Configuration file for environment '{env}' not found.")
 
-    with open(config_path, "r") as config_file:
+    with config_path.open("r") as config_file:
         config = json.load(config_file)
 
     config["env"] = env
