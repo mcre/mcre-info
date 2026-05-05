@@ -183,6 +183,12 @@ test("SSG HTML keeps lightweight RSS links in the initial response", async ({
   expect(html).not.toContain("assets.st-note.com");
   expect(html).not.toContain("res.cloudinary.com");
   expect(html).not.toContain('"enclosure"');
+  expect(html).not.toContain(
+    'rel="preconnect" href="https://www.googletagmanager.com"',
+  );
+  expect(html).toContain(
+    "https://www.googletagmanager.com/gtag/js?id=G-EVL1PP92QT",
+  );
 });
 
 test("LCP profile image is prioritized in the initial HTML", async ({
