@@ -94,6 +94,12 @@ test("webfont assets are split by unicode range", async () => {
       assetName.includes("zen-maru-gothic-japanese-700-normal"),
     ),
   ).toBe(false);
+  expect(
+    assetNames.filter(
+      (assetName) =>
+        assetName.startsWith("zen-maru-gothic-") && assetName.endsWith(".woff"),
+    ),
+  ).toHaveLength(0);
 
   const appCssName = assetNames.find(
     (assetName) => assetName.startsWith("app-") && assetName.endsWith(".css"),
@@ -104,12 +110,14 @@ test("webfont assets are split by unicode range", async () => {
     path.join(distAssetsPath, appCssName ?? ""),
     "utf8",
   );
+  expect(Buffer.byteLength(appCss, "utf8")).toBeLessThan(360 * 1024);
 
   const zenFontFaceBlocks =
     appCss.match(
       /@font-face\{[^}]*font-family:(?:"Zen Maru Gothic"|Zen Maru Gothic)[^}]*\}/g,
     ) ?? [];
   expect(zenFontFaceBlocks.length).toBeGreaterThan(2);
+  expect(zenFontFaceBlocks.length).toBeLessThanOrEqual(80);
   expect(
     zenFontFaceBlocks.every((fontFaceBlock) =>
       fontFaceBlock.includes("unicode-range:"),
