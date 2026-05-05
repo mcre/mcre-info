@@ -30,15 +30,18 @@
 
         <v-row class="mt-10" justify="center">
           <v-col cols="12" lg="6" md="6" sm="10">
-            <ProfileOverviewCard class="mb-4" :content="profile" />
+            <ProfileOverviewCard
+              class="deferred-card mb-4"
+              :content="profile"
+            />
 
             <HobbyActivitiesCard
-              class="mb-4"
+              class="deferred-card mb-4"
               :sections="profile.hobbySections"
             />
 
             <ProfileRssCard
-              class="mb-4"
+              class="deferred-card mb-4"
               href="https://zenn.dev/m_cre"
               image="/img/zenn.webp"
               source="zenn"
@@ -48,7 +51,7 @@
             <ProfileProjectsCard
               avatar-href="https://github.com/mcre"
               avatar-tooltip="Github - mcre"
-              class="mb-4"
+              class="deferred-card mb-4"
               icon="$mdiGithub"
               more-href="https://github.com/mcre"
               :projects="profile.githubProjects"
@@ -56,14 +59,14 @@
             />
 
             <ProfileProjectsCard
-              class="mb-4"
+              class="deferred-card mb-4"
               icon="$mdiWeb"
               :projects="profile.webapps"
               title="Webapp 開発"
             />
 
             <ProfileProjectsCard
-              class="mb-4"
+              class="deferred-card mb-4"
               icon="$mdiYoutube"
               :projects="profile.youtubeProjects"
               title="Youtube Channel"
@@ -71,17 +74,20 @@
           </v-col>
 
           <v-col cols="12" lg="6" md="6" sm="10">
-            <SkillsCard class="mb-4" :sections="profile.skillSections" />
+            <SkillsCard
+              class="deferred-card mb-4"
+              :sections="profile.skillSections"
+            />
 
             <ProfileRssCard
-              class="mb-4"
+              class="deferred-card mb-4"
               href="https://note.com/m_cre/"
               image="/img/note.webp"
               source="note"
               title="note"
             />
 
-            <WakaTimeCard class="mb-4" />
+            <WakaTimeCard class="deferred-card mb-4" />
           </v-col>
         </v-row>
       </v-container>
@@ -133,5 +139,10 @@ useHead({
 
 .page-container {
   max-width: 1185px;
+}
+
+.deferred-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
 }
 </style>

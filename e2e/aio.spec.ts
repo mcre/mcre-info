@@ -187,6 +187,28 @@ test("webfont loading stays out of the initial performance window", async ({
   expect(earlyFontRequests).toEqual([]);
 });
 
+test("offscreen profile cards defer their rendering work", async () => {
+  const html = await readFile(
+    path.join(repositoryRoot, "dist", "index.html"),
+    "utf8",
+  );
+  const deferredCardCount = html.match(/deferred-card/g)?.length ?? 0;
+  expect(deferredCardCount).toBeGreaterThanOrEqual(8);
+
+  const assetNames = await readdir(distAssetsPath);
+  const appCssName = assetNames.find(
+    (assetName) => assetName.startsWith("app-") && assetName.endsWith(".css"),
+  );
+  expect(appCssName).toBeDefined();
+
+  const appCss = await readFile(
+    path.join(distAssetsPath, appCssName ?? ""),
+    "utf8",
+  );
+  expect(appCss).toContain("content-visibility:auto");
+  expect(appCss).toContain("contain-intrinsic-size:auto 320px");
+});
+
 test("SSG HTML keeps lightweight RSS links in the initial response", async ({
   request,
 }) => {
