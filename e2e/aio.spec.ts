@@ -70,3 +70,27 @@ test("AIO and search artifacts are generated", async ({ request }) => {
   expect(sitemap.ok()).toBe(true);
   expect(await sitemap.text()).toContain("https://mcre.info/");
 });
+
+test("SSG HTML keeps RSS payload out of the initial response", async ({
+  request,
+}) => {
+  const response = await request.get("/");
+  expect(response.ok()).toBe(true);
+
+  const html = await response.text();
+  expect(html).toContain('<html lang="ja">');
+  expect(html).not.toContain("Generated article");
+  expect(html).not.toContain("assets.st-note.com");
+  expect(html).not.toContain("res.cloudinary.com");
+  expect(html).not.toContain('"pinia":{"rss"');
+});
+
+test("LCP profile image is prioritized in the initial HTML", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const face = page.getByAltText("mcre (FUJITA Shinya) の顔写真");
+  await expect(face).toHaveAttribute("fetchpriority", "high");
+  await expect(face).toHaveAttribute("loading", "eager");
+});

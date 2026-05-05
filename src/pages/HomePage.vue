@@ -10,7 +10,10 @@
           <v-avatar size="128">
             <img
               alt="mcre (FUJITA Shinya) の顔写真"
+              decoding="async"
+              fetchpriority="high"
               height="128"
+              loading="eager"
               src="/img/face01.webp"
               width="128"
             />
@@ -88,6 +91,7 @@
 const jsonLd = computed(() => JSON.stringify(buildProfileJsonLd(profile)));
 
 useHead({
+  htmlAttrs: { lang: "ja" },
   title: profile.title,
   meta: [
     { name: "description", content: profile.description },
@@ -99,7 +103,10 @@ useHead({
     { property: "og:site_name", content: profile.siteName },
     { name: "twitter:card", content: "summary_large_image" },
   ],
-  link: [{ rel: "canonical", href: profile.url }],
+  link: [
+    { rel: "canonical", href: profile.url },
+    { rel: "preload", href: "/img/face01.webp", as: "image" },
+  ],
   script: [
     {
       type: "application/ld+json",
