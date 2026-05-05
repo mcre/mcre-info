@@ -1,8 +1,13 @@
-$custom-font-family: "Zen Maru Gothic", sans-serif;
+$system-font-family:
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
 
 @use "vuetify/settings" with (
-  $body-font-family: $custom-font-family,
-  $heading-font-family: $custom-font-family
+  $body-font-family: $system-font-family,
+  $heading-font-family: $system-font-family
 );
 
 .v-card-title {

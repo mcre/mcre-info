@@ -47,7 +47,7 @@ Vuetify 4 は CSS cascade layer を使います。`vite-ssg` の Critical CSS �
 
 ### Webfont
 
-Zen Maru Gothic は維持しますが、軽量化のためローカル配布するウェイトは `japanese-400-normal.woff2` と `japanese-700-normal.woff2` のみです。`src/styles/fonts.scss` から読み込みます。
+Webfont は使わず、`src/styles/settings.scss` で system UI font を指定しています。PageSpeed改善のため、ローカル woff / woff2 や `@font-face` は追加しません。
 
 ### AIO / SEO
 

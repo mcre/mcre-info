@@ -82,24 +82,35 @@ test("AIO and search artifacts are generated", async ({ request }) => {
   expect(await sitemap.text()).toContain("https://mcre.info/");
 });
 
-test("webfont assets are split by unicode range", async () => {
+test("site uses system fonts without local webfont assets", async () => {
+  const packageJson = JSON.parse(
+    await readFile(path.join(repositoryRoot, "package.json"), "utf8"),
+  );
+  expect(packageJson.dependencies).not.toHaveProperty(
+    "@fontsource/zen-maru-gothic",
+  );
+
   const assetNames = await readdir(distAssetsPath);
   expect(
-    assetNames.some((assetName) =>
-      assetName.includes("zen-maru-gothic-japanese-400-normal"),
-    ),
-  ).toBe(false);
-  expect(
-    assetNames.some((assetName) =>
-      assetName.includes("zen-maru-gothic-japanese-700-normal"),
-    ),
-  ).toBe(false);
-  expect(
-    assetNames.filter(
-      (assetName) =>
-        assetName.startsWith("zen-maru-gothic-") && assetName.endsWith(".woff"),
-    ),
+    assetNames.filter((assetName) => assetName.startsWith("fonts-")),
   ).toHaveLength(0);
+  expect(
+    assetNames.filter((assetName) => assetName.startsWith("zen-maru-gothic-")),
+  ).toHaveLength(0);
+  expect(
+    assetNames.filter((assetName) => assetName.endsWith(".woff2")),
+  ).toHaveLength(0);
+  expect(
+    assetNames.filter((assetName) => assetName.endsWith(".woff")),
+  ).toHaveLength(0);
+
+  const html = await readFile(
+    path.join(repositoryRoot, "dist", "index.html"),
+    "utf8",
+  );
+  expect(html).not.toContain("fonts-");
+  expect(html).not.toContain("zen-maru-gothic");
+  expect(html).not.toContain("Zen Maru Gothic");
 
   const appCssName = assetNames.find(
     (assetName) => assetName.startsWith("app-") && assetName.endsWith(".css"),
@@ -113,63 +124,12 @@ test("webfont assets are split by unicode range", async () => {
   expect(Buffer.byteLength(appCss, "utf8")).toBeLessThan(360 * 1024);
   expect(appCss).not.toContain("@font-face");
   expect(appCss).not.toContain("zen-maru-gothic-");
-  expect(appCss).toContain("rss-search-index");
-  expect(appCss).toContain("font-family:system-ui");
-
-  const fontCssNames: string[] = [];
-  for (const assetName of assetNames) {
-    if (
-      assetName === appCssName ||
-      !assetName.startsWith("fonts-") ||
-      !assetName.endsWith(".css")
-    ) {
-      continue;
-    }
-
-    const assetCss = await readFile(
-      path.join(distAssetsPath, assetName),
-      "utf8",
-    );
-    if (assetCss.includes("Zen Maru Gothic")) {
-      fontCssNames.push(assetName);
-    }
-  }
-  expect(fontCssNames).toHaveLength(1);
-
-  const html = await readFile(
-    path.join(repositoryRoot, "dist", "index.html"),
-    "utf8",
-  );
-  expect(html).not.toContain(fontCssNames[0]);
-
-  const zenFontFaceBlocks =
-    (
-      await readFile(path.join(distAssetsPath, fontCssNames[0] ?? ""), "utf8")
-    ).match(
-      /@font-face\{[^}]*font-family:(?:"Zen Maru Gothic"|Zen Maru Gothic)[^}]*\}/g,
-    ) ?? [];
-  expect(zenFontFaceBlocks.length).toBeGreaterThan(2);
-  expect(zenFontFaceBlocks.length).toBeLessThanOrEqual(80);
-  expect(
-    zenFontFaceBlocks.every((fontFaceBlock) =>
-      fontFaceBlock.includes("unicode-range:"),
-    ),
-  ).toBe(true);
-
-  const fontWeights = new Set(
-    zenFontFaceBlocks.map((fontFaceBlock) => {
-      const fontWeight = fontFaceBlock.match(/font-weight:(\d+)/)?.[1];
-      expect(fontWeight).toBeDefined();
-      return Number(fontWeight);
-    }),
-  );
-  expect(fontWeights).toEqual(new Set([400, 700]));
+  expect(appCss).not.toContain("Zen Maru Gothic");
+  expect(appCss).toContain("system-ui");
 });
 
-test("webfont loading stays out of the initial performance window", async ({
-  page,
-}) => {
-  const earlyFontRequests: string[] = [];
+test("page does not request local webfonts", async ({ page }) => {
+  const fontRequests: string[] = [];
 
   page.on("request", (request) => {
     const url = request.url();
@@ -177,14 +137,14 @@ test("webfont loading stays out of the initial performance window", async ({
       url.includes("/assets/fonts-") ||
       url.includes("/assets/zen-maru-gothic-")
     ) {
-      earlyFontRequests.push(url);
+      fontRequests.push(url);
     }
   });
 
   await page.goto("/");
   await page.waitForTimeout(3000);
 
-  expect(earlyFontRequests).toEqual([]);
+  expect(fontRequests).toEqual([]);
 });
 
 test("offscreen profile cards defer their rendering work", async () => {
@@ -207,6 +167,22 @@ test("offscreen profile cards defer their rendering work", async () => {
   );
   expect(appCss).toContain("content-visibility:auto");
   expect(appCss).toContain("contain-intrinsic-size:auto 320px");
+});
+
+test("RSS sections keep the same card surface as other profile cards", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  for (const title of ["Zenn", "note"]) {
+    const rssCard = page.locator(".v-card").filter({
+      has: page.locator(".v-card-title", { hasText: title }),
+    });
+
+    await expect(rssCard).toHaveCount(1);
+    await expect(rssCard).toHaveClass(/deferred-card/);
+    await expect(rssCard).toHaveClass(/mb-4/);
+  }
 });
 
 test("SSG HTML keeps lightweight RSS links in the initial response", async ({

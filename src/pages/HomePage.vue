@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-app-bar class="brand-app-bar" collapse color="primary">
-      <h1 class="font-weight-bold mx-2" style="font-size: 1.4rem">mcre.info</h1>
+      <h1 class="font-weight-bold mx-2" style="font-size: 1.25rem">
+        mcre.info
+      </h1>
     </v-app-bar>
 
     <v-main style="--v-layout-top: 64px">
@@ -123,12 +125,7 @@ useHead({
       imagesrcset: getHighDensityImageSrcset("/img/face01.webp"),
     },
   ],
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: jsonLd,
-    },
-  ],
+  script: [{ type: "application/ld+json", innerHTML: jsonLd }],
 });
 </script>
 
