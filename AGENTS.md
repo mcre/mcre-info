@@ -59,7 +59,7 @@
 ## Webfont
 
 - Zen Maru Gothic はサイトの見た目として維持する。
-- 軽量化のためローカル配布は `japanese-400-normal.woff2` と `japanese-700-normal.woff2` だけにする。
+- 軽量化のため Zen Maru Gothic は 400 / 700 の `unicode-range` 分割配信を使う。追加 weight や別フォントは増やさない。
 - Webfont 読み込みは `src/styles/fonts.scss` で管理する。
 
 ## AIO / SEO

@@ -1,4 +1,15 @@
+import { readdir, readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import { expect, test } from "@playwright/test";
+
+const repositoryRoot = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "..",
+);
+
+const distAssetsPath = path.join(repositoryRoot, "dist", "assets");
 
 const rssArticles = [
   {
@@ -69,6 +80,50 @@ test("AIO and search artifacts are generated", async ({ request }) => {
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.ok()).toBe(true);
   expect(await sitemap.text()).toContain("https://mcre.info/");
+});
+
+test("webfont assets are split by unicode range", async () => {
+  const assetNames = await readdir(distAssetsPath);
+  expect(
+    assetNames.some((assetName) =>
+      assetName.includes("zen-maru-gothic-japanese-400-normal"),
+    ),
+  ).toBe(false);
+  expect(
+    assetNames.some((assetName) =>
+      assetName.includes("zen-maru-gothic-japanese-700-normal"),
+    ),
+  ).toBe(false);
+
+  const appCssName = assetNames.find(
+    (assetName) => assetName.startsWith("app-") && assetName.endsWith(".css"),
+  );
+  expect(appCssName).toBeDefined();
+
+  const appCss = await readFile(
+    path.join(distAssetsPath, appCssName ?? ""),
+    "utf8",
+  );
+
+  const zenFontFaceBlocks =
+    appCss.match(
+      /@font-face\{[^}]*font-family:(?:"Zen Maru Gothic"|Zen Maru Gothic)[^}]*\}/g,
+    ) ?? [];
+  expect(zenFontFaceBlocks.length).toBeGreaterThan(2);
+  expect(
+    zenFontFaceBlocks.every((fontFaceBlock) =>
+      fontFaceBlock.includes("unicode-range:"),
+    ),
+  ).toBe(true);
+
+  const fontWeights = new Set(
+    zenFontFaceBlocks.map((fontFaceBlock) => {
+      const fontWeight = fontFaceBlock.match(/font-weight:(\d+)/)?.[1];
+      expect(fontWeight).toBeDefined();
+      return Number(fontWeight);
+    }),
+  );
+  expect(fontWeights).toEqual(new Set([400, 700]));
 });
 
 test("SSG HTML keeps RSS payload out of the initial response", async ({

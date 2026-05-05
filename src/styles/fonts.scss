@@ -1,17 +1,2 @@
-@font-face {
-  font-display: swap;
-  font-family: "Zen Maru Gothic";
-  font-style: normal;
-  font-weight: 400;
-  src: url("@fontsource/zen-maru-gothic/files/zen-maru-gothic-japanese-400-normal.woff2")
-    format("woff2");
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "Zen Maru Gothic";
-  font-style: normal;
-  font-weight: 700;
-  src: url("@fontsource/zen-maru-gothic/files/zen-maru-gothic-japanese-700-normal.woff2")
-    format("woff2");
-}
+@import "@fontsource/zen-maru-gothic/400.css";
+@import "@fontsource/zen-maru-gothic/700.css";
