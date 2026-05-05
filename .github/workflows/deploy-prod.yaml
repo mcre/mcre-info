@@ -23,8 +23,50 @@ permissions:
   contents: read
 
 jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Use Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chrome
+
+      - name: Install CDK Python dependencies
+        run: |
+          python3 -m venv backend/cdk/.venv
+          backend/cdk/.venv/bin/python -m pip install -r backend/cdk/requirements.txt
+
+      - name: Frontend checks
+        run: |
+          npm run format:check
+          npm run lint
+          npm run type-check
+          npm run test:unit
+          npm run e2e
+
+      - name: Backend and CDK checks
+        run: |
+          npm run lambda:test
+          npm run cdk:synth:prod
+
   deploy-cdk:
     runs-on: ubuntu-latest
+    needs: verify
     outputs:
       PREFIX: ${{ steps.output-step.outputs.PREFIX }}
       DOMAIN_NAME_API: ${{ steps.output-step.outputs.DOMAIN_NAME_API }}
@@ -41,6 +83,11 @@ jobs:
         with:
           role-to-assume: ${{ vars.AWS_IAM_ROLE_ARN }}
           aws-region: ap-northeast-1
+
+      - name: Use Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
 
       - name: Install AWS CDK
         run: npm install -g aws-cdk
@@ -137,7 +184,7 @@ jobs:
           echo "Updated .env.production:"
           cat .env.production
 
-      - name: npm ci, build
+      - name: Install Node dependencies and build site
         run: |
           npm ci
           npm run build --if-present
