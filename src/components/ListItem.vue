@@ -20,12 +20,20 @@
     />
 
     <template v-if="avHref && (avIcon || avImg)" #append>
-      <Avatar :href="avHref" :icon="avIcon" :img="avImg" :tooltip="avTooltip" />
+      <Avatar
+        :href="avHref"
+        :icon="avIcon"
+        :img="avImg"
+        :img-srcset="getHighDensityImageSrcset(avImg)"
+        :tooltip="avTooltip"
+      />
     </template>
   </v-list-item>
 </template>
 
 <script setup lang="ts">
+import { getHighDensityImageSrcset } from "@/utils/imageSrcset";
+
 const props = defineProps({
   title: {
     type: String,

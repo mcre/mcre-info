@@ -113,6 +113,8 @@ test("webfont assets are split by unicode range", async () => {
   expect(Buffer.byteLength(appCss, "utf8")).toBeLessThan(360 * 1024);
   expect(appCss).not.toContain("@font-face");
   expect(appCss).not.toContain("zen-maru-gothic-");
+  expect(appCss).toContain("rss-search-index");
+  expect(appCss).toContain("font-family:system-ui");
 
   const fontCssNames: string[] = [];
   for (const assetName of assetNames) {
@@ -220,6 +222,21 @@ test("profile images provide high-density variants", async ({ page }) => {
     );
     await expect(avatar).toHaveAttribute("sizes", "28px");
   }
+
+  const xAvatars = await page.locator('img[alt="X"]').evaluateAll((images) =>
+    images.map((image) => ({
+      sizes: image.getAttribute("sizes"),
+      srcset: image.getAttribute("srcset"),
+    })),
+  );
+  expect(xAvatars.length).toBeGreaterThan(1);
+  expect(
+    xAvatars.every(
+      (image) =>
+        image.sizes === "28px" &&
+        image.srcset === "/img/x.webp 1x, /img/x-2x.webp 2x",
+    ),
+  ).toBe(true);
 });
 
 test("large lazy project image stays compressed", async () => {

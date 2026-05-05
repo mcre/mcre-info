@@ -10,7 +10,7 @@
         />
       </template>
 
-      <v-card-text>
+      <v-card-text class="rss-search-index">
         <v-alert
           v-if="rssStore.error"
           class="mb-3"
@@ -95,3 +95,18 @@ onBeforeUnmount(() => {
   observer?.disconnect();
 });
 </script>
+
+<style scoped>
+.rss-search-index {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.rss-search-index :deep(*) {
+  font-family: inherit;
+}
+</style>
