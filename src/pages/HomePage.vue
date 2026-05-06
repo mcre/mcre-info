@@ -6,7 +6,7 @@
       </h1>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="profile-main">
       <v-container class="page-container">
         <v-row justify="center">
           <v-avatar size="128">
@@ -132,6 +132,11 @@ useHead({
 <style scoped>
 .brand-app-bar {
   min-width: 128px;
+}
+
+.profile-main {
+  /* Vuetify 4はSSG時点でapp barのlayout offsetを0pxにするため、初期描画だけ上に詰まる。 */
+  --v-layout-top: 64px !important;
 }
 
 .page-container {

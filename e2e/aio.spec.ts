@@ -173,6 +173,36 @@ test("client hydrates the SSG markup instead of remounting it", async ({
   expect(hydrationWarnings).toEqual([]);
 });
 
+test("SSG-only layout reserves app bar space before hydration", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    javaScriptEnabled: false,
+    viewport: { height: 900, width: 1280 },
+  });
+  const page = await context.newPage();
+
+  try {
+    await page.goto("http://127.0.0.1:4173/");
+
+    const main = page.locator(".profile-main");
+    await expect(main).toHaveCSS("padding-top", "64px");
+
+    const appBarBox = await page.locator(".v-app-bar").boundingBox();
+    const faceBox = await page
+      .getByAltText("mcre (FUJITA Shinya) の顔写真")
+      .boundingBox();
+
+    if (!appBarBox || !faceBox) {
+      throw new Error("app bar or profile image box was not available");
+    }
+
+    expect(faceBox.y).toBeGreaterThanOrEqual(appBarBox.height);
+  } finally {
+    await context.close();
+  }
+});
+
 test("offscreen profile cards defer their rendering work", async () => {
   const html = await readFile(
     path.join(repositoryRoot, "dist", "index.html"),
