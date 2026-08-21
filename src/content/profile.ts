@@ -76,7 +76,7 @@ export const profile: ProfileContent = {
   siteName: "mcre.info",
   title: "mcre.info - mcre (FUJITA Shinya)",
   description:
-    "mcre (FUJITA Shinya) のプロフィール。フルスタック開発者としての職歴、スキル、制作物、技術記事、外部プロフィールをまとめています。",
+    "mcre (FUJITA Shinya) のプロフィール。Webアプリ開発やデータ分析、これまでの仕事と制作物を載せています。",
   url: "https://mcre.info",
   image: "https://mcre.info/img/face01.webp",
   handle: "mcre",
@@ -148,16 +148,7 @@ export const profile: ProfileContent = {
   profileItems: [
     {
       title: "mcre (FUJITA Shinya)",
-      description: [
-        "Webアプリ開発、データ分析、クラウド、ものづくりを扱うエンジニア。",
-        "連絡はXのDMまで。",
-      ],
-    },
-    {
-      title: "関心",
-      description: [
-        "使う人の動線に合う業務アプリケーション、静的サイト、AIを使った開発体験、物語のあるプロダクト。",
-      ],
+      description: ["連絡はXのDMまで。"],
     },
   ],
   career: [
@@ -232,7 +223,7 @@ export const profile: ProfileContent = {
         {
           title: "フルスタック開発",
           description: [
-            "クラウドアーキテクチャ設計、データベース、バックエンド、フロントエンドまで横断して開発できます。",
+            "AWSの構成設計からDB、バックエンド、フロントエンドまで一通り担当しています。",
           ],
         },
         {
@@ -330,7 +321,7 @@ export const profile: ProfileContent = {
     {
       title: "AI Wolf",
       url: "https://aiwolf.org/",
-      description: "自然言語処理やゲームAIへの関心。",
+      description: "人狼知能大会に参加していました。",
       image: "/img/aiwolf-4th-nlp.webp",
     },
   ],
@@ -388,8 +379,7 @@ export const profile: ProfileContent = {
     {
       title: "けんみんラボ",
       url: "https://kenmin-lab.net",
-      description:
-        "習慣・方言などの都道府県ごとの違いを、だれでも投票できます。",
+      description: "習慣や方言など、都道府県ごとの違いを投票するサイト。",
       image: "/img/kenmin-lab.png",
       tags: {
         Vue3: ["Vuetify3"],
@@ -435,7 +425,7 @@ export const profile: ProfileContent = {
       title: "mcre-info",
       image: "/img/favicon.webp",
       url: "https://github.com/mcre/mcre-info",
-      description: "このサイトのソースコードを公開しています。",
+      description: "このサイトのソースコード。",
       tags: {
         Vue3: ["Vuetify3"],
         AWS: ["API-Gateway", "CDK", "CloudFront"],
@@ -456,7 +446,7 @@ export const profile: ProfileContent = {
       title: "mcre-tools",
       image: "/img/favicon.webp",
       url: "https://github.com/mcre/mcre-tools",
-      description: "「熟語パズル」などのツールのソースコード。",
+      description: "「熟語パズル」などのWebツール。",
       tags: {
         Vue3: ["Vuetify3"],
         AWS: ["API-Gateway", "DynamoDB", "Lambda", "CDK", "CloudFront"],
