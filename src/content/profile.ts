@@ -229,7 +229,7 @@ export const profile: ProfileContent = {
         {
           title: "Webアプリ開発",
           description: [
-            "Vue.js, AWSサーバレス(Lambda, DynamoDB, API-Gateway等)の構成をよく使います。",
+            "Vue.jsとAWSサーバレス(Lambda, DynamoDB, API-Gateway等)の構成をよく使います。",
           ],
         },
         {
@@ -330,21 +330,21 @@ export const profile: ProfileContent = {
       title: "けんみんラボ",
       url: "https://kenmin-lab.net",
       description:
-        "習慣・方言などの都道府県ごとの違いを、だれでも投票できます。",
+        "習慣・方言などの都道府県ごとの違いについて、だれでも投票できます。",
       image: "/img/kenmin-lab.png",
     },
     {
       title: "DQW Tools",
       url: "https://dqw.mcre.info/",
       description:
-        "DQW(ドラゴンクエストウォーク)のプレイに役立つ、こころ道クエスト検索ツールを公開しています。",
+        "DQW(ドラゴンクエストウォーク)のプレイに役立つこころ道クエスト検索ツールを公開しています。",
       image: "/img/dqw-tools.webp",
     },
     {
       title: "CoCoDakara Body Design",
       url: "https://bodydesign.cocodakara.net/",
       description:
-        "麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システム開発・運用を担当しています。",
+        "麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システムの開発・運用を担当しています。",
       image: "/img/cocodakara.webp",
     },
     {
@@ -379,7 +379,7 @@ export const profile: ProfileContent = {
     {
       title: "けんみんラボ",
       url: "https://kenmin-lab.net",
-      description: "習慣や方言など、都道府県ごとの違いを投票するサイト。",
+      description: "習慣や方言など、都道府県ごとの違いについて投票するサイト。",
       image: "/img/kenmin-lab.png",
       tags: {
         Vue3: ["Vuetify3"],
@@ -390,7 +390,7 @@ export const profile: ProfileContent = {
       title: "DQW Tools",
       url: "https://dqw.mcre.info/",
       description:
-        "DQW(ドラゴンクエストウォーク)のプレイに役立つ、こころ道クエスト検索ツールを公開しています。",
+        "DQW(ドラゴンクエストウォーク)のプレイに役立つこころ道クエスト検索ツールを公開しています。",
       image: "/img/dqw-tools.webp",
       tags: {
         Vue3: ["Vuetify3"],
@@ -401,7 +401,7 @@ export const profile: ProfileContent = {
       title: "CoCoDakara Body Design",
       url: "https://bodydesign.cocodakara.net/",
       description:
-        "麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システム開発・運用を担当しています。",
+        "麻布十番のパーソナルジム「CoCoDakara Body Design」の予約システムの開発・運用を担当しています。",
       image: "/img/cocodakara.webp",
       tags: {
         Vue: ["Vuetify"],
@@ -480,7 +480,7 @@ export const profile: ProfileContent = {
       image: "/img/lp.webp",
       url: "https://www.youtube.com/c/聴く-名作文庫",
       description:
-        "青空文庫の小説をTeXで綺麗に縦組みし、機械音声で読み上げる動画を半自動生成したものを投稿していました。チャンネル登録者数1,000人突破。",
+        "青空文庫の小説をTeXで綺麗に縦組みし、機械音声で読み上げる動画を半自動で生成して投稿していました。チャンネル登録者数1,000人突破。",
       youtube: "4U_JLkcVEi0",
       tags: { Python: ["MoviePy"], AWS: ["Polly"], TeX: ["jlreq"] },
     },
